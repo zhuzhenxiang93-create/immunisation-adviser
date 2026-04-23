@@ -1,0 +1,68 @@
+[
+  {
+    "id": "Q001",
+    "query": "When should the MMR vaccine be given to a 12-month-old child in New Zealand?",
+    "category": "vaccine_schedule",
+    "ground_truth_answer": "The MMR vaccine is given at 12 months and again at 15 months (combined MMRV) in the NZ immunisation schedule.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Chapter on MMR / Childhood Schedule"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q002",
+    "query": "Is the influenza vaccine safe for a patient with egg allergy?",
+    "category": "contraindication",
+    "ground_truth_answer": "Most influenza vaccines contain trace egg protein; guidelines specify precautions for patients with severe egg allergy (anaphylaxis). Consult the relevant handbook section.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Influenza chapter — Contraindications and precautions"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q003",
+    "query": "What is the catch-up schedule for a 3-year-old who has never been vaccinated?",
+    "category": "catch_up_schedule",
+    "ground_truth_answer": "Catch-up schedules are defined in the NZ Immunisation Handbook. For a completely unvaccinated 3-year-old, multiple vaccines may be required across several visits.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Catch-up immunisation"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q004",
+    "query": "How should varicella vaccine be stored?",
+    "category": "storage_handling",
+    "ground_truth_answer": "Varicella vaccine must be stored frozen at -15°C to -50°C and protected from light. Once thawed, it must not be refrozen.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Varicella — Storage and handling"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q005",
+    "query": "What are the contraindications for the BCG vaccine?",
+    "category": "contraindication",
+    "ground_truth_answer": "BCG is contraindicated in immunocompromised individuals, HIV-positive patients (unless on stable ART with adequate CD4 count per guidelines), and those with generalised septic skin conditions.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "BCG — Contraindications and precautions"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q006",
+    "query": "Can a pregnant woman receive the Tdap vaccine?",
+    "category": "contraindication",
+    "ground_truth_answer": "Tdap is recommended during each pregnancy (ideally 16–32 weeks) to protect the newborn via maternal antibody transfer.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Tdap — Pregnancy"
+    },
+    "expected_confidence": "high"
+  }
+]

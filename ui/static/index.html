@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IMAC Immunisation Guidelines Adviser</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <!-- Marked (markdown rendering) -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+
+  <style>
+    :root {
+      --imac-blue:    #1a5276;
+      --imac-light:   #d6eaf8;
+      --high-green:   #1e8449;
+      --medium-amber: #b7770d;
+      --low-red:      #c0392b;
+      --notfound-gray:#6c757d;
+    }
+
+    body { background: #f4f6f9; font-family: 'Segoe UI', sans-serif; }
+
+    /* ── Top bar ── */
+    .topbar {
+      background: var(--imac-blue);
+      color: #fff;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.25);
+    }
+    .topbar .brand { font-size: 1.2rem; font-weight: 700; letter-spacing: .3px; }
+    .topbar .sub   { font-size: .78rem; opacity: .8; }
+
+    /* ── Disclaimer banner ── */
+    .disclaimer {
+      background: #fef9e7;
+      border-left: 4px solid #f0b429;
+      font-size: .82rem;
+      color: #7d6608;
+      padding: 7px 18px;
+    }
+
+    /* ── Layout ── */
+    .main-layout { display: flex; height: calc(100vh - 90px); overflow: hidden; }
+
+    /* ── Sidebar (history) ── */
+    .sidebar {
+      width: 260px;
+      min-width: 260px;
+      background: #fff;
+      border-right: 1px solid #dee2e6;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .sidebar-header {
+      padding: 12px 16px;
+      font-size: .8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      color: #6c757d;
+      border-bottom: 1px solid #dee2e6;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .history-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px 0;
+    }
+    .history-item {
+      padding: 8px 16px;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: background .15s;
+      font-size: .82rem;
+    }
+    .history-item:hover { background: var(--imac-light); border-left-color: var(--imac-blue); }
+    .history-item .q-text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #343a40;
+    }
+    .history-item .q-meta { font-size: .72rem; color: #adb5bd; margin-top: 2px; }
+
+    /* ── Main content ── */
+    .content-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 20px 28px 0;
+    }
+
+    /* ── Query input card ── */
+    .query-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 18px 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+      margin-bottom: 18px;
+    }
+    .query-card textarea {
+      resize: none;
+      border-radius: 8px;
+      font-size: .95rem;
+      border: 1.5px solid #ced4da;
+      transition: border-color .2s;
+    }
+    .query-card textarea:focus { border-color: var(--imac-blue); box-shadow: 0 0 0 3px rgba(26,82,118,.12); }
+    .btn-ask {
+      background: var(--imac-blue);
+      color: #fff;
+      border-radius: 8px;
+      font-weight: 600;
+      padding: 8px 22px;
+      border: none;
+      transition: background .2s;
+    }
+    .btn-ask:hover  { background: #154360; color: #fff; }
+    .btn-ask:disabled { background: #7fa8c9; }
+
+    /* ── Example chips ── */
+    .example-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .chip {
+      background: var(--imac-light);
+      color: var(--imac-blue);
+      border: 1px solid #aed6f1;
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: .78rem;
+      cursor: pointer;
+      transition: background .15s;
+      white-space: nowrap;
+    }
+    .chip:hover { background: #aed6f1; }
+
+    /* ── Response area ── */
+    .response-area { flex: 1; overflow-y: auto; padding-bottom: 20px; }
+
+    /* ── Response card ── */
+    .response-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+      overflow: hidden;
+    }
+    .response-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .confidence-badge {
+      font-size: .75rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .conf-high     { background: #d5f5e3; color: var(--high-green); }
+    .conf-medium   { background: #fef9e7; color: var(--medium-amber); }
+    .conf-low      { background: #fdedec; color: var(--low-red); }
+    .conf-notfound { background: #f0f0f0; color: var(--notfound-gray); }
+
+    .response-body { padding: 18px 22px; font-size: .93rem; line-height: 1.7; color: #2c3e50; }
+    .response-body p:last-child { margin-bottom: 0; }
+
+    /* ── Citations ── */
+    .citations-section { padding: 0 22px 18px; }
+    .citations-title {
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: #6c757d;
+      margin-bottom: 10px;
+    }
+    .citation-card {
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      font-size: .83rem;
+      background: #fafafa;
+    }
+    .citation-card .c-source { font-weight: 700; color: var(--imac-blue); }
+    .citation-card .c-section { color: #555; margin: 2px 0; }
+    .citation-card .c-excerpt {
+      color: #555;
+      border-left: 3px solid #aed6f1;
+      padding-left: 10px;
+      margin-top: 6px;
+      font-style: italic;
+    }
+    .citation-card .c-url { font-size: .76rem; color: #adb5bd; }
+
+    /* ── Audit footer ── */
+    .audit-footer {
+      background: #f8f9fa;
+      border-top: 1px solid #f0f0f0;
+      padding: 8px 22px;
+      font-size: .75rem;
+      color: #adb5bd;
+      display: flex;
+      gap: 18px;
+    }
+
+    /* ── Spinner ── */
+    .spinner-wrap { text-align: center; padding: 40px; color: #adb5bd; }
+
+    /* ── Empty state ── */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #adb5bd;
+    }
+    .empty-state i { font-size: 3rem; margin-bottom: 14px; display: block; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #ced4da; border-radius: 4px; }
+
+    /* ── Auth modal tweaks ── */
+    .auth-logo {
+      text-align: center;
+      padding: 10px 0 4px;
+      color: var(--imac-blue);
+    }
+    .auth-logo i { font-size: 2.4rem; }
+    .auth-logo .brand { font-size: 1.05rem; font-weight: 700; margin-top: 6px; }
+    .auth-logo .sub   { font-size: .78rem; color: #6c757d; }
+    .nav-tabs .nav-link.active { color: var(--imac-blue); border-bottom-color: var(--imac-blue); font-weight: 600; }
+    .nav-tabs .nav-link { color: #6c757d; }
+
+    /* User pill in topbar */
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.15);
+      border-radius: 20px;
+      padding: 4px 12px 4px 8px;
+      font-size: .82rem;
+    }
+    .user-pill .avatar {
+      width: 24px; height: 24px;
+      background: #fff;
+      color: var(--imac-blue);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; font-weight: 700;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     AUTH MODAL (shown when not logged in, non-dismissible)
+═══════════════════════════════════════════════════════════ -->
+<div class="modal fade" id="authModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" style="max-width:420px">
+    <div class="modal-content border-0 shadow">
+      <div class="modal-body p-4">
+
+        <!-- Logo -->
+        <div class="auth-logo mb-3">
+          <i class="bi bi-shield-plus-fill"></i>
+          <div class="brand">IMAC Immunisation Adviser</div>
+          <div class="sub">University of Auckland · COMPSCI 714 AI Hackathon</div>
+        </div>
+
+        <!-- Tabs -->
+        <ul class="nav nav-tabs mb-3" id="authTabs">
+          <li class="nav-item flex-fill text-center">
+            <button class="nav-link w-100 active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login-pane">
+              <i class="bi bi-box-arrow-in-right me-1"></i>Login
+            </button>
+          </li>
+          <li class="nav-item flex-fill text-center">
+            <button class="nav-link w-100" id="register-tab" data-bs-toggle="tab" data-bs-target="#register-pane">
+              <i class="bi bi-person-plus me-1"></i>Register
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+
+          <!-- Login pane -->
+          <div class="tab-pane fade show active" id="login-pane">
+            <div id="login-alert" class="alert alert-danger py-2 d-none" role="alert"></div>
+            <div class="mb-3">
+              <label class="form-label small fw-semibold">Username</label>
+              <input type="text" id="login-username" class="form-control" placeholder="Enter username" autocomplete="username" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-semibold">Password</label>
+              <input type="password" id="login-password" class="form-control" placeholder="Enter password" autocomplete="current-password" />
+            </div>
+            <button class="btn w-100 btn-ask" id="login-btn" onclick="doLogin()">
+              <i class="bi bi-box-arrow-in-right me-1"></i>Login
+            </button>
+          </div>
+
+          <!-- Register pane -->
+          <div class="tab-pane fade" id="register-pane">
+            <div id="register-alert" class="alert alert-danger py-2 d-none" role="alert"></div>
+            <div class="mb-2">
+              <label class="form-label small fw-semibold">Username</label>
+              <input type="text" id="reg-username" class="form-control" placeholder="2–32 characters" autocomplete="username" />
+            </div>
+            <div class="mb-2">
+              <label class="form-label small fw-semibold">Email</label>
+              <input type="email" id="reg-email" class="form-control" placeholder="you@example.com" autocomplete="email" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-semibold">Password</label>
+              <input type="password" id="reg-password" class="form-control" placeholder="At least 6 characters" autocomplete="new-password" />
+            </div>
+            <button class="btn w-100 btn-ask" id="register-btn" onclick="doRegister()">
+              <i class="bi bi-person-check me-1"></i>Create Account
+            </button>
+          </div>
+
+        </div><!-- tab-content -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     MAIN APP
+═══════════════════════════════════════════════════════════ -->
+
+<!-- Top bar -->
+<div class="topbar">
+  <i class="bi bi-shield-plus-fill fs-4"></i>
+  <div>
+    <div class="brand">IMAC Immunisation Guidelines Adviser</div>
+    <div class="sub">University of Auckland · COMPSCI 714 AI Hackathon</div>
+  </div>
+  <div class="ms-auto d-flex align-items-center gap-3">
+    <span class="badge bg-success bg-opacity-75" id="status-badge">
+      <i class="bi bi-circle-fill me-1" style="font-size:.55rem"></i>Online
+    </span>
+    <!-- User info + logout (hidden until logged in) -->
+    <div class="user-pill d-none" id="user-pill">
+      <div class="avatar" id="user-avatar">?</div>
+      <span id="user-name"></span>
+      <button class="btn btn-sm p-0 ms-1 text-white" title="Logout" onclick="doLogout()"
+              style="background:none;border:none;opacity:.8;font-size:.85rem">
+        <i class="bi bi-box-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Disclaimer -->
+<div class="disclaimer">
+  <i class="bi bi-exclamation-triangle-fill me-1"></i>
+  <strong>Clinical advisory tool only.</strong>
+  This system supports advisors by retrieving approved guidance. Final clinical decisions remain with qualified staff.
+</div>
+
+<!-- Main layout -->
+<div class="main-layout">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <span><i class="bi bi-clock-history me-1"></i>Recent Queries</span>
+      <button class="btn btn-sm btn-link text-muted p-0" onclick="clearHistory()" title="Clear history">
+        <i class="bi bi-trash3"></i>
+      </button>
+    </div>
+    <div class="history-list" id="history-list">
+      <div class="text-center text-muted py-4" style="font-size:.8rem">No queries yet</div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content-area">
+
+    <!-- Query card -->
+    <div class="query-card">
+      <label class="form-label fw-semibold mb-2" style="font-size:.88rem; color:#444;">
+        <i class="bi bi-search me-1"></i>Clinical Query
+      </label>
+      <textarea id="query-input" class="form-control" rows="3"
+        placeholder="e.g. When should the MMR vaccine be given to a 12-month-old child in New Zealand?"></textarea>
+      <div class="d-flex align-items-center justify-content-between mt-3">
+        <div class="example-chips" id="example-chips"></div>
+        <button class="btn btn-ask" id="ask-btn" onclick="submitQuery()">
+          <i class="bi bi-send-fill me-1"></i>Ask
+        </button>
+      </div>
+    </div>
+
+    <!-- Response -->
+    <div class="response-area" id="response-area">
+      <div class="empty-state">
+        <i class="bi bi-chat-square-text"></i>
+        <div>Ask a question about NZ immunisation guidelines</div>
+        <div style="font-size:.8rem; margin-top:6px">Answers are retrieved from the NZ Immunisation Handbook</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const API = 'http://127.0.0.1:8000';
+
+const EXAMPLES = [
+  'When should MMR be given to a 12-month-old?',
+  'Is influenza vaccine safe for egg allergy?',
+  'How should varicella vaccine be stored?',
+  'Catch-up schedule for unvaccinated 3-year-old?',
+  'BCG contraindications?',
+  'Tdap in pregnancy?',
+];
+
+// ── Token helpers ────────────────────────────────────────────────────────────
+function getToken()           { return localStorage.getItem('imac_token'); }
+function getUsername()        { return localStorage.getItem('imac_username'); }
+function saveAuth(token, username) {
+  localStorage.setItem('imac_token', token);
+  localStorage.setItem('imac_username', username);
+}
+function clearAuth() {
+  localStorage.removeItem('imac_token');
+  localStorage.removeItem('imac_username');
+}
+function authHeaders() {
+  const t = getToken();
+  return t ? { 'Content-Type': 'application/json', 'Authorization': `Bearer ${t}` }
+           : { 'Content-Type': 'application/json' };
+}
+
+// ── Auth modal ───────────────────────────────────────────────────────────────
+let _authModal;
+
+function showAuthModal() {
+  _authModal = _authModal || new bootstrap.Modal(document.getElementById('authModal'));
+  _authModal.show();
+}
+function hideAuthModal() {
+  _authModal && _authModal.hide();
+}
+
+function setAuthBtnLoading(btnId, loading) {
+  const btn = document.getElementById(btnId);
+  if (loading) {
+    btn.disabled = true;
+    btn.dataset.orig = btn.innerHTML;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Please wait…';
+  } else {
+    btn.disabled = false;
+    btn.innerHTML = btn.dataset.orig || btn.innerHTML;
+  }
+}
+
+function showAuthAlert(pane, msg) {
+  const el = document.getElementById(`${pane}-alert`);
+  el.textContent = msg;
+  el.classList.remove('d-none');
+}
+function hideAuthAlert(pane) {
+  document.getElementById(`${pane}-alert`).classList.add('d-none');
+}
+
+async function doLogin() {
+  hideAuthAlert('login');
+  const username = document.getElementById('login-username').value.trim();
+  const password = document.getElementById('login-password').value;
+  if (!username || !password) { showAuthAlert('login', 'Please enter username and password.'); return; }
+
+  setAuthBtnLoading('login-btn', true);
+  try {
+    const res = await fetch(`${API}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+    const data = await res.json();
+    if (!res.ok) { showAuthAlert('login', data.detail || 'Login failed.'); return; }
+    saveAuth(data.token, data.username);
+    onLoggedIn(data.username);
+  } catch {
+    showAuthAlert('login', 'Cannot reach server. Is it running?');
+  } finally {
+    setAuthBtnLoading('login-btn', false);
+  }
+}
+
+async function doRegister() {
+  hideAuthAlert('register');
+  const username = document.getElementById('reg-username').value.trim();
+  const email    = document.getElementById('reg-email').value.trim();
+  const password = document.getElementById('reg-password').value;
+  if (!username || !email || !password) { showAuthAlert('register', 'All fields are required.'); return; }
+
+  setAuthBtnLoading('register-btn', true);
+  try {
+    const res = await fetch(`${API}/auth/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, email, password }),
+    });
+    const data = await res.json();
+    if (!res.ok) { showAuthAlert('register', data.detail || 'Registration failed.'); return; }
+    saveAuth(data.token, data.username);
+    onLoggedIn(data.username);
+  } catch {
+    showAuthAlert('register', 'Cannot reach server. Is it running?');
+  } finally {
+    setAuthBtnLoading('register-btn', false);
+  }
+}
+
+function doLogout() {
+  clearAuth();
+  // Reset UI
+  document.getElementById('user-pill').classList.add('d-none');
+  document.getElementById('response-area').innerHTML = `
+    <div class="empty-state">
+      <i class="bi bi-chat-square-text"></i>
+      <div>Ask a question about NZ immunisation guidelines</div>
+      <div style="font-size:.8rem; margin-top:6px">Answers are retrieved from the NZ Immunisation Handbook</div>
+    </div>`;
+  document.getElementById('history-list').innerHTML =
+    '<div class="text-center text-muted py-4" style="font-size:.8rem">No queries yet</div>';
+  showAuthModal();
+}
+
+function onLoggedIn(username) {
+  hideAuthModal();
+  // Update topbar
+  const pill = document.getElementById('user-pill');
+  pill.classList.remove('d-none');
+  document.getElementById('user-name').textContent = username;
+  document.getElementById('user-avatar').textContent = username.charAt(0).toUpperCase();
+  // Load history
+  loadHistory();
+}
+
+// ── Enter key in auth modal fields ──────────────────────────────────────────
+function bindAuthEnter() {
+  ['login-username', 'login-password'].forEach(id =>
+    document.getElementById(id).addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); })
+  );
+  ['reg-username', 'reg-email', 'reg-password'].forEach(id =>
+    document.getElementById(id).addEventListener('keydown', e => { if (e.key === 'Enter') doRegister(); })
+  );
+}
+
+// ── Init ────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  renderExamples();
+  checkHealth();
+  bindAuthEnter();
+
+  document.getElementById('query-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) submitQuery();
+  });
+
+  // Check existing token
+  const token    = getToken();
+  const username = getUsername();
+  if (token && username) {
+    // Verify token is still valid
+    fetch(`${API}/auth/me`, { headers: { 'Authorization': `Bearer ${token}` } })
+      .then(r => {
+        if (r.ok) { onLoggedIn(username); }
+        else       { clearAuth(); showAuthModal(); }
+      })
+      .catch(() => showAuthModal());
+  } else {
+    showAuthModal();
+  }
+});
+
+function renderExamples() {
+  const wrap = document.getElementById('example-chips');
+  EXAMPLES.forEach(ex => {
+    const chip = document.createElement('span');
+    chip.className = 'chip';
+    chip.textContent = ex;
+    chip.onclick = () => {
+      document.getElementById('query-input').value = ex;
+      submitQuery();
+    };
+    wrap.appendChild(chip);
+  });
+}
+
+// ── Health check ─────────────────────────────────────────────────────────────
+async function checkHealth() {
+  try {
+    const r = await fetch(`${API}/health`);
+    const badge = document.getElementById('status-badge');
+    if (r.ok) {
+      badge.className = 'badge bg-success bg-opacity-75';
+      badge.innerHTML = '<i class="bi bi-circle-fill me-1" style="font-size:.55rem"></i>Online';
+    } else throw new Error();
+  } catch {
+    const badge = document.getElementById('status-badge');
+    badge.className = 'badge bg-danger bg-opacity-75';
+    badge.innerHTML = '<i class="bi bi-circle-fill me-1" style="font-size:.55rem"></i>Offline';
+  }
+}
+
+// ── Submit query ─────────────────────────────────────────────────────────────
+async function submitQuery() {
+  const q = document.getElementById('query-input').value.trim();
+  if (!q) return;
+
+  const btn = document.getElementById('ask-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Asking…';
+
+  showSpinner();
+
+  try {
+    const res = await fetch(`${API}/query`, {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify({ query: q }),
+    });
+
+    if (res.status === 401) {
+      clearAuth();
+      showAuthModal();
+      showError('Session expired. Please log in again.');
+      return;
+    }
+
+    if (!res.ok) {
+      const err = await res.json();
+      showError(err.detail || 'Server error');
+      return;
+    }
+
+    const data = await res.json();
+    renderResponse(data);
+    await loadHistory();
+  } catch (e) {
+    showError('Cannot reach the API server. Is it running on port 8000?');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="bi bi-send-fill me-1"></i>Ask';
+  }
+}
+
+// ── Render response ───────────────────────────────────────────────────────────
+function confidenceClass(c) {
+  return { high: 'conf-high', medium: 'conf-medium', low: 'conf-low' }[c] || 'conf-notfound';
+}
+function confidenceLabel(c) {
+  return { high: 'HIGH', medium: 'MEDIUM', low: 'LOW', not_found: 'NOT FOUND' }[c] || c.toUpperCase();
+}
+
+function renderResponse(data) {
+  const citations = (data.citations || []).map(c => `
+    <div class="citation-card">
+      <div class="c-source"><i class="bi bi-book me-1"></i>${esc(c.source)}</div>
+      <div class="c-section"><i class="bi bi-bookmark me-1 text-muted"></i>${esc(c.section)}</div>
+      ${c.url ? `<div class="c-url"><a href="${esc(c.url)}" target="_blank"><i class="bi bi-link-45deg"></i>${esc(c.url)}</a></div>` : ''}
+      ${c.excerpt ? `<div class="c-excerpt">${esc(c.excerpt)}</div>` : ''}
+    </div>`).join('');
+
+  const audit = data.audit || {};
+  const ts = audit.timestamp ? new Date(audit.timestamp).toLocaleTimeString() : '';
+
+  document.getElementById('response-area').innerHTML = `
+    <div class="response-card">
+      <div class="response-header">
+        <i class="bi bi-chat-left-text text-muted"></i>
+        <span class="fw-semibold text-truncate flex-grow-1" style="font-size:.9rem">${esc(audit.query || '')}</span>
+        <span class="confidence-badge ${confidenceClass(data.confidence)}">
+          ${confidenceLabel(data.confidence)}
+        </span>
+      </div>
+      <div class="response-body">${marked.parse(data.answer || '_No answer generated._')}</div>
+      ${citations ? `
+        <div class="citations-section">
+          <div class="citations-title"><i class="bi bi-journals me-1"></i>Sources</div>
+          ${citations}
+        </div>` : ''}
+      <div class="audit-footer">
+        <span><i class="bi bi-database me-1"></i>${audit.chunks_retrieved || 0} chunks retrieved</span>
+        ${ts ? `<span><i class="bi bi-clock me-1"></i>${ts}</span>` : ''}
+        <span class="ms-auto text-muted fst-italic">Final clinical decisions remain with qualified staff</span>
+      </div>
+    </div>`;
+}
+
+// ── History ───────────────────────────────────────────────────────────────────
+async function loadHistory() {
+  try {
+    const res = await fetch(`${API}/history?limit=20`, { headers: authHeaders() });
+    if (res.status === 401) return;
+    if (!res.ok) return;
+    const items = await res.json();
+    const list = document.getElementById('history-list');
+
+    if (!items.length) {
+      list.innerHTML = '<div class="text-center text-muted py-4" style="font-size:.8rem">No queries yet</div>';
+      return;
+    }
+
+    list.innerHTML = items.map(item => `
+      <div class="history-item" onclick="rerunQuery(${JSON.stringify(item.query)})">
+        <div class="q-text">${esc(item.query)}</div>
+        <div class="q-meta">
+          <span class="badge ${item.confidence === 'high' ? 'text-bg-success' : item.confidence === 'medium' ? 'text-bg-warning' : 'text-bg-secondary'}"
+                style="font-size:.65rem">${item.confidence}</span>
+          &nbsp;${new Date(item.timestamp).toLocaleTimeString()}
+        </div>
+      </div>`).join('');
+  } catch {}
+}
+
+async function clearHistory() {
+  await fetch(`${API}/history`, { method: 'DELETE', headers: authHeaders() });
+  loadHistory();
+}
+
+function rerunQuery(q) {
+  document.getElementById('query-input').value = q;
+  submitQuery();
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function showSpinner() {
+  document.getElementById('response-area').innerHTML = `
+    <div class="spinner-wrap">
+      <div class="spinner-border text-primary" style="width:2.5rem;height:2.5rem"></div>
+      <div class="mt-3">Searching knowledge base…</div>
+    </div>`;
+}
+
+function showError(msg) {
+  document.getElementById('response-area').innerHTML = `
+    <div class="alert alert-danger d-flex align-items-center gap-2 mt-2">
+      <i class="bi bi-exclamation-triangle-fill fs-5"></i>
+      <div>${esc(msg)}</div>
+    </div>`;
+}
+
+function esc(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>

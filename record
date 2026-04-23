@@ -1,0 +1,9 @@
+创建虚拟环境immunisation-adviser
+安装 requirements.txt
+conda activate immunisation-adviser
+cd D:/714/hackthon/immunisation-adviser
+
+启动：
+python start.py
+
+浏览器打开 http://127.0.0.1:8000

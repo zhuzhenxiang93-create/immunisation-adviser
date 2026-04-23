@@ -1,0 +1,27 @@
+# Core LangGraph / LangChain
+langgraph>=0.2.0
+langchain>=0.2.0
+langchain-openai>=0.1.0
+
+# Azure SDKs
+openai>=1.30.0
+azure-search-documents>=11.4.0
+azure-core>=1.30.0
+azure-storage-blob>=12.19.0
+azure-ai-documentintelligence>=1.0.0
+
+# Text processing
+langchain-text-splitters>=0.2.0
+tiktoken>=0.7.0
+
+# UI
+gradio>=4.36.0
+
+# Retrieval
+rank_bm25>=0.2.2
+
+# Auth
+PyJWT>=2.8.0
+
+# Utilities
+python-dotenv>=1.0.0

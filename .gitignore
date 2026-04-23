@@ -1,0 +1,26 @@
+# Environment & secrets
+.env
+
+# Large data files (embeddings)
+data/chunks_with_embeddings.json
+data/users.db
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
