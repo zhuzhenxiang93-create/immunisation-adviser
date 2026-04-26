@@ -2,10 +2,10 @@
 query_handler.py — Main agent entry point using LangGraph.
 
 Graph structure:
-    START → retrieve_node → generate_node → format_node → END
+    START → classify_node → retrieve_node → generate_node → format_node → END
 
-State carries the query, retrieved chunks, raw generation, and final output
-through the pipeline. Each node is a pure function with no side effects.
+State carries the query, classification, retrieved chunks, raw generation,
+and final output through the pipeline. Each node is a pure function.
 
 Usage:
     from agent.query_handler import run_query
@@ -25,6 +25,7 @@ from langgraph.graph import StateGraph
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from agent.retriever import retrieve
 from agent.generator import generate
+from agent.classifier import classify_query
 from agent.output_formatter import build_output, format_for_display
 
 from config.azure_config import RETRIEVAL_TOP_K
@@ -36,7 +37,8 @@ from config.azure_config import RETRIEVAL_TOP_K
 
 class AgentState(TypedDict):
     query: str
-    chunks: list[dict]          # retrieved from Azure AI Search
+    classification: dict        # vaccine_type, query_type, scenario, caller, age, urgency
+    chunks: list[dict]          # retrieved from local/Azure search
     generation: dict            # raw LLM output (answer + citations + confidence)
     output: dict                # final structured output including audit
     formatted: str              # human-readable string for UI display
@@ -47,8 +49,15 @@ class AgentState(TypedDict):
 # Nodes
 # ---------------------------------------------------------------------------
 
+def classify_node(state: AgentState) -> dict:
+    """Classify the query across six dimensions (rule-based, zero latency)."""
+    classification = classify_query(state["query"])
+    print(f"[classify] {classification}")
+    return {"classification": classification}
+
+
 def retrieve_node(state: AgentState) -> dict:
-    """Retrieve relevant chunks from Azure AI Search (hybrid search)."""
+    """Retrieve relevant chunks from local/Azure search (hybrid search)."""
     try:
         chunks = retrieve(state["query"], top_k=RETRIEVAL_TOP_K)
         print(f"[retrieve] {len(chunks)} chunks retrieved")
@@ -81,6 +90,7 @@ def format_node(state: AgentState) -> dict:
         query=state["query"],
         generation_result=state["generation"],
         chunks_retrieved=len(state.get("chunks", [])),
+        classification=state.get("classification", {}),
     )
 
     # Inject error message into answer if something went wrong
@@ -102,11 +112,13 @@ def format_node(state: AgentState) -> dict:
 def _build_graph() -> StateGraph:
     builder = StateGraph(AgentState)
 
+    builder.add_node("classify_node", classify_node)
     builder.add_node("retrieve_node", retrieve_node)
     builder.add_node("generate_node", generate_node)
     builder.add_node("format_node", format_node)
 
-    builder.add_edge(START, "retrieve_node")
+    builder.add_edge(START, "classify_node")
+    builder.add_edge("classify_node", "retrieve_node")
     builder.add_edge("retrieve_node", "generate_node")
     builder.add_edge("generate_node", "format_node")
     builder.add_edge("format_node", END)
@@ -142,6 +154,7 @@ def run_query(query: str) -> dict:
     graph = _get_graph()
     initial_state: AgentState = {
         "query": query,
+        "classification": {},
         "chunks": [],
         "generation": {},
         "output": {},

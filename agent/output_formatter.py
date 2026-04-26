@@ -23,15 +23,17 @@ def build_output(
     query: str,
     generation_result: dict,
     chunks_retrieved: int,
+    classification: dict | None = None,
 ) -> dict:
     """
-    Merge LLM generation result with audit metadata.
+    Merge LLM generation result with audit metadata and classification.
     Returns the complete output dict.
     """
     return {
         "answer": generation_result.get("answer", ""),
         "citations": generation_result.get("citations", []),
         "confidence": generation_result.get("confidence", "not_found"),
+        "classification": classification or {},
         "audit": {
             "query": query,
             "chunks_retrieved": chunks_retrieved,

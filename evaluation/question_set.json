@@ -64,5 +64,269 @@
       "section": "Tdap — Pregnancy"
     },
     "expected_confidence": "high"
+  },
+  {
+    "id": "Q007",
+    "query": "What is the HPV vaccination schedule for a 12-year-old in New Zealand?",
+    "category": "vaccine_schedule",
+    "ground_truth_answer": "HPV vaccine (Gardasil 9) is funded for eligible students at age 12–13 via the school-based programme. For immunocompetent recipients aged 9–14 receiving their first dose before age 15, a 2-dose schedule is used. Those aged 15 and over, or immunocompromised individuals, receive a 3-dose schedule.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "HPV — Dosing schedule"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q008",
+    "query": "Can MMR and varicella vaccines be given on the same day?",
+    "category": "co_administration",
+    "ground_truth_answer": "Yes. MMR and varicella can be given simultaneously as separate injections at different sites, or as the combined MMRV vaccine. If not given on the same day, a minimum 4-week interval must separate two live vaccines.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "General principles — Live vaccines and intervals"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q009",
+    "query": "Should premature infants receive vaccines on the same schedule as term infants?",
+    "category": "special_population",
+    "ground_truth_answer": "Yes. Premature infants should be immunised according to their chronological age (date of birth), not their corrected gestational age, using the standard NZ schedule. Doses should not be reduced.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Preterm infants — Immunisation"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q010",
+    "query": "What is the minimum interval between doses of the hepatitis B vaccine series?",
+    "category": "vaccine_schedule",
+    "ground_truth_answer": "For the standard 3-dose series, the minimum interval is 4 weeks between doses 1 and 2, and 8 weeks between doses 2 and 3, with at least 16 weeks between doses 1 and 3.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Hepatitis B — Dosing intervals"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q011",
+    "query": "How many doses of COVID-19 vaccine should an immunocompromised patient receive?",
+    "category": "special_population",
+    "ground_truth_answer": "Immunocompromised individuals may require additional primary doses and booster doses of COVID-19 vaccine as per current Ministry of Health guidance. The specific schedule depends on the degree of immunosuppression and the vaccine product used.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "COVID-19 — Immunocompromised individuals"
+    },
+    "expected_confidence": "medium"
+  },
+  {
+    "id": "Q012",
+    "query": "What are the common side effects of the meningococcal B (Bexsero) vaccine?",
+    "category": "side_effects",
+    "ground_truth_answer": "Common side effects of Bexsero include injection site pain, redness and swelling, fever, irritability, sleepiness, and loss of appetite. Fever is especially common in infants; prophylactic paracetamol may be recommended.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Meningococcal B — Adverse events"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q013",
+    "query": "What is the minimum age for the first rotavirus vaccine dose?",
+    "category": "vaccine_schedule",
+    "ground_truth_answer": "The first dose of rotavirus vaccine must be given at 6 weeks of age or older but no later than 14 weeks and 6 days. The series must be completed by 24 weeks of age (Rotarix) or 32 weeks (RotaTeq).",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Rotavirus — Age restrictions"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q014",
+    "query": "What should be done if a patient has an anaphylactic reaction after vaccination?",
+    "category": "adverse_event_management",
+    "ground_truth_answer": "Administer 0.01 mg/kg intramuscular adrenaline (epinephrine) into the outer mid-thigh immediately. Call 111. Lay the patient flat with legs raised unless breathing is compromised. Repeat adrenaline every 5 minutes if needed. Observe for biphasic reaction.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Anaphylaxis management"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q015",
+    "query": "Is the pneumococcal vaccine funded for adults aged 65 and over in New Zealand?",
+    "category": "funding_eligibility",
+    "ground_truth_answer": "Yes. Adults aged 65 and over are eligible for a funded pneumococcal vaccine under the NZ National Immunisation Schedule. The specific product and schedule may vary based on prior vaccination history.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Pneumococcal — Funded eligibility"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q016",
+    "query": "Should healthcare workers be vaccinated against varicella if they have no history of chickenpox?",
+    "category": "occupational_health",
+    "ground_truth_answer": "Yes. Healthcare workers without reliable evidence of immunity (prior disease or vaccination) should receive 2 doses of varicella vaccine at least 4 weeks apart to protect themselves and vulnerable patients.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Varicella — Healthcare workers"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q017",
+    "query": "Can a breastfeeding mother receive the influenza vaccine?",
+    "category": "special_population",
+    "ground_truth_answer": "Yes. Inactivated influenza vaccine is safe and recommended for breastfeeding women. Vaccination protects the mother and may provide indirect protection to the infant through reduced maternal illness.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Influenza — Breastfeeding"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q018",
+    "query": "What is the recommended schedule for the Shingrix (recombinant zoster) vaccine?",
+    "category": "vaccine_schedule",
+    "ground_truth_answer": "Shingrix is given as 2 doses intramuscularly, with the second dose 2–6 months after the first. For immunocompromised patients, the interval may be shortened to 1–2 months between doses.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Herpes zoster (shingles) — Shingrix schedule"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q019",
+    "query": "Can vaccines be given to a child who has a mild cold without fever?",
+    "category": "contraindication",
+    "ground_truth_answer": "Yes. A mild illness without fever is not a contraindication to vaccination. Children with minor upper respiratory tract infections may be vaccinated on schedule.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "General principles — Vaccination with minor illness"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q020",
+    "query": "What is the preferred injection site for vaccines in infants under 12 months?",
+    "category": "administration_technique",
+    "ground_truth_answer": "The anterolateral thigh (vastus lateralis muscle) is the preferred intramuscular injection site for infants under 12 months of age due to the larger muscle mass compared to the deltoid.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Vaccine administration — Injection site selection"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q021",
+    "query": "What is the catch-up schedule for a 7-month-old infant who missed the Hib vaccine?",
+    "category": "catch_up_schedule",
+    "ground_truth_answer": "For infants aged 7–11 months who have not yet received Hib vaccine, 2 primary doses are given 4 weeks apart, followed by a booster dose at 12–15 months (at least 8 weeks after the second dose).",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Hib — Catch-up schedule"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q022",
+    "query": "Are live attenuated vaccines safe to give to HIV-positive children?",
+    "category": "special_population",
+    "ground_truth_answer": "Live vaccines (MMR, varicella) may be given to HIV-positive children who are not severely immunocompromised (CD4 count above threshold as per guidelines). BCG should generally be avoided. Clinical judgement and specialist consultation are required.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Immunocompromised — HIV-positive individuals"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q023",
+    "query": "What vaccines are recommended for travel to Southeast Asia?",
+    "category": "travel_vaccine",
+    "ground_truth_answer": "For travel to Southeast Asia, ensure routine NZ schedule vaccines are up to date. Additional vaccines to consider include hepatitis A, hepatitis B, typhoid, and Japanese encephalitis depending on itinerary and activities. Malaria prophylaxis should also be discussed.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Travel immunisation"
+    },
+    "expected_confidence": "medium"
+  },
+  {
+    "id": "Q024",
+    "query": "What is the recommended paracetamol dose after vaccination for a 3-month-old infant?",
+    "category": "post_vaccination_care",
+    "ground_truth_answer": "The recommended dose of paracetamol for infants is 15 mg/kg per dose, given every 4–6 hours as needed, not exceeding 4 doses in 24 hours. For a typical 3-month-old (approximately 5–6 kg), this is approximately 75–90 mg per dose. Always check current product labelling.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Post-vaccination care — Fever management"
+    },
+    "expected_confidence": "medium"
+  },
+  {
+    "id": "Q025",
+    "query": "Can an immunocompromised patient receive the oral polio vaccine?",
+    "category": "contraindication",
+    "ground_truth_answer": "No. Oral polio vaccine (OPV) is a live vaccine and is absolutely contraindicated in immunocompromised individuals and their household contacts. Inactivated polio vaccine (IPV) should be used instead.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Polio — Immunocompromised patients"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q026",
+    "query": "What is the recommended RSV prophylaxis for a premature infant born at 28 weeks gestation?",
+    "category": "special_population",
+    "ground_truth_answer": "Premature infants born at or before 29 weeks gestation who are under 12 months at the start of the RSV season may be eligible for nirsevimab (Beyfortus) or palivizumab (Synagis) prophylaxis under funded criteria. Eligibility depends on gestational age, age at RSV season, and presence of chronic lung disease.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "RSV prophylaxis — Preterm infants"
+    },
+    "expected_confidence": "medium"
+  },
+  {
+    "id": "Q027",
+    "query": "What is the minimum interval required between two doses of different live vaccines?",
+    "category": "co_administration",
+    "ground_truth_answer": "If two different live vaccines are not given on the same day, a minimum interval of 4 weeks (28 days) must be observed between them. This is to prevent immunological interference between the vaccines.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "General principles — Live vaccine intervals"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q028",
+    "query": "What documentation must be completed after administering a vaccine in New Zealand?",
+    "category": "documentation",
+    "ground_truth_answer": "After vaccination, the provider must record: patient name and date of birth, vaccine name and brand, dose, batch number, expiry date, injection site, date and time of administration, and the vaccinator's name and signature. This must be entered in the patient's clinical record and the National Immunisation Register (NIR).",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Vaccine administration — Documentation requirements"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q029",
+    "query": "Is the hepatitis A vaccine recommended for patients with chronic liver disease?",
+    "category": "special_population",
+    "ground_truth_answer": "Yes. Patients with chronic liver disease are at increased risk of severe hepatitis A infection and should receive the hepatitis A vaccine series. In New Zealand, funding eligibility criteria apply.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Hepatitis A — High-risk groups"
+    },
+    "expected_confidence": "high"
+  },
+  {
+    "id": "Q030",
+    "query": "A nurse accidentally gave a subcutaneous injection instead of intramuscular for MMR. Is the dose valid?",
+    "category": "administration_error",
+    "ground_truth_answer": "MMR vaccine is licensed for subcutaneous administration, so a subcutaneous injection is the correct route and the dose is valid. No repeat dose is required. This is distinct from vaccines like hepatitis B, where incorrect route may compromise immunogenicity.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "MMR — Administration route"
+    },
+    "expected_confidence": "high"
   }
 ]

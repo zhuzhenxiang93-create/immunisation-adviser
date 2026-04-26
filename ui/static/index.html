@@ -666,6 +666,29 @@ async function submitQuery() {
 }
 
 // ── Render response ───────────────────────────────────────────────────────────
+function buildClassificationBadges(clf) {
+  if (!clf || Object.keys(clf).length === 0) return '';
+  const tags = [];
+  const urgencyColor = { emergency: 'danger', urgent: 'warning', routine: '' };
+
+  (clf.vaccine_type || []).filter(v => v !== 'unknown').forEach(v =>
+    tags.push(`<span class="badge text-bg-primary" style="font-size:.7rem">${esc(v)}</span>`)
+  );
+  (clf.query_type || []).filter(t => t !== 'general').forEach(t =>
+    tags.push(`<span class="badge text-bg-info" style="font-size:.7rem">${esc(t)}</span>`)
+  );
+  (clf.clinical_scenario || []).forEach(s =>
+    tags.push(`<span class="badge text-bg-secondary" style="font-size:.7rem">${esc(s)}</span>`)
+  );
+  if (clf.patient_age_group && clf.patient_age_group !== 'unknown')
+    tags.push(`<span class="badge text-bg-light border" style="font-size:.7rem;color:#333">${esc(clf.patient_age_group)}</span>`);
+  if (clf.urgency && clf.urgency !== 'routine')
+    tags.push(`<span class="badge text-bg-${urgencyColor[clf.urgency] || 'secondary'}" style="font-size:.7rem">${esc(clf.urgency)}</span>`);
+
+  if (tags.length === 0) return '';
+  return `<div style="display:flex;flex-wrap:wrap;gap:4px;padding:6px 0 2px 0">${tags.join('')}</div>`;
+}
+
 function confidenceClass(c) {
   return { high: 'conf-high', medium: 'conf-medium', low: 'conf-low' }[c] || 'conf-notfound';
 }
@@ -694,6 +717,7 @@ function renderResponse(data) {
           ${confidenceLabel(data.confidence)}
         </span>
       </div>
+      ${buildClassificationBadges(data.classification)}
       <div class="response-body">${marked.parse(data.answer || '_No answer generated._')}</div>
       ${citations ? `
         <div class="citations-section">

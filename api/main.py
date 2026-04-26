@@ -8,8 +8,8 @@ Endpoints:
   GET  /auth/me             Get current user info
   POST /query               Run a single query (auth required)
   POST /query/stream        Stream the answer token-by-token / SSE (auth required)
-  GET  /history             Last N queries in this session (in-memory)
-  DELETE /history           Clear session history
+  GET  /history             Last N queries (persisted in SQLite)
+  DELETE /history           Clear query history
 
 Run:
   conda activate immunisation-adviser
@@ -23,7 +23,6 @@ from __future__ import annotations
 
 import sys
 import asyncio
-from collections import deque
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import AsyncGenerator, Optional
@@ -42,6 +41,8 @@ from agent.retriever import retrieve
 from config.azure_config import get_openai_client, get_chat_model
 from api.auth_manager import AuthManager
 from api.jwt_utils import create_access_token, verify_token
+from api.audit_logger import AuditLogger
+from api.pii_filter import scan as pii_scan
 
 # ── App setup ─────────────────────────────────────────────────────────────────
 
@@ -90,8 +91,8 @@ def get_current_user(
     return user
 
 
-# ── In-memory session history (last 50 queries) ───────────────────────────────
-_history: deque[dict] = deque(maxlen=50)
+# ── Persistent audit log (SQLite) ────────────────────────────────────────────
+_audit = AuditLogger(db_path="./data/users.db")
 
 
 # ── Request / Response schemas ────────────────────────────────────────────────
@@ -131,10 +132,20 @@ class AuditModel(BaseModel):
     timestamp: str
 
 
+class ClassificationModel(BaseModel):
+    vaccine_type:      list[str] = []
+    query_type:        list[str] = []
+    clinical_scenario: list[str] = []
+    caller_type:       str = "unknown"
+    patient_age_group: str = "unknown"
+    urgency:           str = "routine"
+
+
 class QueryResponse(BaseModel):
     answer: str
     citations: list[CitationModel]
     confidence: str          # high | medium | low | not_found
+    classification: ClassificationModel
     audit: AuditModel
     formatted: str           # human-readable markdown
 
@@ -144,6 +155,17 @@ class HistoryEntry(BaseModel):
     confidence: str
     chunks_retrieved: int
     timestamp: str
+
+
+class ReportSummary(BaseModel):
+    total_queries:     int
+    confidence:        dict
+    vaccine_type:      dict
+    query_type:        dict
+    clinical_scenario: dict
+    urgency:           dict
+    patient_age_group: dict
+    daily_volume:      dict
 
 
 # ── Auth endpoints ─────────────────────────────────────────────────────────────
@@ -186,6 +208,18 @@ def health_check():
     }
 
 
+# ── Reporting ─────────────────────────────────────────────────────────────────
+
+@app.get("/reports/summary", response_model=ReportSummary, tags=["reporting"])
+def reports_summary(current_user: dict = Depends(get_current_user)):
+    """
+    Aggregate statistics across all logged queries.
+    Returns distribution by confidence, vaccine type, query type,
+    clinical scenario, urgency, patient age group, and daily volume.
+    """
+    return _audit.get_summary()
+
+
 # ── Query endpoints (auth required) ───────────────────────────────────────────
 
 @app.post("/query", response_model=QueryResponse, tags=["adviser"])
@@ -194,6 +228,16 @@ def query(req: QueryRequest, current_user: dict = Depends(get_current_user)):
     Run a clinical query through the full RAG pipeline.
     Returns a structured answer with citations and confidence indicator.
     """
+    pii = pii_scan(req.query)
+    if pii["has_pii"]:
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                f"Query contains potential personal information ({', '.join(pii['types'])}). "
+                "Please remove patient identifiers before submitting."
+            ),
+        )
+
     try:
         result = run_query(req.query)
     except FileNotFoundError as e:
@@ -204,17 +248,26 @@ def query(req: QueryRequest, current_user: dict = Depends(get_current_user)):
     output = result.get("output", {})
     audit = output.get("audit", {})
 
-    _history.appendleft({
-        "query": req.query,
-        "confidence": output.get("confidence", "not_found"),
-        "chunks_retrieved": audit.get("chunks_retrieved", 0),
-        "timestamp": audit.get("timestamp", ""),
-    })
-
+    clf = output.get("classification", {})
+    _audit.log(
+        query=req.query,
+        confidence=output.get("confidence", "not_found"),
+        chunks_retrieved=audit.get("chunks_retrieved", 0),
+        classification=clf,
+        username=current_user.get("username", "unknown"),
+    )
     return QueryResponse(
         answer=output.get("answer", ""),
         citations=[CitationModel(**c) for c in output.get("citations", [])],
         confidence=output.get("confidence", "not_found"),
+        classification=ClassificationModel(
+            vaccine_type=clf.get("vaccine_type", []),
+            query_type=clf.get("query_type", []),
+            clinical_scenario=clf.get("clinical_scenario", []),
+            caller_type=clf.get("caller_type", "unknown"),
+            patient_age_group=clf.get("patient_age_group", "unknown"),
+            urgency=clf.get("urgency", "routine"),
+        ),
         audit=AuditModel(
             query=audit.get("query", req.query),
             chunks_retrieved=audit.get("chunks_retrieved", 0),
@@ -268,12 +321,13 @@ async def query_stream(req: QueryRequest, current_user: dict = Depends(get_curre
             yield f"event: audit\ndata: {audit_payload}\n\n"
             yield "event: done\ndata: [DONE]\n\n"
 
-            _history.appendleft({
-                "query": req.query,
-                "confidence": "streamed",
-                "chunks_retrieved": len(chunks),
-                "timestamp": datetime.now(timezone.utc).isoformat(),
-            })
+            _audit.log(
+                query=req.query,
+                confidence="streamed",
+                chunks_retrieved=len(chunks),
+                classification={},
+                username=current_user.get("username", "unknown"),
+            )
 
         except Exception as e:
             yield f"event: error\ndata: {e}\n\n"
@@ -285,16 +339,25 @@ async def query_stream(req: QueryRequest, current_user: dict = Depends(get_curre
     )
 
 
-# ── Session history ────────────────────────────────────────────────────────────
+# ── Query history (persisted) ─────────────────────────────────────────────────
 
 @app.get("/history", response_model=list[HistoryEntry], tags=["session"])
-def get_history(limit: int = 10, current_user: dict = Depends(get_current_user)):
-    """Return the last N queries in this session (in-memory, not persisted)."""
-    return list(_history)[:limit]
+def get_history(limit: int = 20, current_user: dict = Depends(get_current_user)):
+    """Return the last N queries for the current user (persisted in SQLite)."""
+    rows = _audit.get_recent(limit=limit, username=current_user.get("username"))
+    return [
+        HistoryEntry(
+            query=r["query"],
+            confidence=r["confidence"],
+            chunks_retrieved=r["chunks_retrieved"],
+            timestamp=r["timestamp"],
+        )
+        for r in rows
+    ]
 
 
 @app.delete("/history", tags=["session"])
 def clear_history(current_user: dict = Depends(get_current_user)):
-    """Clear session history."""
-    _history.clear()
+    """Clear query history for the current user."""
+    _audit.clear(username=current_user.get("username"))
     return {"status": "cleared"}
