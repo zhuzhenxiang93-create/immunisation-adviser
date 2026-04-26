@@ -111,20 +111,7 @@ _URGENCY_RULES: list[tuple[str, list[str]]] = [
 
 # ── Public API ────────────────────────────────────────────────────────────────
 
-def classify_query(query: str) -> dict:
-    """
-    Classify a query across six dimensions.
-
-    Returns:
-        {
-            "vaccine_type":      ["influenza"] or ["unknown"],
-            "query_type":        ["contraindication", "schedule"] or ["general"],
-            "clinical_scenario": ["pregnancy"] or [],
-            "caller_type":       "nurse" or "unknown",
-            "patient_age_group": "infant" or "unknown",
-            "urgency":           "emergency" | "urgent" | "routine",
-        }
-    """
+def _classify_rule_based(query: str) -> dict:
     vaccines  = [l for l, p in _VACCINE_RULES   if _match(query, p)]
     qtypes    = [l for l, p in _QUERY_TYPE_RULES if _match(query, p)]
     scenarios = [l for l, p in _SCENARIO_RULES  if _match(query, p)]
@@ -145,3 +132,82 @@ def classify_query(query: str) -> dict:
         "patient_age_group": ages[0]    if ages    else "unknown",
         "urgency":           urgency,
     }
+
+
+def _needs_fallback(result: dict) -> bool:
+    """True when rule-based found nothing useful — likely colloquial input."""
+    return (
+        result["vaccine_type"]      == ["unknown"]
+        and result["query_type"]    == ["general"]
+        and not result["clinical_scenario"]
+        and result["caller_type"]   == "unknown"
+        and result["patient_age_group"] == "unknown"
+    )
+
+
+_LLM_SYSTEM = """You are a clinical query classifier for IMAC (NZ immunisation advisory centre).
+Extract classification dimensions from the immunisation query. Return ONLY valid JSON, no markdown.
+
+Schema:
+{
+  "vaccine_type": ["influenza"|"MMR"|"MMRV"|"varicella"|"COVID-19"|"BCG"|"Tdap/Td"|"HPV"|"hepatitis B"|"hepatitis A"|"rotavirus"|"pneumococcal"|"meningococcal"|"polio"|"Hib"|"RSV"|"zoster"|"unknown"],
+  "query_type": ["contraindication"|"schedule"|"dosage"|"eligibility"|"storage"|"catch-up"|"adverse event"|"co-administration"|"administration"|"efficacy"|"general"],
+  "clinical_scenario": ["pregnancy"|"immunocompromised"|"allergy"|"premature infant"|"travel"|"outbreak"|"delayed schedule"],
+  "caller_type": "GP"|"nurse"|"midwife"|"pharmacist"|"parent"|"patient"|"unknown",
+  "patient_age_group": "neonate"|"infant"|"child"|"adolescent"|"adult"|"elderly"|"pregnant"|"unknown",
+  "urgency": "emergency"|"urgent"|"routine"
+}
+
+Rules: vaccine_type and query_type are arrays; clinical_scenario is an array (may be empty);
+caller_type, patient_age_group, urgency are single strings."""
+
+
+def _classify_with_llm(query: str) -> dict:
+    """GPT-4o fallback classifier. Raises on failure so caller can catch."""
+    import json
+    from config.azure_config import get_openai_client, get_chat_model
+
+    client = get_openai_client()
+    resp = client.chat.completions.create(
+        model=get_chat_model(),
+        messages=[
+            {"role": "system", "content": _LLM_SYSTEM},
+            {"role": "user",   "content": f"Classify: {query}"},
+        ],
+        temperature=0,
+        max_tokens=200,
+    )
+    raw = resp.choices[0].message.content.strip()
+    # Strip markdown fences if present
+    if raw.startswith("```"):
+        raw = raw.split("```")[1]
+        if raw.startswith("json"):
+            raw = raw[4:]
+    return json.loads(raw.strip())
+
+
+def classify_query(query: str) -> dict:
+    """
+    Classify a query across six dimensions.
+
+    Rule-based first (zero cost). If the result is fully empty — all unknown,
+    no scenario — the query is likely colloquial, so GPT-4o is called as a
+    fallback. If GPT-4o fails for any reason, the rule-based result is kept.
+
+    Returns:
+        {
+            "vaccine_type":      list[str],
+            "query_type":        list[str],
+            "clinical_scenario": list[str],
+            "caller_type":       str,
+            "patient_age_group": str,
+            "urgency":           str,
+        }
+    """
+    result = _classify_rule_based(query)
+    if _needs_fallback(result):
+        try:
+            result = _classify_with_llm(query)
+        except Exception:
+            pass  # silently keep rule-based result
+    return result
