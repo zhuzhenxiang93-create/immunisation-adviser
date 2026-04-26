@@ -43,6 +43,7 @@ from api.auth_manager import AuthManager
 from api.jwt_utils import create_access_token, verify_token
 from api.audit_logger import AuditLogger
 from api.pii_filter import scan as pii_scan
+from api.crm_manager import CRMManager
 
 # ── App setup ─────────────────────────────────────────────────────────────────
 
@@ -91,8 +92,9 @@ def get_current_user(
     return user
 
 
-# ── Persistent audit log (SQLite) ────────────────────────────────────────────
+# ── Persistent audit log + CRM (SQLite) ──────────────────────────────────────
 _audit = AuditLogger(db_path="./data/users.db")
+_crm   = CRMManager(db_path="./data/users.db")
 
 
 # ── Request / Response schemas ────────────────────────────────────────────────
@@ -141,6 +143,26 @@ class ClassificationModel(BaseModel):
     urgency:           str = "routine"
 
 
+class CRMCaseModel(BaseModel):
+    id:           int
+    case_number:  str
+    username:     str
+    query:        str
+    caller_type:  str
+    vaccine_type: list[str]
+    urgency:      str
+    confidence:   str
+    status:       str        # open | resolved | escalated
+    notes:        str
+    created_at:   str
+    updated_at:   str
+
+
+class CRMUpdateRequest(BaseModel):
+    status: Optional[str] = None   # open | resolved | escalated
+    notes:  Optional[str] = None
+
+
 class QueryResponse(BaseModel):
     answer: str
     citations: list[CitationModel]
@@ -148,6 +170,7 @@ class QueryResponse(BaseModel):
     classification: ClassificationModel
     audit: AuditModel
     formatted: str           # human-readable markdown
+    case_number: str         # CRM case reference
 
 
 class HistoryEntry(BaseModel):
@@ -249,17 +272,26 @@ def query(req: QueryRequest, current_user: dict = Depends(get_current_user)):
     audit = output.get("audit", {})
 
     clf = output.get("classification", {})
+    confidence = output.get("confidence", "not_found")
     _audit.log(
         query=req.query,
-        confidence=output.get("confidence", "not_found"),
+        confidence=confidence,
         chunks_retrieved=audit.get("chunks_retrieved", 0),
         classification=clf,
+        username=current_user.get("username", "unknown"),
+    )
+    crm_case = _crm.create_case(
+        query=req.query,
+        caller_type=clf.get("caller_type", "unknown"),
+        vaccine_type=clf.get("vaccine_type", []),
+        urgency=clf.get("urgency", "routine"),
+        confidence=confidence,
         username=current_user.get("username", "unknown"),
     )
     return QueryResponse(
         answer=output.get("answer", ""),
         citations=[CitationModel(**c) for c in output.get("citations", [])],
-        confidence=output.get("confidence", "not_found"),
+        confidence=confidence,
         classification=ClassificationModel(
             vaccine_type=clf.get("vaccine_type", []),
             query_type=clf.get("query_type", []),
@@ -274,6 +306,7 @@ def query(req: QueryRequest, current_user: dict = Depends(get_current_user)):
             timestamp=audit.get("timestamp", ""),
         ),
         formatted=result.get("formatted", ""),
+        case_number=crm_case["case_number"],
     )
 
 
@@ -361,3 +394,47 @@ def clear_history(current_user: dict = Depends(get_current_user)):
     """Clear query history for the current user."""
     _audit.clear(username=current_user.get("username"))
     return {"status": "cleared"}
+
+
+# ── CRM case management ────────────────────────────────────────────────────────
+
+@app.get("/crm/cases", response_model=list[CRMCaseModel], tags=["crm"])
+def crm_list_cases(
+    status: Optional[str] = None,
+    limit: int = 50,
+    current_user: dict = Depends(get_current_user),
+):
+    """
+    List CRM cases. Optionally filter by status (open | resolved | escalated).
+    Returns cases for the current user only.
+    """
+    return _crm.get_cases(status=status, username=current_user.get("username"), limit=limit)
+
+
+@app.get("/crm/cases/{case_id}", response_model=CRMCaseModel, tags=["crm"])
+def crm_get_case(case_id: int, current_user: dict = Depends(get_current_user)):
+    """Get a single CRM case by numeric ID."""
+    case = _crm.get_case(case_id)
+    if case is None:
+        raise HTTPException(status_code=404, detail="Case not found")
+    if case["username"] != current_user.get("username"):
+        raise HTTPException(status_code=403, detail="Access denied")
+    return case
+
+
+@app.patch("/crm/cases/{case_id}", response_model=CRMCaseModel, tags=["crm"])
+def crm_update_case(
+    case_id: int,
+    req: CRMUpdateRequest,
+    current_user: dict = Depends(get_current_user),
+):
+    """Update CRM case status (open | resolved | escalated) and/or notes."""
+    case = _crm.get_case(case_id)
+    if case is None:
+        raise HTTPException(status_code=404, detail="Case not found")
+    if case["username"] != current_user.get("username"):
+        raise HTTPException(status_code=403, detail="Access denied")
+    if req.status and req.status not in ("open", "resolved", "escalated"):
+        raise HTTPException(status_code=400, detail="status must be open | resolved | escalated")
+    updated = _crm.update_case(case_id, status=req.status, notes=req.notes)
+    return updated

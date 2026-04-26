@@ -244,6 +244,35 @@
     .nav-tabs .nav-link.active { color: var(--imac-blue); border-bottom-color: var(--imac-blue); font-weight: 600; }
     .nav-tabs .nav-link { color: #6c757d; }
 
+    /* ── CRM Cases list ── */
+    .crm-item {
+      padding: 8px 16px;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: background .15s;
+      font-size: .82rem;
+    }
+    .crm-item:hover { background: var(--imac-light); border-left-color: var(--imac-blue); }
+    .crm-item .case-num { font-weight: 700; color: var(--imac-blue); font-size: .78rem; }
+    .crm-item .case-q   { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #343a40; }
+    .crm-item .case-meta { font-size: .72rem; color: #adb5bd; margin-top: 2px; }
+
+    .status-open       { background:#d6eaf8; color:#1a5276; }
+    .status-resolved   { background:#d5f5e3; color:#1e8449; }
+    .status-escalated  { background:#fdedec; color:#c0392b; }
+
+    /* ── Case number badge in response ── */
+    .case-ref {
+      font-size: .72rem;
+      font-weight: 600;
+      background: #eaf4fd;
+      color: var(--imac-blue);
+      border: 1px solid #aed6f1;
+      border-radius: 12px;
+      padding: 2px 10px;
+      white-space: nowrap;
+    }
+
     /* User pill in topbar */
     .user-pill {
       display: flex;
@@ -379,14 +408,42 @@
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <div class="sidebar-header">
-      <span><i class="bi bi-clock-history me-1"></i>Recent Queries</span>
-      <button class="btn btn-sm btn-link text-muted p-0" onclick="clearHistory()" title="Clear history">
-        <i class="bi bi-trash3"></i>
+    <!-- Sidebar tabs -->
+    <div style="display:flex; border-bottom:1px solid #dee2e6;">
+      <button id="tab-history" onclick="switchSidebarTab('history')"
+        style="flex:1;padding:9px 0;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+               border:none;background:#fff;color:var(--imac-blue);border-bottom:2px solid var(--imac-blue);cursor:pointer;">
+        <i class="bi bi-clock-history me-1"></i>History
+      </button>
+      <button id="tab-crm" onclick="switchSidebarTab('crm')"
+        style="flex:1;padding:9px 0;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+               border:none;background:#fff;color:#6c757d;border-bottom:2px solid transparent;cursor:pointer;">
+        <i class="bi bi-journal-text me-1"></i>Cases
       </button>
     </div>
-    <div class="history-list" id="history-list">
-      <div class="text-center text-muted py-4" style="font-size:.8rem">No queries yet</div>
+
+    <!-- History panel -->
+    <div id="panel-history" style="flex:1;overflow-y:auto;padding:8px 0;">
+      <div style="display:flex;align-items:center;justify-content:flex-end;padding:4px 12px 2px;">
+        <button class="btn btn-sm btn-link text-muted p-0" onclick="clearHistory()" title="Clear history">
+          <i class="bi bi-trash3" style="font-size:.8rem"></i>
+        </button>
+      </div>
+      <div class="history-list" id="history-list">
+        <div class="text-center text-muted py-4" style="font-size:.8rem">No queries yet</div>
+      </div>
+    </div>
+
+    <!-- CRM Cases panel (hidden by default) -->
+    <div id="panel-crm" style="flex:1;overflow-y:auto;padding:8px 0;display:none;">
+      <div style="display:flex;align-items:center;justify-content:flex-end;padding:4px 12px 2px;">
+        <button class="btn btn-sm btn-link p-0" onclick="loadCRMCases()" title="Refresh" style="font-size:.8rem;color:#6c757d">
+          <i class="bi bi-arrow-clockwise"></i>
+        </button>
+      </div>
+      <div id="crm-list">
+        <div class="text-center text-muted py-4" style="font-size:.8rem">No cases yet</div>
+      </div>
     </div>
   </div>
 
@@ -417,6 +474,65 @@
       </div>
     </div>
 
+  </div>
+</div>
+
+<!-- CRM Case Detail Modal -->
+<div class="modal fade" id="crmModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" style="max-width:520px">
+    <div class="modal-content border-0 shadow">
+      <div class="modal-header" style="background:var(--imac-blue);color:#fff;border-radius:.375rem .375rem 0 0">
+        <h6 class="modal-title mb-0">
+          <i class="bi bi-journal-text me-2"></i>
+          CRM Case — <span id="crm-modal-number"></span>
+        </h6>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <div class="mb-3">
+          <div class="text-muted" style="font-size:.75rem;font-weight:700;text-transform:uppercase">Query</div>
+          <div id="crm-modal-query" style="font-size:.88rem;margin-top:4px"></div>
+        </div>
+        <div class="row g-2 mb-3">
+          <div class="col-6">
+            <div class="text-muted" style="font-size:.75rem;font-weight:700;text-transform:uppercase">Caller Type</div>
+            <div id="crm-modal-caller" style="font-size:.88rem;margin-top:4px"></div>
+          </div>
+          <div class="col-6">
+            <div class="text-muted" style="font-size:.75rem;font-weight:700;text-transform:uppercase">Urgency</div>
+            <div id="crm-modal-urgency" style="font-size:.88rem;margin-top:4px"></div>
+          </div>
+          <div class="col-6">
+            <div class="text-muted" style="font-size:.75rem;font-weight:700;text-transform:uppercase">Confidence</div>
+            <div id="crm-modal-confidence" style="font-size:.88rem;margin-top:4px"></div>
+          </div>
+          <div class="col-6">
+            <div class="text-muted" style="font-size:.75rem;font-weight:700;text-transform:uppercase">Created</div>
+            <div id="crm-modal-created" style="font-size:.88rem;margin-top:4px"></div>
+          </div>
+        </div>
+        <hr class="my-3">
+        <div class="mb-3">
+          <label class="form-label" style="font-size:.8rem;font-weight:700;text-transform:uppercase;color:#6c757d">Status</label>
+          <select id="crm-modal-status" class="form-select form-select-sm">
+            <option value="open">Open</option>
+            <option value="resolved">Resolved</option>
+            <option value="escalated">Escalated</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" style="font-size:.8rem;font-weight:700;text-transform:uppercase;color:#6c757d">Advisor Notes</label>
+          <textarea id="crm-modal-notes" class="form-control" rows="3" placeholder="Add follow-up notes…"></textarea>
+        </div>
+        <input type="hidden" id="crm-modal-id">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+        <button class="btn btn-sm btn-ask" onclick="saveCRMCase()">
+          <i class="bi bi-check2 me-1"></i>Save
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -713,6 +829,7 @@ function renderResponse(data) {
       <div class="response-header">
         <i class="bi bi-chat-left-text text-muted"></i>
         <span class="fw-semibold text-truncate flex-grow-1" style="font-size:.9rem">${esc(audit.query || '')}</span>
+        ${data.case_number ? `<span class="case-ref" title="CRM Case" style="cursor:pointer" onclick="openCaseByNumber('${esc(data.case_number)}')">${esc(data.case_number)}</span>` : ''}
         <span class="confidence-badge ${confidenceClass(data.confidence)}">
           ${confidenceLabel(data.confidence)}
         </span>
@@ -787,6 +904,88 @@ function showError(msg) {
 
 function esc(str) {
   return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Sidebar tab switching ─────────────────────────────────────────────────────
+function switchSidebarTab(tab) {
+  const isHistory = tab === 'history';
+  document.getElementById('panel-history').style.display = isHistory ? '' : 'none';
+  document.getElementById('panel-crm').style.display     = isHistory ? 'none' : '';
+  document.getElementById('tab-history').style.color       = isHistory ? 'var(--imac-blue)' : '#6c757d';
+  document.getElementById('tab-history').style.borderBottomColor = isHistory ? 'var(--imac-blue)' : 'transparent';
+  document.getElementById('tab-crm').style.color           = isHistory ? '#6c757d' : 'var(--imac-blue)';
+  document.getElementById('tab-crm').style.borderBottomColor     = isHistory ? 'transparent' : 'var(--imac-blue)';
+  if (!isHistory) loadCRMCases();
+}
+
+// ── CRM cases list ────────────────────────────────────────────────────────────
+async function loadCRMCases() {
+  try {
+    const res = await fetch(`${API}/crm/cases?limit=30`, { headers: authHeaders() });
+    if (!res.ok) return;
+    const cases = await res.json();
+    const list = document.getElementById('crm-list');
+    if (!cases.length) {
+      list.innerHTML = '<div class="text-center text-muted py-4" style="font-size:.8rem">No cases yet</div>';
+      return;
+    }
+    list.innerHTML = cases.map(c => `
+      <div class="crm-item" onclick="openCaseModal(${JSON.stringify(c)})">
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span class="case-num">${esc(c.case_number)}</span>
+          <span class="badge status-${esc(c.status)}" style="font-size:.65rem">${esc(c.status)}</span>
+        </div>
+        <div class="case-q">${esc(c.query)}</div>
+        <div class="case-meta">
+          ${c.urgency !== 'routine' ? `<span class="badge text-bg-${c.urgency==='emergency'?'danger':'warning'}" style="font-size:.6rem">${esc(c.urgency)}</span> ` : ''}
+          ${esc(c.caller_type)} · ${new Date(c.created_at).toLocaleTimeString()}
+        </div>
+      </div>`).join('');
+  } catch {}
+}
+
+// ── CRM case modal ────────────────────────────────────────────────────────────
+let _crmModal;
+
+function openCaseModal(c) {
+  document.getElementById('crm-modal-number').textContent    = c.case_number;
+  document.getElementById('crm-modal-query').textContent     = c.query;
+  document.getElementById('crm-modal-caller').textContent    = c.caller_type;
+  document.getElementById('crm-modal-urgency').textContent   = c.urgency;
+  document.getElementById('crm-modal-confidence').textContent= c.confidence;
+  document.getElementById('crm-modal-created').textContent   = new Date(c.created_at).toLocaleString();
+  document.getElementById('crm-modal-status').value          = c.status;
+  document.getElementById('crm-modal-notes').value           = c.notes || '';
+  document.getElementById('crm-modal-id').value              = c.id;
+  _crmModal = _crmModal || new bootstrap.Modal(document.getElementById('crmModal'));
+  _crmModal.show();
+}
+
+async function openCaseByNumber(caseNumber) {
+  try {
+    const res = await fetch(`${API}/crm/cases?limit=100`, { headers: authHeaders() });
+    if (!res.ok) return;
+    const cases = await res.json();
+    const c = cases.find(x => x.case_number === caseNumber);
+    if (c) openCaseModal(c);
+  } catch {}
+}
+
+async function saveCRMCase() {
+  const id     = document.getElementById('crm-modal-id').value;
+  const status = document.getElementById('crm-modal-status').value;
+  const notes  = document.getElementById('crm-modal-notes').value;
+  try {
+    const res = await fetch(`${API}/crm/cases/${id}`, {
+      method: 'PATCH',
+      headers: authHeaders(),
+      body: JSON.stringify({ status, notes }),
+    });
+    if (res.ok) {
+      _crmModal && _crmModal.hide();
+      loadCRMCases();
+    }
+  } catch {}
 }
 </script>
 </body>
