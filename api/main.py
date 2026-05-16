@@ -10,6 +10,7 @@ Endpoints:
   POST /query/stream        Stream the answer token-by-token / SSE (auth required)
   GET  /history             Last N queries (persisted in SQLite)
   DELETE /history           Clear query history
+  GET  /reports/summary     Aggregate query statistics
 
 Run:
   conda activate immunisation-adviser
@@ -42,8 +43,7 @@ from config.azure_config import get_openai_client, get_chat_model
 from api.auth_manager import AuthManager
 from api.jwt_utils import create_access_token, verify_token
 from api.audit_logger import AuditLogger
-from api.pii_filter import scan as pii_scan
-from api.crm_manager import CRMManager
+from api.pii_filter import scan as pii_scan, redact_output
 
 # ── App setup ─────────────────────────────────────────────────────────────────
 
@@ -92,9 +92,8 @@ def get_current_user(
     return user
 
 
-# ── Persistent audit log + CRM (SQLite) ──────────────────────────────────────
+# ── Persistent audit log (SQLite) ────────────────────────────────────────────
 _audit = AuditLogger(db_path="./data/users.db")
-_crm   = CRMManager(db_path="./data/users.db")
 
 
 # ── Request / Response schemas ────────────────────────────────────────────────
@@ -143,26 +142,6 @@ class ClassificationModel(BaseModel):
     urgency:           str = "routine"
 
 
-class CRMCaseModel(BaseModel):
-    id:           int
-    case_number:  str
-    username:     str
-    query:        str
-    caller_type:  str
-    vaccine_type: list[str]
-    urgency:      str
-    confidence:   str
-    status:       str        # open | resolved | escalated
-    notes:        str
-    created_at:   str
-    updated_at:   str
-
-
-class CRMUpdateRequest(BaseModel):
-    status: Optional[str] = None   # open | resolved | escalated
-    notes:  Optional[str] = None
-
-
 class QueryResponse(BaseModel):
     answer: str
     citations: list[CitationModel]
@@ -170,7 +149,6 @@ class QueryResponse(BaseModel):
     classification: ClassificationModel
     audit: AuditModel
     formatted: str           # human-readable markdown
-    case_number: str         # CRM case reference
 
 
 class HistoryEntry(BaseModel):
@@ -269,28 +247,56 @@ def query(req: QueryRequest, current_user: dict = Depends(get_current_user)):
         raise HTTPException(status_code=500, detail=f"Pipeline error: {e}")
 
     output = result.get("output", {})
-    audit = output.get("audit", {})
+    audit_meta = output.get("audit", {})
 
     clf = output.get("classification", {})
     confidence = output.get("confidence", "not_found")
+    raw_citations = output.get("citations", [])
+    safe_answer = redact_output(output.get("answer", ""))
+
+    # ── Responsible AI enforcement ────────────────────────────────────────────
+    # Accuracy over recall: when the model signals no answer, enforce the
+    # escalation message regardless of what the LLM actually returned.
+    _ESCALATION = (
+        "I could not find a clear answer in the approved guidance. "
+        "Please consult the relevant handbook section directly or escalate "
+        "to a senior advisor.\n\n"
+        "Final clinical decisions remain with the qualified advisor."
+    )
+    if confidence == "not_found":
+        safe_answer = _ESCALATION
+        raw_citations = []
+    elif confidence == "low":
+        safe_answer = (
+            safe_answer
+            + "\n\n⚠ Low confidence: the retrieved guidance is only tangentially relevant. "
+            "Please verify with the primary source before acting on this information."
+        )
+
+    # Source transparency: warn if answer was generated but no citations provided
+    if confidence not in ("not_found",) and not raw_citations:
+        safe_answer = (
+            safe_answer
+            + "\n\n⚠ No source citations were returned. Treat this answer with caution "
+            "and verify directly against the approved handbook."
+        )
+
+    chunks_retrieved = audit_meta.get("chunks_retrieved", 0)
+    sources = result.get("chunks", [])  # raw chunks list if pipeline exposes it
+
     _audit.log(
         query=req.query,
         confidence=confidence,
-        chunks_retrieved=audit.get("chunks_retrieved", 0),
+        chunks_retrieved=chunks_retrieved,
         classification=clf,
         username=current_user.get("username", "unknown"),
-    )
-    crm_case = _crm.create_case(
-        query=req.query,
-        caller_type=clf.get("caller_type", "unknown"),
-        vaccine_type=clf.get("vaccine_type", []),
-        urgency=clf.get("urgency", "routine"),
-        confidence=confidence,
-        username=current_user.get("username", "unknown"),
+        sources_retrieved=sources,
+        citations=raw_citations,
+        answer=safe_answer,
     )
     return QueryResponse(
-        answer=output.get("answer", ""),
-        citations=[CitationModel(**c) for c in output.get("citations", [])],
+        answer=safe_answer,
+        citations=[CitationModel(**c) for c in raw_citations],
         confidence=confidence,
         classification=ClassificationModel(
             vaccine_type=clf.get("vaccine_type", []),
@@ -301,12 +307,11 @@ def query(req: QueryRequest, current_user: dict = Depends(get_current_user)):
             urgency=clf.get("urgency", "routine"),
         ),
         audit=AuditModel(
-            query=audit.get("query", req.query),
-            chunks_retrieved=audit.get("chunks_retrieved", 0),
-            timestamp=audit.get("timestamp", ""),
+            query=audit_meta.get("query", req.query),
+            chunks_retrieved=chunks_retrieved,
+            timestamp=audit_meta.get("timestamp", ""),
         ),
         formatted=result.get("formatted", ""),
-        case_number=crm_case["case_number"],
     )
 
 
@@ -315,6 +320,16 @@ async def query_stream(req: QueryRequest, current_user: dict = Depends(get_curre
     """
     Stream the answer token-by-token using Server-Sent Events (SSE).
     """
+    # PII check on input (same guard as /query)
+    pii = pii_scan(req.query)
+    if pii["has_pii"]:
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                f"Query contains potential personal information ({', '.join(pii['types'])}). "
+                "Please remove patient identifiers before submitting."
+            ),
+        )
 
     async def event_generator() -> AsyncGenerator[str, None]:
         try:
@@ -342,10 +357,15 @@ async def query_stream(req: QueryRequest, current_user: dict = Depends(get_curre
                 max_tokens=1500,
             )
 
+            # Accumulate full response so we can redact PII before streaming
+            full_response: list[str] = []
             for chunk in stream:
                 delta = chunk.choices[0].delta.content or ""
                 if delta:
-                    yield f"data: {delta}\n\n"
+                    full_response.append(delta)
+
+            safe_text = redact_output("".join(full_response))
+            yield f"data: {safe_text}\n\n"
 
             audit_payload = (
                 f'{{"chunks_retrieved": {len(chunks)}, '
@@ -396,45 +416,3 @@ def clear_history(current_user: dict = Depends(get_current_user)):
     return {"status": "cleared"}
 
 
-# ── CRM case management ────────────────────────────────────────────────────────
-
-@app.get("/crm/cases", response_model=list[CRMCaseModel], tags=["crm"])
-def crm_list_cases(
-    status: Optional[str] = None,
-    limit: int = 50,
-    current_user: dict = Depends(get_current_user),
-):
-    """
-    List CRM cases. Optionally filter by status (open | resolved | escalated).
-    Returns cases for the current user only.
-    """
-    return _crm.get_cases(status=status, username=current_user.get("username"), limit=limit)
-
-
-@app.get("/crm/cases/{case_id}", response_model=CRMCaseModel, tags=["crm"])
-def crm_get_case(case_id: int, current_user: dict = Depends(get_current_user)):
-    """Get a single CRM case by numeric ID."""
-    case = _crm.get_case(case_id)
-    if case is None:
-        raise HTTPException(status_code=404, detail="Case not found")
-    if case["username"] != current_user.get("username"):
-        raise HTTPException(status_code=403, detail="Access denied")
-    return case
-
-
-@app.patch("/crm/cases/{case_id}", response_model=CRMCaseModel, tags=["crm"])
-def crm_update_case(
-    case_id: int,
-    req: CRMUpdateRequest,
-    current_user: dict = Depends(get_current_user),
-):
-    """Update CRM case status (open | resolved | escalated) and/or notes."""
-    case = _crm.get_case(case_id)
-    if case is None:
-        raise HTTPException(status_code=404, detail="Case not found")
-    if case["username"] != current_user.get("username"):
-        raise HTTPException(status_code=403, detail="Access denied")
-    if req.status and req.status not in ("open", "resolved", "escalated"):
-        raise HTTPException(status_code=400, detail="status must be open | resolved | escalated")
-    updated = _crm.update_case(case_id, status=req.status, notes=req.notes)
-    return updated

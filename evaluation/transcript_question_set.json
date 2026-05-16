@@ -1,0 +1,574 @@
+[
+  {
+    "id": "R001",
+    "source": "real_imac_call_transcript",
+    "query": "Hi, [caller]. It's [caller] from the doctors in [caller] again. , I just wanted to confirm, I've got a 4 year old who's come in for her 4-year-old immunizations, and it's just not showing up on my list, but, in regards to her 3rd meningococcal B dose. So she's had her first dose at 14 months, and then she's had another dose at 18 months. So then she should be due for her third booster dose, right?",
+    "category": "dosage",
+    "vaccine_type": [
+      "meningococcal"
+    ],
+    "query_types": [
+      "dosage"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "child",
+    "urgency": "routine",
+    "agent_response_hint": "Hello, this is [NAME]. How can I help? Correct. Yeah, she can have that now and you can offer that at the same time as the 4 year old event. Double check. Yeah, no, all good. Have a good afternoon. See you. Bye.",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R002",
+    "source": "real_imac_call_transcript",
+    "query": "I'm, I'm very lucky to have you again. I just had another question, [caller], something unrelated, just about a hepatitis B vaccine. I've just got a patient coming in for his catch-up vaccines. He's 14 years old. he had the hepatitis B on the 16th of March this year, and he's coming in for the second dose, which is, today.",
+    "category": "dosage",
+    "vaccine_type": [
+      "hepatitis B"
+    ],
+    "query_types": [
+      "dosage",
+      "catch-up"
+    ],
+    "clinical_scenario": [
+      "delayed schedule"
+    ],
+    "caller_type": "unknown",
+    "patient_age_group": "adolescent",
+    "urgency": "routine",
+    "agent_response_hint": "Hi, this is [NAME] speaking. Who am I talking to, thanks. No, so it needs to be 28 days between the two, so minimum. So when was this? Yeah, so you've got to count it out literally, or else, if it's 27 days, it's not valid. Um, so yeah, you don't wanna, yeah, you don't wanna make a mistake. I'm just",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R003",
+    "source": "real_imac_call_transcript",
+    "query": "Hi [caller], [caller] here, nurse at [caller]. no, sorry, I'm at Red Beach today. I'm at Red Beach today. Got to think where I am. , just a quick question. At Red at [caller], we've got a list on the wall from IMA. I can't find it online. It's got all the vaccines that we can give. They're part of the schedule, and Hep A is on it. If they are not having it for like catch-ups or something, they're having it because someone in the family's travelling and they want Hep A and B and because one of th",
+    "category": "vaccine_schedule",
+    "vaccine_type": [
+      "hepatitis B",
+      "hepatitis A"
+    ],
+    "query_types": [
+      "schedule",
+      "catch-up"
+    ],
+    "clinical_scenario": [
+      "travel",
+      "delayed schedule"
+    ],
+    "caller_type": "nurse",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Good afternoon, [NAME] speaking. Hi, [NAME]. Yeah, indeed. Yes. Anything with Hep A is not a national scheduled vaccine. Um, it may, it's probably that you can give it as part of your immunisation programme, but it's always got to be prescribed because it's not the national schedule. It's just, you ",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R004",
+    "source": "real_imac_call_transcript",
+    "query": "I've just got a patient that's going to have the fluid, flu vaccine. they're having the B12 injection, that should be fine at the same time. . .",
+    "category": "co_administration",
+    "vaccine_type": [
+      "influenza"
+    ],
+    "query_types": [
+      "co-administration",
+      "administration"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Good afternoon, [NAME] speaking. Yeah, hi, [NAME]. That's all right. Yeah. No problem. Cheers, [NAME]. Lovely. Good. Thanks.",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R005",
+    "source": "real_imac_call_transcript",
+    "query": "Hi, I have a question about, using funded boost strips for tetanus-prone wounds for non-New Zealand residents. so should we be using funded or non-funded stock? And can we claim from Ministry of Health or can we not claim?",
+    "category": "funding_eligibility",
+    "vaccine_type": [
+      "Tdap/Td"
+    ],
+    "query_types": [
+      "eligibility"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Yeah. So, under the age of 18, there's, you can use, yeah, over the. Yeah, over the age of 18, you do have to be eligible for New Zealand Healthcare to get funded vaccines. Yeah, I'm afraid so. Yeah, no, I don't think I, I don't think ACC will pay for it either, I'm afraid so. You, so to be eligible",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R006",
+    "source": "real_imac_call_transcript",
+    "query": "She's had, a couple of doses of the COVID vaccination in the past and would be due for a booster dose. but she was advised, she was diagnosed with, lichen planus, no, planus, which is like, mouth ulcers. She was advised by one of the clinical pharmacists that this was likely a reaction to the COVID-19 vaccination.",
+    "category": "dosage",
+    "vaccine_type": [
+      "COVID-19"
+    ],
+    "query_types": [
+      "dosage",
+      "eligibility",
+      "adverse event"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "pharmacist",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Brilliant. And so what did they say? Cause I always send a response back. So, did she have this already and it was exacerbated? Is that what happened? And she had a flu vaccine as well. At the same time as the COVID. OK. OK. And then this happened after the COVID, yeah. OK. OK, look, that, that's OK",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R007",
+    "source": "real_imac_call_transcript",
+    "query": "Just had a quick little question, might be being a little pedantic. Just a couple have come in for a COVID booster and it's just slightly under 6 months since the previous one. So it's October 2, 22nd of October. so they're just a few days early. Is that to just go ahead or how pedantic do we want to be about the 6 month gap between doses?",
+    "category": "dosage",
+    "vaccine_type": [
+      "COVID-19"
+    ],
+    "query_types": [
+      "dosage"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "infant",
+    "urgency": "routine",
+    "agent_response_hint": "Who am I speaking with, please? Good, thanks, [NAME]. Look, your name hasn't come up. I'll just have to pop you in [NAME] A. And your surname, please? What's the point of Yup, there you are. Right. How can I help you? Um, no, no, look, it should be, what age are we talking? Yeah, yeah. So because th",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R008",
+    "source": "real_imac_call_transcript",
+    "query": ", hi [caller], it's [caller], one of the nurses at Maryland's Medical centre. We've got an 83 year old come in for her flu vaccination, and she's currently got shingles. She's had it for 10 days. She doesn't have a fever, but she, we're just wondering if they might be infected. Would you advise going ahead and giving the flu injection or just hanging off, hanging back for a while?",
+    "category": "administration_technique",
+    "vaccine_type": [
+      "influenza",
+      "zoster"
+    ],
+    "query_types": [
+      "administration"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "elderly",
+    "urgency": "routine",
+    "agent_response_hint": "Who am I speaking with, please? Battleship North Carolina and Right. I think if she's, um, yeah, I, I, if she's not febrile, it's probably better to go ahead and get those antibodies hopefully working for her, I would say, yeah, yeah, yeah. OK, cheers [NAME]. Bye.",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R009",
+    "source": "real_imac_call_transcript",
+    "query": "Hi, I've got a, 5 year old coming in. he's due for his 4 year old DTap IPV. I'm just wondering, he's had no MM, no BEC zeros. So I'm thinking, what are the guidelines now for catch up BC zeros?",
+    "category": "catch_up_schedule",
+    "vaccine_type": [
+      "polio"
+    ],
+    "query_types": [
+      "catch-up"
+    ],
+    "clinical_scenario": [
+      "delayed schedule"
+    ],
+    "caller_type": "unknown",
+    "patient_age_group": "child",
+    "urgency": "routine",
+    "agent_response_hint": "[NAME], you're speaking with [NAME], one of the nurses here at Mac. How can I help? Hi, how can I help? Unfortunately, because he's 5, we can't give any catch up doses of BX zero, so he's just actually missed out on that one, but we certainly want to get his MMR in, um, so 2 doses, 4 weeks apart wou",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R010",
+    "source": "real_imac_call_transcript",
+    "query": "I just had a quick question about the flu vaccines and hopefully just helping me find a resource. I, I'm new to, I've, I've been away from vaccinating for a while, so I'm a bit new to it again. so just with like being an authorised vaccinator, when it comes to like the funded flu vaccines and the non-funded flu vaccines, we're authorised to deliver those, right?",
+    "category": "funding_eligibility",
+    "vaccine_type": [
+      "influenza"
+    ],
+    "query_types": [
+      "eligibility"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Good afternoon, you're speaking with [NAME]. [NAME], OK, great, got you here. How can I help you? Yes. Yes, you are. Yes. Funded or unfunded or unfunded, you're authorised to deliver them. As part of the national flu programme. Um, OK, let me, yeah, let me see if I can find something. I think there'",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R011",
+    "source": "real_imac_call_transcript",
+    "query": "Hi, [caller]. This is [caller], calling from Newton Medical centre. we have a working patient. She's 23 years old, already has 3 COVID vaccines. But she, people around her had COVID recently. She wants extra protection. Can she have the latest one?",
+    "category": "efficacy",
+    "vaccine_type": [
+      "COVID-19"
+    ],
+    "query_types": [
+      "efficacy"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "adult",
+    "urgency": "routine",
+    "agent_response_hint": "Hello, [NAME] speaking. No. Is she, she's healthy, is she? Uh, she's, yeah, she's not eligible under the age of 30 if she doesn't have any high-risk medical conditions. It won't actually stop her getting COVID, unfortunately. Uh, the vaccine will help prevent secondary complications and hospitalisat",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R012",
+    "source": "real_imac_call_transcript",
+    "query": "And Pharix hexa given somewhere in the community, I'm not too sure, and then they referred to AD to get the, tetanus immunoglobin injection.",
+    "category": "administration_technique",
+    "vaccine_type": [
+      "Tdap/Td"
+    ],
+    "query_types": [
+      "administration"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Who am I speaking with, please? Hi, um, [NAME], how can I help you? Immunoglobulin, yeah, yeah. Um, the immunoglobulin are you're talking about or the, um, uh, what the, um, so they gave her a hexa as well? At ED, yeah, so the heat. Oh, I see. I'm with you. Yeah, cool. Yeah. No, you would just conti",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R013",
+    "source": "real_imac_call_transcript",
+    "query": "Look, I've got a lady that's going to [caller] 1 week before her baby is 12 months old. So, what I need to know, if she has MMR the week before, is that dose zero, or can that, you know, is 1 week ?",
+    "category": "dosage",
+    "vaccine_type": [
+      "MMR"
+    ],
+    "query_types": [
+      "dosage"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "infant",
+    "urgency": "routine",
+    "agent_response_hint": "[NAME], good morning. Hi, [NAME], can I get your surname, please? OK, thank you. How can I help you? Um, you can give it, it will be dose 1, if it's from 11 months. No, before 11 months is a dose 0. After 11 months is dose 1. But you need to go and have a look on our website. There is a dose 0 scree",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R014",
+    "source": "real_imac_call_transcript",
+    "query": "Hi, I just had an inquiry. I just wanted to double-check. I've got a, 11 year old patient who is in for a catch-up plan, which is, which includes MMR and HPV vaccines.",
+    "category": "catch_up_schedule",
+    "vaccine_type": [
+      "MMR",
+      "HPV"
+    ],
+    "query_types": [
+      "catch-up"
+    ],
+    "clinical_scenario": [
+      "delayed schedule"
+    ],
+    "caller_type": "unknown",
+    "patient_age_group": "adolescent",
+    "urgency": "routine",
+    "agent_response_hint": "Hello, [NAME] speaking. And did she have a stem cell transplant? Did she have a stem cell transplant or just chemotherapy, do you know? And was she re-vaccinated after her chemotherapy? Yeah, yeah, no, that's OK. It's a bit more complicated, these ones. OK. OK. So she wasn't re-vaccinated after her ",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R015",
+    "source": "real_imac_call_transcript",
+    "query": "Currently going through all of my consent forms for the year 7 and 8 co-delivery here in [caller], the DTP and Gardasil. So I've rung the mum with this consent form. All she put on about the medical history, and that's why I rang. Her daughter only has one kidney that's sitting in her pelvis, and they were nervous about immunisation, and the kidney is not only working at 75%, so they can't give her ibuprofen, obviously, .",
+    "category": "storage_handling",
+    "vaccine_type": [
+      "Tdap/Td",
+      "HPV"
+    ],
+    "query_types": [
+      "storage"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "adolescent",
+    "urgency": "routine",
+    "agent_response_hint": "[NAME], you're speaking with [NAME], one of the nurses here at Eme. How can I help? Yeah, no, absolutely. Um, so you wouldn't, that wouldn't be a contraindication to having the Gardasil 9, vaccine. It's a great question though, um, and really good to double check. Obviously, that, um, yeah, quite a,",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R016",
+    "source": "real_imac_call_transcript",
+    "query": ", hi, [caller]. It's [caller], I'm one of the nurses at the Hastings Health centre. I'm very sorry to trouble you when you're very busy. [caller], this is a funded Shingrix question. We've got, the rheumatology department is recommending several of our patients have the funded, Shingrix vaccines, which is fine, but I'm just inquiring, do I need a prescription from the GP for those, since, no, big question mark.",
+    "category": "funding_eligibility",
+    "vaccine_type": [
+      "varicella"
+    ],
+    "query_types": [
+      "eligibility"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "GP",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Good morning. You're speaking with [NAME]. I don't think so. So they've, they've, because they make the special groups, don't they? Yeah, as an authorised vaccinator, you're authorised to give all the vaccines on the national immunisation schedule plus the plus the special groups. So, you know, your",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R017",
+    "source": "real_imac_call_transcript",
+    "query": "Hi, my name is [caller]. I'm one of the nurses at Fielding Healthcare. Well, I just have a patient with me who has Guillain-Barre syndrome and was under the impression that provided that counted as immunodeficiency for funded vaccines. Can you confirm if that is true, if I can, if he meets funding criteria for Shingrix?",
+    "category": "funding_eligibility",
+    "vaccine_type": [
+      "varicella"
+    ],
+    "query_types": [
+      "eligibility"
+    ],
+    "clinical_scenario": [
+      "immunocompromised"
+    ],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "[NAME], you're speaking with [NAME], one of the nurses here. [NAME]. How can I help? Yes, I can. I'll just have a quick look. Bear with me. Is it just the Shinrix that he's wanting? Yeah, no, that GBS isn't, um, part of the funding criteria for, um, Shingrix. It's really specific. Um, just bear with",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R018",
+    "source": "real_imac_call_transcript",
+    "query": "[caller] from Hokawru Medical. Just a very quick question. the meningitis vaccines for pre-hostal students. I've had a read up. It doesn't say it has to be [caller] hostels. This girl is going, to [caller], and she's gonna be in hostels over there. Nowhere does it say it has to be [caller], so can we fund her or not?",
+    "category": "funding_eligibility",
+    "vaccine_type": [
+      "meningococcal"
+    ],
+    "query_types": [
+      "eligibility"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "GP",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "[NAME]. Welcome to [NAME]. You're speaking with [NAME]. How may I help? No, yeah, so I've had this query before and I said no, and then someone else has said yes. Let me just double-check this. um. I had a, yeah, I would have said no in the past, but then I saw something recently where someone said.",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R019",
+    "source": "real_imac_call_transcript",
+    "query": "Actually, I have got, patient, so he will be joining defence Force, and then he has been required to get some of the immunisation schedule prior to his enlistment. So he already had the polio, he already had MMR, he already had his COVID vaccination done. another requirement is 3 hep B injection and then 3 tetanus, which includes diphtheria and pertussis and whooping cough.",
+    "category": "vaccine_schedule",
+    "vaccine_type": [
+      "MMR",
+      "COVID-19",
+      "Tdap/Td",
+      "hepatitis B",
+      "polio"
+    ],
+    "query_types": [
+      "schedule",
+      "administration"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "came with, please. Yep, that too. Cool. How can I help there? All right. So you're, OK. Um, so as long as you have a month between each of those vaccines that are the same. All right. So you're giving, you need to do 3 hep B vaccines. So, you need a month between each of those vaccines. Uh, actually",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R020",
+    "source": "real_imac_call_transcript",
+    "query": "Hi, [caller]. My name is [caller]. I'm calling from Staff Care Occupational Health in [caller]. I'm just calling around, we have two customers, that were booked in for a hepatitis A booster. what is your recommendation around, so they're not, they were given, administered the hepatitis A vaccine in [caller].",
+    "category": "administration_technique",
+    "vaccine_type": [
+      "hepatitis A"
+    ],
+    "query_types": [
+      "administration"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Good afternoon. You're speaking with [NAME]. Yeah, so, um, depends. So if you, yeah, if your clinic requires proof and you can't just take their word for it, then you would either need to consider them non-immune and offer them another like two doses, or you would want to do blood work, um. So eithe",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R021",
+    "source": "real_imac_call_transcript",
+    "query": "So I've got two questions, and they're both related to the same patient, but, the first question is, one of our patients is 24-year-old, young man born in [caller] and had all of his childhood vaccinations, so what the schedule was for when he was born in 2001, which included hepatitis B.",
+    "category": "vaccine_schedule",
+    "vaccine_type": [
+      "hepatitis B"
+    ],
+    "query_types": [
+      "schedule"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "adult",
+    "urgency": "routine",
+    "agent_response_hint": "Hi, this is [NAME] speaking. Who am I talking to? Thanks. Hi, [NAME], let me just find you. Uh, oh, there you are, right there. What can we do for you, [NAME]? So there's a few things going on in here. Um, so, so he had his childhood, cool, but often what happens is, and you'll find this with when p",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R022",
+    "source": "real_imac_call_transcript",
+    "query": "I have a 4 year old here who has had all of their vaccines although late. Apart from the big 0 which I can offer a catch-up, but he hasn't had the hub, the 15-month hib.",
+    "category": "catch_up_schedule",
+    "vaccine_type": [
+      "Hib"
+    ],
+    "query_types": [
+      "catch-up"
+    ],
+    "clinical_scenario": [
+      "delayed schedule"
+    ],
+    "caller_type": "unknown",
+    "patient_age_group": "child",
+    "urgency": "routine",
+    "agent_response_hint": "Good afternoon. You're speaking with [NAME]. Hi, yeah, good, thanks, [NAME]. How can I help you? Has he received any, has he received any HECSA over the age of one? OK, so because he's had the 3rd 1 at 24 months, so over the age of 12 months, that will count as the HIB that you require over the age ",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R023",
+    "source": "real_imac_call_transcript",
+    "query": "[caller], hi, it's I'm [caller]. I've worked for 2 F Show Health. I just want to know, do you know how long does the, Shinrix, vaccine last, like work for?",
+    "category": "efficacy",
+    "vaccine_type": [
+      "zoster"
+    ],
+    "query_types": [
+      "efficacy"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Long-term follow-up of these trial participants found efficacy against zoster plateaued after 4 plateaued, but that doesn't mean it got dropped after 4 to 6 years and was sustained overall at 84%. Because it was up to 91%, right? So it plateaued at 84% for at least 7 years post vac vaccination. So w",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R024",
+    "source": "real_imac_call_transcript",
+    "query": "I'm just, I've got a, [caller] here with me who's 74 years old and she's got COPD and we were just really, she had an RSV vaccination in June 2024. And we were just looking at the information on it and it looks like it's 80% effective for two years. So should she this June be looking at getting another one?",
+    "category": "efficacy",
+    "vaccine_type": [
+      "RSV"
+    ],
+    "query_types": [
+      "efficacy"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "elderly",
+    "urgency": "routine",
+    "agent_response_hint": "Hi, this is [NAME] speaking. Who am I talking to? Thanks. Hi, [NAME], what can we do for you? Um, well, actually they've, they've just updated the, um, yeah, I'm just trying to find it. They, they've updated it, um, and now they're saying it's sort of, um, expanded efficacy and safety data covering ",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R025",
+    "source": "real_imac_call_transcript",
+    "query": "It's like buses. I've got two in a row. I've got a, a 12 year old coming in for, meningococcal, injections because he's going to boarding school, but he's 1212 months, sorry, 12 years, 3 months old, and I see the rules say from 13 years. Is there a problem?",
+    "category": "administration_technique",
+    "vaccine_type": [
+      "meningococcal"
+    ],
+    "query_types": [
+      "administration"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "infant",
+    "urgency": "routine",
+    "agent_response_hint": "Uh, I gather I'd have to go to the, I think it would still be to, I just have to have a quick look at the immunisation handbook there to let you know, uh. Meningococcal oil. Um, so that's the big zero, isn't it? We're talking about with this one. So I'm pretty sure it would be the, um, I just have t",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R026",
+    "source": "real_imac_call_transcript",
+    "query": "I'm not a health professional, but my GP has advised me to contact IMA regarding shingles vaccine funding after I missed my eligibility due to having shingles. At 65. Is there any pathway or advice for the situation?",
+    "category": "catch_up_schedule",
+    "vaccine_type": [
+      "zoster"
+    ],
+    "query_types": [
+      "catch-up"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "GP",
+    "patient_age_group": "elderly",
+    "urgency": "routine",
+    "agent_response_hint": "[NAME]. [NAME] speaking. I'll just get your, if you can just get your, uh, are you, you're not a health professional? Um, I just need to get you up. We don't. Member of public. Um, Um, in [ADDRESS], OK. Right. Um, so, firstly, we don't, um, give advice to the general public. We just give advice to h",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R027",
+    "source": "real_imac_call_transcript",
+    "query": "Hi, [caller]. This is [caller] from Eastmere Doctors. Hi, I'm just calling because I just had a 6-week this morning, 6-week, vaccine. the mum only wanted to have the rotavirus done, which we have done for her. but the GP was asking for the patient to have a DPT vaccine only because the mum didn't want to do the other ones. And I did explain, we've, we've only got the combination.",
+    "category": "co_administration",
+    "vaccine_type": [
+      "rotavirus"
+    ],
+    "query_types": [
+      "co-administration"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "GP",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Hello, [NAME] speaking. No, and it was actually developed as a booster. The, we have, we have two options. So, the Infinrix Hexa, which we usually use. We could also use Infinrix IPV which is the vaccine we use for our 4-year booster. We used to use that from 6 weeks, yeah. So, those are the only tw",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R028",
+    "source": "real_imac_call_transcript",
+    "query": "And he's just come back from holiday in [caller] having a chat to one of his friends who's just had some nasty bouts of shingles, and he's, it's scared the whatsits out of him now because he's 5 years down the line after his, Zostavax, and it's documented that it does only give you 5 years protection. he's prepared to pay for Shingrix privately, to give himself the protection, and from what I can understand, that should be fine. I just wanted to double check it with yourselves.",
+    "category": "efficacy",
+    "vaccine_type": [
+      "varicella",
+      "zoster"
+    ],
+    "query_types": [
+      "efficacy"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Hello, [NAME] speaking. Yes, yeah. It's actually only a minimum of 1 year between Zostavax and Shingrix just because Zostavax isn't overly effective, and I mean it's down to about 4% after 8 years. But Shingrix is a very effective vaccine. You still need 2 doses because it uses different vaccine tec",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R029",
+    "source": "real_imac_call_transcript",
+    "query": "Hi, [caller]. It's [caller], one of the nurses from Stratford Coastal Medical. I've just got a query, on a PCV for a patient. they've had 3 doses, which is like on schedule. It's just on the schedule, is due for a PCV 13 as a catch-up, but I think they've already had PCV enough doses, but I'm just double-checking.",
+    "category": "vaccine_schedule",
+    "vaccine_type": [
+      "pneumococcal"
+    ],
+    "query_types": [
+      "schedule",
+      "dosage",
+      "catch-up"
+    ],
+    "clinical_scenario": [
+      "delayed schedule"
+    ],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Sure, please, yes, this is. And when, what date was that and how old was the child? 30th of the 5th, 2003. Uh, yes, yep, that's right, yeah. I would have thought a certain. 2023, 8th of the 11th if they're born, or 8th of the 7th. So, I'm just gonna have a look back on the 2023 calendar as well and ",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "R030",
+    "source": "real_imac_call_transcript",
+    "query": "Hi. [caller], I, I have a 6 year old and a 9-year-old coming for the flu vaccine for the first time. do they need a 2nd 14 weeks later or, or?",
+    "category": "general",
+    "vaccine_type": [
+      "influenza"
+    ],
+    "query_types": [
+      "general"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "neonate",
+    "urgency": "routine",
+    "agent_response_hint": "[NAME], you're speaking with [NAME]. How can I help? My name's [NAME]. Hi, [NAME], how can we help today? I think that's just bear with my lolo um. Yep, just one moment. Sorry, I'm just finding where it's written. Just bear with me. OK, I can show you, I can show you where that is. I'm just looking ",
+    "expected_confidence": "high"
+  }
+]

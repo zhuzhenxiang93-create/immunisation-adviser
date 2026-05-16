@@ -3,7 +3,15 @@ audit_logger.py — SQLite-backed audit log for query history.
 
 Table: query_log
   id, username, query, confidence, chunks_retrieved,
+  sources_retrieved_json,   -- breadcrumb+URL of every chunk fetched
+  citations_json,           -- sources actually cited in the final answer
+  answer,                   -- generated answer text (for post-hoc review)
   classification_json, timestamp
+
+Auditability rationale (Responsible AI):
+  Logging what was retrieved vs what was cited allows reviewers to check
+  whether the answer is grounded in the retrieved sources and to flag
+  hallucinations or miscitations after the fact.
 """
 from __future__ import annotations
 
@@ -27,15 +35,30 @@ class AuditLogger:
         with self._get_conn() as conn:
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS query_log (
-                    id                  INTEGER PRIMARY KEY AUTOINCREMENT,
-                    username            TEXT    NOT NULL DEFAULT 'unknown',
-                    query               TEXT    NOT NULL,
-                    confidence          TEXT    NOT NULL DEFAULT 'not_found',
-                    chunks_retrieved    INTEGER NOT NULL DEFAULT 0,
-                    classification_json TEXT    NOT NULL DEFAULT '{}',
-                    timestamp           DATETIME DEFAULT CURRENT_TIMESTAMP
+                    id                      INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username                TEXT    NOT NULL DEFAULT 'unknown',
+                    query                   TEXT    NOT NULL,
+                    confidence              TEXT    NOT NULL DEFAULT 'not_found',
+                    chunks_retrieved        INTEGER NOT NULL DEFAULT 0,
+                    sources_retrieved_json  TEXT    NOT NULL DEFAULT '[]',
+                    citations_json          TEXT    NOT NULL DEFAULT '[]',
+                    answer                  TEXT    NOT NULL DEFAULT '',
+                    classification_json     TEXT    NOT NULL DEFAULT '{}',
+                    timestamp               DATETIME DEFAULT CURRENT_TIMESTAMP
                 )
             """)
+            # Migrate existing tables that lack the new columns
+            for col, default in [
+                ("sources_retrieved_json", "'[]'"),
+                ("citations_json",         "'[]'"),
+                ("answer",                 "''"),
+            ]:
+                try:
+                    conn.execute(
+                        f"ALTER TABLE query_log ADD COLUMN {col} TEXT NOT NULL DEFAULT {default}"
+                    )
+                except Exception:
+                    pass  # column already exists
             conn.commit()
 
     def log(
@@ -45,17 +68,33 @@ class AuditLogger:
         chunks_retrieved: int,
         classification: dict,
         username: str = "unknown",
+        sources_retrieved: list[dict] | None = None,
+        citations: list[dict] | None = None,
+        answer: str = "",
     ) -> None:
+        """
+        sources_retrieved: list of {breadcrumb, url} for every retrieved chunk.
+        citations:         list of citation dicts from the generated answer.
+        answer:            the final answer text (post-redaction).
+        """
         with self._get_conn() as conn:
             conn.execute(
                 """INSERT INTO query_log
-                   (username, query, confidence, chunks_retrieved, classification_json)
-                   VALUES (?, ?, ?, ?, ?)""",
+                   (username, query, confidence, chunks_retrieved,
+                    sources_retrieved_json, citations_json, answer,
+                    classification_json)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
                 (
                     username,
                     query,
                     confidence,
                     chunks_retrieved,
+                    json.dumps([
+                        {"breadcrumb": c.get("breadcrumb", ""), "url": c.get("url", "")}
+                        for c in (sources_retrieved or [])
+                    ]),
+                    json.dumps(citations or []),
+                    answer,
                     json.dumps(classification),
                 ),
             )

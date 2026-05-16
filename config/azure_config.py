@@ -29,16 +29,6 @@ def _require(key: str) -> str:
 LLM_PROVIDER = os.getenv("LLM_PROVIDER", "openai").lower()       # "openai" | "azure" | "qwen"
 SEARCH_PROVIDER = os.getenv("SEARCH_PROVIDER", "local").lower()  # "local"  | "azure"
 
-# ── Standard OpenAI ───────────────────────────────────────────────────────────
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
-OPENAI_MODEL_GPT4O = os.getenv("OPENAI_MODEL_GPT4O", "gpt-4o")
-OPENAI_MODEL_EMBEDDING = os.getenv("OPENAI_MODEL_EMBEDDING", "text-embedding-3-large")
-
-# ── Qwen / DashScope ──────────────────────────────────────────────────────────
-DASHSCOPE_API_KEY = os.getenv("DASHSCOPE_API_KEY", "")
-QWEN_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
-QWEN_MODEL_CHAT = os.getenv("QWEN_MODEL_CHAT", "qwen-plus")
-QWEN_MODEL_EMBEDDING = os.getenv("QWEN_MODEL_EMBEDDING", "text-embedding-v2")
 
 # ── Azure OpenAI ──────────────────────────────────────────────────────────────
 AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT", "")

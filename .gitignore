@@ -1,9 +1,14 @@
 # Environment & secrets
 .env
 
-# Large data files (embeddings)
+# Large data files (embeddings & raw data)
 data/chunks_with_embeddings.json
+data/chunks_raw.json
 data/users.db
+data/output20260400/
+data/transcript_analysis.json
+data/volume_patterns.json
+data/pii_audit_report.json
 
 # Python cache
 __pycache__/

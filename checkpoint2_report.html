@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Checkpoint 2 — Team 6</title>
+<style>
+  @page { size: A4; margin: 25mm 25mm 20mm 25mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: #000;
+    max-width: 165mm;
+    margin: 0 auto;
+    padding: 20px 0;
+  }
+
+  h1.title {
+    text-align: center;
+    font-size: 14pt;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  h2.subtitle {
+    text-align: center;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-bottom: 18px;
+  }
+
+  h3 {
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 14px;
+    margin-bottom: 6px;
+  }
+
+  p {
+    text-align: justify;
+    margin-bottom: 6px;
+  }
+
+  ul {
+    margin: 4px 0 8px 20px;
+  }
+  ul li {
+    margin-bottom: 5px;
+    text-align: justify;
+  }
+
+  strong { font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1 class="title">Checkpoint 2</h1>
+<h2 class="subtitle">Solution Design and Start of Proof-of-Concept Development</h2>
+
+<!-- ── 0. INTRODUCTION AND CONTEXT ───────────────── -->
+<h3>Introduction and context</h3>
+<p>
+This report is submitted as part of COMPSCI 714 — a hackathon-based group project
+conducted in partnership with the University of Auckland Research and Innovation Office
+(RIO) and Microsoft. The project is designed to provide hands-on experience in
+designing, building, and evaluating an AI solution for an authentic, real-world problem
+submitted by University staff. Teams build proof-of-concept systems using Microsoft
+Azure AI Foundry tools, working within practical constraints including budget, time,
+technical scope, and data privacy obligations.
+</p>
+<p>
+The use case assigned to this team is provided by the Immunisation Advisory Centre
+(IMAC), based at the University of Auckland. IMAC operates the national immunisation
+advisory service for New Zealand, supporting clinical advisors who answer queries from
+healthcare professionals — including pharmacists, nurses, and GPs — on topics such as
+vaccine timing, catch-up schedules, contraindications, funding eligibility, storage,
+co-administration, adverse events, and special populations. Advisors handle a high
+volume of calls and rely on multiple long-form clinical guidelines to answer accurately
+and consistently. The core challenge identified is the time and cognitive load required
+to locate relevant information across these guidelines during live advisor interactions.
+</p>
+<p>
+The proposed AI solution is a retrieval-augmented generation (RAG) assistant that
+retrieves relevant sections from approved NZ immunisation guidance and summarises them
+for the advisor, with citations and a confidence indicator. The system is explicitly
+positioned as an <strong>advisor support tool</strong>: it reduces the time spent
+manually searching handbook pages and improves consistency of information retrieval,
+while all final clinical judgements remain with the qualified advisor. This framing
+directly reflects the responsible AI requirements set out in the project brief, which
+prohibit medical diagnosis, treatment recommendations, and autonomous clinical advice,
+and which require source transparency, auditability, and privacy by design throughout
+the system.
+</p>
+<p>
+The sections below describe the proposed solution, system architecture, implementation
+progress, next development steps, responsible AI boundaries, current challenges, and
+the results of the Milestone 1 PII redaction verification.
+</p>
+
+<!-- ── 1. PROPOSED SOLUTION ─────────────────────── -->
+<h3>1. Proposed solution</h3>
+<p>
+Our selected AI solution is the Immunisation Guidelines Adviser: a proof-of-concept
+retrieval-augmented generation (RAG) assistant for clinical immunisation advisors. The
+intended users are advisors who need quick access to approved New Zealand immunisation
+guidance on topics such as vaccine timing, catch-up schedules, contraindications,
+funding eligibility, storage, administration routes, co-administration, adverse events, and
+special populations such as pregnancy or immunocompromised patients. Instead of
+relying on the language model alone, the system retrieves relevant approved guideline
+sections first and then generates a concise, source-cited summary grounded in those
+references. This is important because the use case is safety-sensitive: the system is
+designed solely to support advisor workflow by surfacing relevant guidance — all final
+clinical decisions remain with qualified healthcare staff.
+</p>
+<p>
+In a normal interaction, the advisor submits a free-text clinical query through the web
+interface or API. The system checks for personal information, classifies the query across
+six clinical dimensions, retrieves relevant guideline chunks, and asks an LLM to
+summarise those retrieved sections into a structured response with citations, a confidence
+level, query classification, and audit metadata. The practical value is that the tool
+reduces time spent manually searching long handbook pages, improves consistency of
+advisory responses, and makes the reasoning trail more visible through source citations
+and audit logs — while leaving all clinical judgement with the advisor.
+</p>
+
+<!-- ── 2. SOLUTION ARCHITECTURE ──────────────────── -->
+<h3>2. Solution architecture</h3>
+<p>The architecture is organised as a modular RAG system with separate layers for data
+preparation, retrieval, generation, API access, interface, persistence, and evaluation.</p>
+<ul>
+  <li>
+    <strong>Data pipeline:</strong> The knowledge base is built from the approved sources
+    provided for this project: the NZ Immunisation Handbook (Te Whatu Ora, 2,275 chunks),
+    the IMAC Vaccines &amp; Diseases website (immune.org.nz, 756 chunks), IMAC general
+    resources (227 chunks), and the PHARMAC Schedule (106 chunks), totalling 3,564
+    section-aligned chunks. The supplied dataset also contains 269 chunks attributed to WHO
+    Immunization guidance; as WHO is not listed among the project's approved sources, these
+    chunks are retained in the index for this proof-of-concept but are clearly labelled in
+    retrieval results and are not cited as primary NZ guidance. A known gap is the absence
+    of Medsafe product information, which is an approved source; adding Medsafe content is
+    identified as a next development step.
+    The CSV-to-chunks script converts source rows into JSON chunks while preserving
+    source name, chapter, section, URL, chunk index, and a display breadcrumb.
+    A 200-character same-section overlap is added to reduce loss of context at chunk
+    boundaries. The embedding/indexing script generates
+    <strong>text-embedding-3-small</strong> vectors (1,536 dimensions) via Azure OpenAI
+    and saves a local JSON file with embeddings. The full 3,633-chunk embedding file
+    (117 MB) has been generated and verified. An optional Azure AI Search upload path
+    is also supported.
+  </li>
+  <li>
+    <strong>Call transcript analysis (analysis and evaluation only):</strong> 1,797
+    anonymised Amazon Connect Contact Lens call transcripts (PII redacted by Contact Lens,
+    verified in Milestone 1 — see Section 6) were processed to understand real
+    advisor–caller interaction patterns. Of these, 1,698 calls yielded classifiable
+    clinical questions.
+    <strong>Importantly, transcript content is not used as a clinical knowledge source
+    and is not included in the retrieval index.</strong> Transcripts are used solely for:
+    (a) understanding real call volume patterns and question frequency,
+    (b) building the 30-question real-call evaluation set, and
+    (c) identifying gaps in knowledge-base coverage.
+    All answers generated by the system draw exclusively on the approved guideline sources
+    described above.
+    Volume pattern analysis (NZ local time) shows calls are concentrated in business
+    hours (08:00–16:00), peak on Thursday (444 calls), and are absent on weekends,
+    consistent with IMAC's adviser service hours.
+    Top query types: eligibility/funding (378), dosage (197), catch-up schedules (115).
+    Top vaccines discussed: influenza (359), COVID-19 (159), varicella (115), MMR (83),
+    Tdap/Td (81), zoster (80), hepatitis B (78).
+    Caller types include pharmacists (198), nurses (197), and GPs (52).
+  </li>
+  <li>
+    <strong>Retrieval layer:</strong> The local retriever combines BM25 keyword search
+    and vector cosine similarity, then fuses the rankings with Reciprocal Rank Fusion
+    (RRF). This design is suitable for immunisation guidance because exact terms such as
+    MMR, BCG, HBsAg, Flucelvax, or MMRV need keyword matching, while natural-language
+    questions need semantic retrieval. The Azure mode can use Azure AI Search for
+    hybrid/semantic search.
+  </li>
+  <li>
+    <strong>Agent and model layer:</strong> The LangGraph pipeline follows
+    classify → retrieve → generate → format. The classifier uses rule-based matching
+    across six dimensions — vaccine type, query type, clinical scenario, caller type,
+    patient age group, and urgency — with an LLM fallback only when the rule-based
+    result is too empty. The generator uses <strong>gpt-4o-mini</strong> via Azure OpenAI
+    and returns a structured JSON object containing answer, citations, and confidence.
+  </li>
+  <li>
+    <strong>API, interface, and persistence:</strong> FastAPI exposes endpoints for
+    registration, login, health checks, full query responses, streaming query responses
+    (SSE), query history, and reporting summary. JWT authentication protects all advisor
+    functions. A PII filter blocks NHI numbers, phone numbers, email addresses, dates of
+    birth, and patient-name patterns before the query is processed. SQLite stores users
+    and query audit logs. The user-facing interface is a Bootstrap 5 web UI served by
+    FastAPI; a Gradio demo UI is also available for local testing.
+  </li>
+  <li>
+    <strong>Evaluation and testing:</strong> The repository includes a smoke test and an
+    evaluation script that runs the agent against a curated clinical question set. The
+    evaluation set now comprises <strong>60 questions</strong>: 30 hand-crafted questions
+    covering all major vaccine types and query categories, and 30 questions derived
+    directly from real IMAC call transcripts. This mixed set enables assessment of both
+    structured coverage and real-world query patterns.
+  </li>
+</ul>
+
+<!-- ── 3. IMPLEMENTATION PROGRESS ────────────────── -->
+<h3>3. Implementation progress</h3>
+<p>
+The proof-of-concept has a working implementation across all major system layers.
+Completed components include: CSV chunk conversion (3,633 chunks from 5 sources with
+section-overlap), embedding generation (text-embedding-3-small, 1,536-dim, 117 MB
+output file), hybrid retrieval (BM25 + FAISS cosine + RRF), LangGraph query handling
+(classify → retrieve → generate → format), answer generation with citations, output
+formatting, query auto-classification across six clinical dimensions, FastAPI endpoints,
+JWT-based authentication, PII input scanning, SQLite audit logging, Bootstrap and Gradio
+interfaces, a one-command launcher script, call transcript analysis pipeline (1,797 calls),
+and a 60-question evaluation set including 30 questions extracted from real IMAC call
+transcripts. End-to-end queries from the web UI to a cited, confidence-rated answer are
+working.
+</p>
+
+<!-- ── 4. NEXT DEVELOPMENT STEPS ─────────────────── -->
+<h3>4. Next development steps</h3>
+<ul>
+  <li>Add Medsafe product information to the knowledge base (currently absent despite being
+  an approved source per the project brief); ingest, chunk, and re-embed alongside existing
+  sources.</li>
+  <li>Run the 60-question evaluation set end-to-end, manually check answer correctness
+  and citation accuracy, and record failure cases to guide further improvement.</li>
+  <li>Improve safety messaging and escalation behaviour for low-confidence, not-found,
+  urgent, or personal-data-containing queries.</li>
+  <li>Conduct transcript gap analysis: cross-reference the 1,698 classified call topics
+  against knowledge-base coverage to flag sections with high call volume but thin
+  guidance content.</li>
+  <li>Polish the web UI, including clearer source display, case status update flow, and
+  advisor notes fields.</li>
+  <li>Prepare a short demo script showing registration, query submission, cited answer,
+  classification badges, history, and CRM case creation for the IMAC stakeholder
+  presentation.</li>
+</ul>
+
+<!-- ── 5. RESPONSIBLE AI / OUT-OF-SCOPE BOUNDARIES ── -->
+<h3>5. Responsible AI and out-of-scope boundaries</h3>
+<p>
+The system is designed as an <strong>advisor support tool</strong>, not an autonomous
+clinical decision-maker. The following out-of-scope boundaries are enforced in the
+implementation:
+</p>
+<ul>
+  <li><strong>No medical diagnosis.</strong> The system prompt explicitly prohibits
+  statements of the form "This patient has condition X." The model is instructed to
+  retrieve and summarise what approved guidance says, not to assess patient conditions.</li>
+  <li><strong>No treatment recommendations.</strong> Statements of the form "The patient
+  should receive treatment X" are prohibited. All clinical decisions remain with the
+  qualified advisor.</li>
+  <li><strong>No autonomous clinical advice.</strong> Every answer closes with the
+  mandatory disclaimer: "Final clinical decisions remain with the qualified advisor."
+  The system prompt reinforces that the tool supports, not replaces, advisor judgement.</li>
+  <li><strong>No hallucination (accuracy over recall).</strong> The LLM is instructed to
+  answer only from retrieved reference sections. The API enforces this at two levels:
+  (a) when <em>confidence = not_found</em>, the API replaces the LLM answer with a
+  fixed escalation message regardless of what the model returned; (b) when
+  <em>confidence = low</em>, a ⚠ warning is appended instructing the advisor to verify
+  directly with the primary source. If an answer is returned with no citations, a
+  further warning is added automatically.</li>
+  <li><strong>Source transparency.</strong> Every non-escalation answer includes citations
+  (source name, section, URL, excerpt). The citation list is checked: an answer with
+  no citations triggers an automatic warning to the advisor.</li>
+  <li><strong>No PII in inputs or outputs.</strong> A PII filter blocks queries containing
+  NHI numbers, NZ phone numbers, email addresses, dates of birth, and patient name
+  patterns before they reach the model. A second output redaction pass removes any PII
+  that might appear in the generated answer before it is returned to the client.
+  Both the full-response (<code>/query</code>) and streaming (<code>/query/stream</code>)
+  endpoints apply this two-layer guard.</li>
+  <li><strong>Auditability.</strong> Every query is logged to SQLite with: the query text,
+  the confidence level, the number of chunks retrieved, the breadcrumb and URL of every
+  retrieved source, the citation list from the final answer, and the answer text itself.
+  This allows post-hoc review of whether answers were grounded in the retrieved sources
+  and supports correction of any errors identified after deployment.</li>
+  <li><strong>No connection to live production systems.</strong> The system uses a local
+  SQLite database, a local FAISS index, and Azure OpenAI (a managed API). It is not
+  connected to IMAC's live phone system, patient records, or operational databases.</li>
+  <li><strong>No real-time call processing.</strong> The system is an on-demand query
+  tool; it does not perform real-time speech recognition or live call monitoring.</li>
+</ul>
+
+<!-- ── 6. CHALLENGES ─────────────────────────────── -->
+<h3>6. Current roadblocks / challenges</h3>
+<p>
+The main technical challenge encountered during this sprint was a <strong>mid-sprint
+model change</strong>: the Azure OpenAI deployment was switched from the originally
+planned large embedding model to the team-shared Foundry instance (gpt-4o-mini and
+text-embedding-3-small). All pipeline components — embedding dimensions, retrieval
+similarity thresholds, and the generation client — were updated and embeddings were
+fully regenerated. This has been resolved.
+</p>
+<p>
+A <strong>data chunking constraint</strong> was also identified: the supplied CSV was
+pre-chunked at section level, preventing standard sliding-window splitting. A custom
+200-character tail-prepend overlap strategy was implemented to preserve cross-boundary
+context within the same section.
+</p>
+<p>
+The main ongoing safety challenge is ensuring that every answer is grounded in current
+approved guidance and that citations actually support the claims made. Because this is a
+clinical-advisor support tool, further testing and human review are needed before
+presenting the system as reliable. The formal evaluation run, now scheduled as the next
+step, will provide the first systematic measurement of citation accuracy and answer
+quality.
+</p>
+
+<!-- ── 7. MILESTONE 1: PII REDACTION VERIFICATION ──── -->
+<h3>7. Milestone 1: PII redaction verification</h3>
+<p>
+The project brief identifies PII redaction verification as the first required milestone
+before call transcripts may be used. The following audit was performed on all 1,797
+Amazon Connect Contact Lens transcript files in <em>data/output20260400/extracted/</em>.
+</p>
+<p>
+<strong>Contact Lens redaction status.</strong> All 1,797 files (100 %) carry
+<code>ContentMetadata.Output: "Redacted"</code> and
+<code>RedactionMaskMode: "EntityType"</code>, confirming that Amazon Contact Lens
+PII redaction was active at the time of transcription.
+The entity types covered by this configuration include: NAME, EMAIL, PHONE, ADDRESS,
+PASSPORT_NUMBER, DRIVER_ID, SSN, and financial identifiers (bank account, credit/debit),
+among others. Redacted spans are replaced in the transcript text with their type label
+(e.g. <code>[NAME]</code>, <code>[PHONE]</code>, <code>[ADDRESS]</code>).
+</p>
+<p>
+<strong>Residual PII scan.</strong> A secondary scan was run across all 1,797 transcripts
+using regular expressions targeting the PII categories required by the brief:
+</p>
+<ul>
+  <li><strong>Caller / patient names:</strong> 0 found — all masked as <code>[NAME]</code> by Contact Lens.</li>
+  <li><strong>NHI numbers</strong> (old format ABC1234 and new format ABC12DE): 0 found
+  across all transcripts. Note that NHI is not a native AWS entity type; the scan confirms
+  none appear in this dataset.</li>
+  <li><strong>Phone numbers:</strong> 1 occurrence found in 1 file (a workplace phone number
+  read aloud by the agent while updating a caller's CRM profile, not a patient identifier).
+  This was a Contact Lens miss; a post-hoc regex filter has been added to
+  <em>analyze_transcripts.py</em> to mask any residual NZ phone patterns before transcript
+  text is used in analysis or embedding.</li>
+  <li><strong>Email addresses:</strong> 0 found.</li>
+  <li><strong>Addresses:</strong> 0 found unmasked (all covered by Contact Lens).</li>
+  <li><strong>Dates of birth:</strong> 0 genuine DOB occurrences found. Date-like strings
+  flagged by the scanner were verified to be clinical dates (vaccine administration dates,
+  schedule eligibility cutoff dates) — not patient dates of birth.</li>
+  <li><strong>Health professional identity:</strong> Advisor names are masked as
+  <code>[NAME]</code>. Business/clinic names (e.g. pharmacy names) appear in clear text as
+  these are organisational names, not personal identifiers; they do not identify individual
+  patients or callers.</li>
+</ul>
+<p>
+<strong>Conclusion.</strong> Contact Lens PII redaction is active and effective across the
+full dataset. The one residual phone number identified is a low-risk organisational
+number, not a patient identifier, and has been caught by the additional post-hoc filter.
+The transcripts are considered safe to use for query topic analysis and evaluation question
+extraction. No patient names, NHI numbers, emails, addresses, or dates of birth were
+found in the dataset.
+</p>
+<p>
+The milestone requires formal verification with IMAC that the Contact Lens configuration
+applied to this dataset matches the settings described above, and that IMAC approves use
+of the transcripts for this proof-of-concept project.
+</p>
+
+</body>
+</html>

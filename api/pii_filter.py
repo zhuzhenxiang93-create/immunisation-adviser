@@ -31,6 +31,18 @@ _FLAG_PATTERNS: list[tuple[str, str]] = [
 ]
 
 
+def redact_output(text: str) -> str:
+    """
+    Silently redact PII from generated output text.
+    Unlike scan(), this does not block — it just replaces and returns.
+    Used as a safety net on LLM answers before returning to the client.
+    """
+    redacted = text
+    for _, pattern, replacement in _PII_PATTERNS:
+        redacted = re.sub(pattern, replacement, redacted, flags=re.IGNORECASE)
+    return redacted
+
+
 def scan(text: str) -> dict:
     """
     Scan text for PII.

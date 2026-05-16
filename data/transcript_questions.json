@@ -1,0 +1,465 @@
+[
+  {
+    "id": "T001",
+    "source": "real_transcript",
+    "query": "Oh hi [REDACTED], it's [REDACTED] calling from Cox's Pharmacy. How are you?",
+    "category": "eligibility",
+    "vaccine_type": [
+      "unknown"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "pharmacist",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "0800 immune [NAME] speaking. Good. Hi, [NAME]. How are you today? Yeah, no worries. How old are they? Hm, I can just have a think about that. So they're 25, did you say, and wanting to get the HPV 9. Yeah, I know, good question. Um, so they are under 27. Usually, unless, usually if it's not recorded",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T002",
+    "source": "real_transcript",
+    "query": "Oh hi there, it's [REDACTED] calling from Uni Taradale Pharmacy. How are you?",
+    "category": "eligibility",
+    "vaccine_type": [
+      "unknown"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "pharmacist",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Good good afternoon, [NAME] speaking. Hi [NAME]. Yeah, hi [NAME], good, thank you. Uh, no. No, no. Hang on. I'm not sure about this. Now, she's 19. When you say low immunity, but what, there must be, I need more information, [NAME]. Um, has she got a medical um condition? Has she been vaccinated in ",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T003",
+    "source": "real_transcript",
+    "query": "Hi. Uh, [REDACTED], I, um, I have a 6 year old and a 9-year-old coming for the flu vaccine for the first time. Um, do they need a 2nd 14 weeks later or, or?",
+    "category": "general",
+    "vaccine_type": [
+      "influenza"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "neonate",
+    "urgency": "routine",
+    "agent_response_hint": "[NAME], you're speaking with [NAME]. How can I help? My name's [NAME]. Hi, [NAME], how can we help today? I think that's just bear with my lolo um. Yep, just one moment. Sorry, I'm just finding where it's written. Just bear with me. OK, I can show you, I can show you where that is. I'm just looking ",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T004",
+    "source": "real_transcript",
+    "query": "All vaccinators, ah, OK, sure, alright, um, cool, OK, I will pass that on. Give me one second, I'm just going to double check something.",
+    "category": "general",
+    "vaccine_type": [],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Yeah, yeah, if they're just purchasing the dose, then yeah, they just need to have a script. Um, and because I guess the thing is generally with, um, general practise, they work under standing orders, but I'm aware that that's not really common practise for you guys in pharmacy, um. If you get a sta",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T005",
+    "source": "real_transcript",
+    "query": "OK, so I've just got a question here. Um, I've just given a 6-week, a Rotarix, um, vaccine just seen by the doctor, um, about 1111 minutes ago now. Um, as soon as the baby had the last little swallow, a bit of a projectile vomit.",
+    "category": "general",
+    "vaccine_type": [
+      "rotavirus"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "infant",
+    "urgency": "urgent",
+    "agent_response_hint": "Right. So, um, now we're advised to re-vaccinate, um, if they, if, if you know they're completely vomited. Yeah. Yeah. Uh, yeah, it, it might have been. Yeah. Quite common. Um, and I don't know whether it's to do with the high sucrose in the vaccine that some babies, you know, um, get it. Yeah, I've",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T006",
+    "source": "real_transcript",
+    "query": "Hi, [REDACTED], um, I've just got a question about, um, dex zero dose spacing.",
+    "category": "dosage",
+    "vaccine_type": [
+      "unknown"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Good morning, [NAME] speaking. OK. So, is it 4 days early or a bit longer, do you think? Sorry, 6. I'll just come over here. 78. I'm with you. 123. I agree. OK, well, look, I mean, you, it's not a can't have, um, I think we might have to get a script though is the only rub. Just bear with me. I'm ju",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T007",
+    "source": "real_transcript",
+    "query": "Hi, this is um [REDACTED] calling. Hey, I just wanted to um double check, um, I did my vaccination stage one course and did my practical assessment and everything, but I'm just having trouble to upload um my documents into the website, so.",
+    "category": "general",
+    "vaccine_type": [],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Hello, [NAME] speaking. Yeah, that's all done through education and training. So, can I give you their phone number? It's run separately from us. Yeah, have you got a pen there? Yeah, so I make education and training is [PHONE]. You're welcome. OK, thank you.",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T008",
+    "source": "real_transcript",
+    "query": "Lovely, so my question, um, we started the flu season and we're administering fluid and flu Silvax, so one of our, our colleagues working under the standing order, pulled out fluilvax and administered to a person, to two people, one is 71 years of age and the other one is, oh my goodness, I need to go and have a look at the task, um, so they are over 65.",
+    "category": "administration",
+    "vaccine_type": [
+      "influenza"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "infant",
+    "urgency": "routine",
+    "agent_response_hint": "0800 m [NAME] speaking. Yeah, I can. If you've just been on a call with someone else? Yeah. Sorry, let me just, I'm just letting you know that I'm on the call with you. So what was your name? And what's your surname? Hang on, slow down. [NAME], yeah, [NAME] I. That's your surname, OK, and where are ",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T009",
+    "source": "real_transcript",
+    "query": "Alright, so, I have a 14 month old baby coming in for a catch-up plan today. Um, had the first lot of immunisations at 9 weeks. So, at 9 weeks, had the Rotorris.",
+    "category": "catch-up",
+    "vaccine_type": [
+      "unknown"
+    ],
+    "clinical_scenario": [
+      "delayed schedule"
+    ],
+    "caller_type": "unknown",
+    "patient_age_group": "neonate",
+    "urgency": "routine",
+    "agent_response_hint": "Yeah, I absolutely, absolutely. We can't, we can't go wrong here, really, hey. Um, so if we, if dose 2, we're 9 months under the age of. So between was it 6 and 12 months, 12 and 2 years, that's right. So we're under 12 months. That's right, we get a 6 month booster for men. I just had to talk, talk",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T010",
+    "source": "real_transcript",
+    "query": "Yeah, I'm just calling to, um, so I had somebody have their HPV vaccine when they were 12 years old, um, and they've just had their 2nd 18 years now, would they require a third as a booster?",
+    "category": "general",
+    "vaccine_type": [
+      "HPV"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "adolescent",
+    "urgency": "routine",
+    "agent_response_hint": "Hello, this is [NAME]. How can I help? Hello, what was your name, please? [NAME], how can I help, [NAME]? No, so if they've had their first dose under 14 years of age, then they don't require a third dose, 2 doses is sufficient. Yeah. You're welcome. Have a good day.",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T011",
+    "source": "real_transcript",
+    "query": "Hi, [REDACTED]. It's [REDACTED] from the doctors in [REDACTED] again. Hey, I just wanted to confirm, um, I've got a 4 year old who's come in for her 4-year-old immunizations, and it's just not showing up on my list, um, but, uh, in regards to her 3rd meningococcal B dose. So she's had her first dose at 14 months, and then she's had another dose at 18 months. So then she should be due for her third booster dose, right?",
+    "category": "dosage",
+    "vaccine_type": [
+      "meningococcal"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "child",
+    "urgency": "routine",
+    "agent_response_hint": "Hello, this is [NAME]. How can I help? Correct. Yeah, she can have that now and you can offer that at the same time as the 4 year old event. Double check. Yeah, no, all good. Have a good afternoon. See you. Bye.",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T012",
+    "source": "real_transcript",
+    "query": "Um, I just, um, I just need some advice. I gave a, um, 12 month old the men's B MMR and con 13. Um, however, the child had had their 5 month one late. I think it was 5 months, yeah, it was late, and they had them on the 4th of November, which means that there was",
+    "category": "general",
+    "vaccine_type": [
+      "MMR"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "infant",
+    "urgency": "routine",
+    "agent_response_hint": "OK, hold for me just a second. I just need to get the error list up here. Yeah, that's, that's OK. Let's just see here what we need to do. OK, I understand. Just give me a moment. I just need to see if we. Need to give another one. Address test is under 6 months. OK, so the interval was November, De",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T013",
+    "source": "real_transcript",
+    "query": "Oh, hi [REDACTED], it's [REDACTED], one of the nurses at Maryland's Medical centre in [REDACTED]. Um, hi, I've just got a question please. I've got a patient in that's gonna have a fluid flu injection, but last month she's um started some chemotherapy drugs, and I just needed to make sure that it was still OK to give it.",
+    "category": "administration",
+    "vaccine_type": [
+      "influenza"
+    ],
+    "clinical_scenario": [
+      "immunocompromised"
+    ],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Hello, [NAME] speaking. Yeah. So, the flu vaccines we do give while people are on chemotherapy medication, they don't work as well, but the thought is any protection is better than none. Uh, in the, yeah, we don't have the live flu vaccines here in [ADDRESS]. Did she have breast cancer or what she? ",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T014",
+    "source": "real_transcript",
+    "query": "Um, I am just calling because, um, I have given a couple of COVID vaccines just a little bit earlier than I should have.",
+    "category": "general",
+    "vaccine_type": [
+      "COVID-19"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Good morning. You're speaking with [NAME]. Yeah, good. Thanks, [NAME]. Um, I've just got to find you on a contact with [NAME]. Whereabouts are you calling from? OK, let me just find you on our contact list. Is it [NAME], how did I spell your name? Yeah, and your last name, [NAME]? Um, are you also k",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T015",
+    "source": "real_transcript",
+    "query": "So I wanted to find out. I tried to log in online, um, to see if I needed a, um, to do my vaccinators update, which I do. What I wanted to know was I've been asked to go and do some flu, um, vaccines tomorrow.",
+    "category": "general",
+    "vaccine_type": [
+      "influenza"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "You're speaking with [NAME], one of the nurses here at the Mac. How can I help? Can I, sorry, just get your surname, [NAME]? OK, let me, sorry, just, um, system just likes us to have, uh, your contact details saved in case we lose the call. I'll just quickly put them here. Um, did you say Phoenix He",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T016",
+    "source": "real_transcript",
+    "query": "Cool. Um, so I've got a, uh, 35 year old female who's currently about 15 weeks pregnant. Um, she's planning to travel to overseas to [REDACTED] next week and is wanting to get her boosttrix done a bit early. Is that OK to do? No?",
+    "category": "general",
+    "vaccine_type": [
+      "unknown"
+    ],
+    "clinical_scenario": [
+      "pregnancy",
+      "travel"
+    ],
+    "caller_type": "unknown",
+    "patient_age_group": "adult",
+    "urgency": "routine",
+    "agent_response_hint": "Oh, that's OK. Yeah, yeah, no, look, that sounds OK. That's certainly fine. Yeah, yeah. I just, I unpacked that and thought sensibly you're allowed to give it in the second trimester, preferably at 16 weeks, but then, you know, really it's very difficult to know exactly when someone's 16 weeks. You'",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T017",
+    "source": "real_transcript",
+    "query": "Good, good. I was just wanting to seek some advice, please. I'm looking at the guidelines for immunisation for adults, um, who are receiving an immunosuppressive disease-modifying drug and with the diagnosis in this particular instance, she has lupus.",
+    "category": "general",
+    "vaccine_type": [
+      "unknown"
+    ],
+    "clinical_scenario": [
+      "immunocompromised"
+    ],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Hello, [NAME] speaking. Good, thank you, and yourself? Yeah. No, so it's only if she hasn't already had them. So how old is she? OK. Yeah. So, if she's had her HPV then she doesn't need to have any more. So, do you want to go through the list, or do you, what would you like to do? She's on meds, is ",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T018",
+    "source": "real_transcript",
+    "query": "Good morning. This is [REDACTED] calling from Unichem Queen Chee Pharmacy. Hello, me again. Hi. So, I've got a question in here. I'm sorry for the noise. I've got a, um, 50 years old gentleman. His wife, um, developing shingles over the weekend. Um, he's, um, immunocompromised and he's asking for shingles vaccine.",
+    "category": "eligibility",
+    "vaccine_type": [
+      "zoster"
+    ],
+    "clinical_scenario": [
+      "immunocompromised"
+    ],
+    "caller_type": "pharmacist",
+    "patient_age_group": "neonate",
+    "urgency": "routine",
+    "agent_response_hint": "Good morning, [NAME] speaking. That's all right. Hm. Right, poor thing, yeah. No, it can't stop it. But, but hang on a minute. So no, um, he's immune-compromised. OK, that's something else. Right. OK. So it's got, this actually doesn't have anything to do with his wife's shingles though. It, it's hi",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T019",
+    "source": "real_transcript",
+    "query": "Hi, um, just had a question. Um, I have a patient, she had the Zostavax vaccine, um, back when she was 65, and she just wondered how long that vaccine would protect her for.",
+    "category": "general",
+    "vaccine_type": [
+      "varicella"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "elderly",
+    "urgency": "routine",
+    "agent_response_hint": "Speaking with some of the nurses here at MA[ADDRESS]How can I help? Hey, how can I help? Uh, so the typical duration of protection is about 5 years, um. Yeah, um, so it depends on, yeah, if she's interested. There's very narrow funding for Shingrix, um, but if it's sort of been, it, it's, as long as",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T020",
+    "source": "real_transcript",
+    "query": "Um, I was just phoning if I have a patient with me and we just have conflicting, we've received conflicting advice around the meningococcal funding. Um, so we had been told in a brief email from our immunisation coordinator that they were both funded for all students, but then on iMac, it just says for, you know, students entering halls of residence. Yeah. So,",
+    "category": "eligibility",
+    "vaccine_type": [
+      "meningococcal"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Um, and it talks about men quadfi and men be are recommended for a 30 to 25 inclusively for individuals, and this is the same as the Pharmac wording, who will be living in communal accommodation within the next 3 months or their first year, and then it lists it specifically boarding school hostels, ",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T021",
+    "source": "real_transcript",
+    "query": "Hello [REDACTED]. It's [REDACTED] here, the nurse at Glenavn Doctors. Hi. Um, sorry to bother you again. Um, I've got a patient who is, um, pregnant, um, and has had a Tdap as part of like a wound at, uh, 4 weeks, uh, pregnant. Um, should we still give the Tdap? I'm guessing it's a yes. Yeah, yeah.",
+    "category": "general",
+    "vaccine_type": [
+      "Tdap/Td"
+    ],
+    "clinical_scenario": [
+      "pregnancy"
+    ],
+    "caller_type": "nurse",
+    "patient_age_group": "pregnant",
+    "urgency": "routine",
+    "agent_response_hint": "Good morning, [NAME] speaking. Yes, yes, you should. Yeah, it's very, it's actually quite common. You'd be surprised the amount of tetanus-prone wound injuries that 1st, 1st generation, first trimester women, uh, pregnant women have. So yeah, they. Just confirming to her that it's for baby, that, th",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T022",
+    "source": "real_transcript",
+    "query": "Hi, I'm calling from Runway Pharmacy um regarding the vaccination question. Is that OK if I ask from you?",
+    "category": "eligibility",
+    "vaccine_type": [
+      "unknown"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "pharmacist",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "[NAME], you're speaking with [NAME], one of the nurses here at Emec. How can I help? Yeah, what was your name? And how old are they? Can they recall having had COVID vaccination? Can they recall having had vaccinations? OK. Um, I guess in any case, um, for individuals who are well, um, the primary c",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T023",
+    "source": "real_transcript",
+    "query": "Thank you. So I just have a question about um hepatitis B vaccine because um we've had um nursing students who come here because um of course um they've had um serology that um their um school wanted them to do.",
+    "category": "general",
+    "vaccine_type": [
+      "hepatitis B"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "nurse",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Yeah. That's right. That's exactly right. So, what we do first is we, the very first thing when we get these nursing students, is we want to check uh to ask them if they've got a vaccine history. Cause some of them, of course, it, depending on their age, may not be showing on the AIR um so we try an",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T024",
+    "source": "real_transcript",
+    "query": "Hi, this is [REDACTED]. I'm a pharmacist working at Bayless the chemist. I'm just trying to do vaccines and I've requested to",
+    "category": "eligibility",
+    "vaccine_type": [
+      "unknown"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "pharmacist",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Oh, can I just, can I, can I just stop you because your number hasn't come up in our system. So I just need to find you in our system. So how do you spell your first name? Yeah. And your last name? Oh, [NAME]. Is that you? Yeah, OK. So that number, we haven't got this number linked to you. So, is th",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T025",
+    "source": "real_transcript",
+    "query": "Uh, yeah, I just have a, um, patient here. She's coming in for a flu vaccine today. She does say she has an allergy to vancomycin, the antibiotics. She gets itching and swelling of her throat, which seems like somewhat anaphylactic to me. And I was looking at the sort of data sheet, or data sheet, the summary of the 2026 influenza vaccine, and it does say it has gentamicin and is it Tolasine titrate in it?",
+    "category": "general",
+    "vaccine_type": [
+      "influenza"
+    ],
+    "clinical_scenario": [
+      "allergy"
+    ],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Good afternoon, [NAME] speaking. Ah, OK. So hold on a minute. I'll just. Is it glycopeptide. So, so which vaccine, so, hang on, I'll go to. Let me just get the vaccines up there. Which vaccine is she wanting? Right, so she's funded for that? No. OK. So, gentamicin and thylacine tartrate. Gentamicin ",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T026",
+    "source": "real_transcript",
+    "query": "Hi, [REDACTED]. It's [REDACTED] ringing from 169 Medical, one of the nurses. Um, I am ringing because, um, just wanna get my head around. I've had a lady ring. She's starting chemo on Monday. She's been told that she's got to be vaccinated against pneumococcal. Now, am I giving her a 13 or do I just jump straight to the 23?",
+    "category": "general",
+    "vaccine_type": [
+      "pneumococcal"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Hello, [NAME] speaking. Yeah, so who's told her that, that it needs, she needs to be vaccinated for pneumococcal? The specialist or? OK, OK. And what's the chemo for? Yeah. And how old is she? Has she had any pneumococcal vaccines in the past? Yeah, OK. So I think the funding is all post. Yeah, I'm ",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T027",
+    "source": "real_transcript",
+    "query": "Hello. Hey, I have a question about simple one actually. It's a flu vaccine. Um, so, but this patient had a flu vaccine last one was in November last year.",
+    "category": "general",
+    "vaccine_type": [
+      "influenza"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "unknown",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "NZ defence. Oh, your defence, gotcha. Lovely. Hi. It happens a lot. Yeah. December, January, February, March. So it's 5 months. I would definitely offer them one now, [NAME], because it's got the updated strain, um, played, yeah. It's fine, absolutely, yes. Even if they've had less than 6 months ago",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T028",
+    "source": "real_transcript",
+    "query": "Hi, [REDACTED]. This is [REDACTED] calling from Alexander Pharmacy. Um, I just have a question. Um, I just did a vaccination, a COVID vaccination, um, for one of our patients, and with the needle, I think maybe either the needle, it wasn't attached, um, like very tightly, or there was something wrong with the vial itself, the pre-syringed, um,",
+    "category": "eligibility",
+    "vaccine_type": [
+      "COVID-19"
+    ],
+    "clinical_scenario": [],
+    "caller_type": "pharmacist",
+    "patient_age_group": "unknown",
+    "urgency": "routine",
+    "agent_response_hint": "Hello, [NAME] speaking. Yes. Now, tell me about your patient. How old are they? 83. OK. Let me just look that one up. Just bear with me. How long is it since he's had his last one? So we're nearly 12 months down the track. OK. Just bear with me while I look this one up because this one's not as stra",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T029",
+    "source": "real_transcript",
+    "query": "I'm, I'm very lucky to have you again. Uh, I just had another question, [REDACTED], something unrelated, um, just about a hepatitis B vaccine. Um, I've just got a patient coming in for his catch-up vaccines. He's 14 years old. Um, he had the hepatitis B on the 16th of March this year, and he's coming in for the second dose, which is, um, today.",
+    "category": "dosage",
+    "vaccine_type": [
+      "hepatitis B"
+    ],
+    "clinical_scenario": [
+      "delayed schedule"
+    ],
+    "caller_type": "unknown",
+    "patient_age_group": "adolescent",
+    "urgency": "routine",
+    "agent_response_hint": "Hi, this is [NAME] speaking. Who am I talking to, thanks. No, so it needs to be 28 days between the two, so minimum. So when was this? Yeah, so you've got to count it out literally, or else, if it's 27 days, it's not valid. Um, so yeah, you don't wanna, yeah, you don't wanna make a mistake. I'm just",
+    "expected_confidence": "high"
+  },
+  {
+    "id": "T030",
+    "source": "real_transcript",
+    "query": "Hey, look, it's a bit of a strange question. I've just got someone who's come here for their 15 month immunizations, um, a little girl who's had, um, a couple of reactions in the last week to query fish, or they thought fish initially, but then she reacted again 48 hours later and had urticaria, basically, a real severe case of urticaria and seen it ED prednisone.",
+    "category": "adverse event",
+    "vaccine_type": [],
+    "clinical_scenario": [
+      "allergy"
+    ],
+    "caller_type": "unknown",
+    "patient_age_group": "child",
+    "urgency": "routine",
+    "agent_response_hint": "[NAME], you're speaking with [NAME], one of the nurses here at [ADDRESS]. How can I help? Hey, can I just quickly grab your surname, [NAME]? Uh, yes, but you're here. How can I help? Yeah, no, it's prolonged, um, corticosteroids or, um, immunosuppressing medications. So, um, if it was just those sor",
+    "expected_confidence": "high"
+  }
+]

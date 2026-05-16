@@ -27,7 +27,7 @@ from config.azure_config import (
     AZURE_SEARCH_INDEX_NAME,
 )
 
-EMBEDDING_DIMENSIONS = 3072   # text-embedding-3-large
+EMBEDDING_DIMENSIONS = 1536   # text-embedding-3-small
 BATCH_SIZE = 16
 
 
