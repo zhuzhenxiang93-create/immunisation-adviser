@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Call Insights — IMAC Adviser</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --imac-blue:  #1a5276;
+      --imac-light: #d6eaf8;
+    }
+    body { background: #f4f6f9; font-family: 'Segoe UI', sans-serif; }
+
+    .topbar {
+      background: var(--imac-blue);
+      color: #fff;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.25);
+    }
+    .topbar .brand { font-size: 1.1rem; font-weight: 700; }
+    .topbar .sub   { font-size: .78rem; opacity: .8; }
+
+    .hero {
+      background: linear-gradient(135deg, var(--imac-blue) 0%, #2980b9 100%);
+      color: #fff;
+      padding: 36px 40px 28px;
+    }
+    .hero h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 6px; }
+    .hero p  { font-size: .93rem; opacity: .88; margin: 0; }
+
+    .stat-pill {
+      background: rgba(255,255,255,.18);
+      border-radius: 12px;
+      padding: 12px 20px;
+      text-align: center;
+      min-width: 130px;
+    }
+    .stat-pill .num  { font-size: 1.8rem; font-weight: 700; line-height: 1; }
+    .stat-pill .lbl  { font-size: .72rem; opacity: .85; margin-top: 4px; text-transform: uppercase; letter-spacing: .4px; }
+
+    .card-chart {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+      padding: 22px 24px;
+      height: 100%;
+    }
+    .card-chart h6 {
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: #6c757d;
+      margin-bottom: 16px;
+    }
+
+    .back-btn {
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.3);
+      color: #fff;
+      border-radius: 8px;
+      padding: 5px 14px;
+      font-size: .82rem;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,.25); color: #fff; }
+
+    .source-note {
+      font-size: .78rem;
+      color: #adb5bd;
+      text-align: center;
+      padding: 20px 0 8px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <i class="bi bi-shield-plus-fill fs-5"></i>
+  <div>
+    <div class="brand">IMAC Immunisation Guidelines Adviser</div>
+    <div class="sub">University of Auckland · COMPSCI 714 AI Hackathon</div>
+  </div>
+  <div class="ms-auto">
+    <a href="/" class="back-btn"><i class="bi bi-arrow-left me-1"></i>Back to Adviser</a>
+  </div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="container-fluid px-2">
+    <h1><i class="bi bi-bar-chart-fill me-2"></i>Real Call Insights</h1>
+    <p>Aggregated patterns from real IMAC advisor–caller interactions.
+       These insights directly inform the system's knowledge base priorities and evaluation design.</p>
+    <div class="d-flex gap-3 mt-4 flex-wrap" id="stat-pills">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- Charts grid -->
+<div class="container-fluid px-4 py-4">
+  <div class="row g-4">
+
+    <!-- Query types -->
+    <div class="col-lg-6">
+      <div class="card-chart">
+        <h6><i class="bi bi-question-circle me-1"></i>What advisors get asked most</h6>
+        <canvas id="chart-qtypes" height="240"></canvas>
+      </div>
+    </div>
+
+    <!-- Vaccine types -->
+    <div class="col-lg-6">
+      <div class="card-chart">
+        <h6><i class="bi bi-capsule me-1"></i>Most discussed vaccines</h6>
+        <canvas id="chart-vaccines" height="240"></canvas>
+      </div>
+    </div>
+
+    <!-- Caller types doughnut -->
+    <div class="col-lg-4">
+      <div class="card-chart">
+        <h6><i class="bi bi-people me-1"></i>Who calls IMAC</h6>
+        <canvas id="chart-callers" height="220"></canvas>
+      </div>
+    </div>
+
+    <!-- Hourly volume -->
+    <div class="col-lg-4">
+      <div class="card-chart">
+        <h6><i class="bi bi-clock me-1"></i>Peak hours (NZ local time)</h6>
+        <canvas id="chart-hourly" height="220"></canvas>
+      </div>
+    </div>
+
+    <!-- Day of week -->
+    <div class="col-lg-4">
+      <div class="card-chart">
+        <h6><i class="bi bi-calendar3 me-1"></i>Calls by day of week</h6>
+        <canvas id="chart-dow" height="220"></canvas>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="source-note">
+    Data source: 1,698 classified calls from Amazon Connect Contact Lens transcripts, April 2026.
+    PII redacted by Contact Lens prior to analysis. Used for analysis and evaluation only —
+    transcript content is not included in the RAG knowledge base.
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const API = 'http://127.0.0.1:8000';
+const BLUE  = '#1a5276';
+const BLUES = ['#1a5276','#2471a3','#2980b9','#5dade2','#85c1e9','#aed6f1','#d6eaf8'];
+const GREENS = ['#1e8449','#27ae60','#2ecc71','#58d68d','#82e0aa','#a9dfbf','#d5f5e3'];
+const MIXED = ['#1a5276','#c0392b','#27ae60','#d35400','#8e44ad','#2980b9','#16a085'];
+
+function getToken() { return localStorage.getItem('imac_token'); }
+
+function hBar(ctx, labels, data, colors) {
+  return new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{ data, backgroundColor: colors, borderRadius: 4, borderSkipped: false }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: '#f0f0f0' }, ticks: { font: { size: 11 } } },
+        y: { ticks: { font: { size: 11 } } }
+      }
+    }
+  });
+}
+
+function vBar(ctx, labels, data, color) {
+  return new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{ data, backgroundColor: color, borderRadius: 4 }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { font: { size: 10 } } },
+        y: { grid: { color: '#f0f0f0' }, ticks: { font: { size: 11 } } }
+      }
+    }
+  });
+}
+
+function doughnut(ctx, labels, data, colors) {
+  return new Chart(ctx, {
+    type: 'doughnut',
+    data: { labels, datasets: [{ data, backgroundColor: colors, borderWidth: 2, borderColor: '#fff' }] },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 10 } }
+      },
+      cutout: '62%'
+    }
+  });
+}
+
+async function loadData() {
+  const token = getToken();
+  if (!token) { window.location.href = '/'; return; }
+
+  let data;
+  try {
+    const res = await fetch(`${API}/reports/transcript-insights`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (res.status === 401) { window.location.href = '/'; return; }
+    if (!res.ok) {
+      document.querySelector('.hero p').textContent = 'Transcript insights not available — run analyze_transcripts.py first.';
+      return;
+    }
+    data = await res.json();
+  } catch {
+    document.querySelector('.hero p').textContent = 'Cannot reach API server.';
+    return;
+  }
+
+  const total   = data.total_classified_calls || 0;
+  const qtypes  = data.top_query_types  || {};
+  const vaxes   = data.top_vaccine_types || {};
+  const callers = data.caller_types     || {};
+  const hourly  = data.hourly_nz        || {};
+  const dow     = data.day_of_week      || {};
+
+  // ── Stat pills ───────────────────────────────────────────────────────────
+  const topQtype = Object.entries(qtypes).sort((a,b) => b[1]-a[1])[0] || ['–', 0];
+  const topVax   = Object.entries(vaxes).sort((a,b)  => b[1]-a[1])[0] || ['–', 0];
+  document.getElementById('stat-pills').innerHTML = `
+    <div class="stat-pill"><div class="num">${total.toLocaleString()}</div><div class="lbl">Calls analysed</div></div>
+    <div class="stat-pill"><div class="num">${Object.keys(qtypes).length}</div><div class="lbl">Query categories</div></div>
+    <div class="stat-pill"><div class="num">${topQtype[1]}</div><div class="lbl">Top: ${topQtype[0]}</div></div>
+    <div class="stat-pill"><div class="num">${topVax[1]}</div><div class="lbl">Top vaccine: ${topVax[0]}</div></div>
+  `;
+
+  // ── Query types chart (top 8) ────────────────────────────────────────────
+  const qtSorted = Object.entries(qtypes).sort((a,b) => b[1]-a[1]).slice(0,8);
+  hBar(
+    document.getElementById('chart-qtypes'),
+    qtSorted.map(([k]) => k),
+    qtSorted.map(([,v]) => v),
+    BLUES.slice(0, qtSorted.length)
+  );
+
+  // ── Vaccine types chart (top 8) ──────────────────────────────────────────
+  const vxSorted = Object.entries(vaxes).sort((a,b) => b[1]-a[1]).slice(0,8);
+  hBar(
+    document.getElementById('chart-vaccines'),
+    vxSorted.map(([k]) => k),
+    vxSorted.map(([,v]) => v),
+    GREENS.slice(0, vxSorted.length)
+  );
+
+  // ── Caller types doughnut (exclude 'unknown') ────────────────────────────
+  const callerFiltered = Object.entries(callers).filter(([k]) => k !== 'unknown');
+  doughnut(
+    document.getElementById('chart-callers'),
+    callerFiltered.map(([k]) => k),
+    callerFiltered.map(([,v]) => v),
+    MIXED.slice(0, callerFiltered.length)
+  );
+
+  // ── Hourly chart (business hours 07-17) ──────────────────────────────────
+  const hourRange = Array.from({length: 11}, (_, i) => `${String(i+7).padStart(2,'0')}:00`);
+  vBar(
+    document.getElementById('chart-hourly'),
+    hourRange,
+    hourRange.map(h => hourly[h] || 0),
+    hourRange.map(h => {
+      const n = hourly[h] || 0;
+      const max = Math.max(...hourRange.map(hh => hourly[hh] || 0));
+      return n === max ? '#c0392b' : BLUE;
+    })
+  );
+
+  // ── Day of week chart ────────────────────────────────────────────────────
+  const days = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+  vBar(
+    document.getElementById('chart-dow'),
+    days.map(d => d.slice(0,3)),
+    days.map(d => dow[d] || 0),
+    days.map(d => {
+      const vals = days.map(dd => dow[dd] || 0);
+      return (dow[d] || 0) === Math.max(...vals) ? '#c0392b' : BLUE;
+    })
+  );
+}
+
+loadData();
+</script>
+</body>
+</html>

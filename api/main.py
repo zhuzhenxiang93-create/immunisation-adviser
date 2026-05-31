@@ -72,6 +72,10 @@ app.mount("/static", StaticFiles(directory=str(_static_dir)), name="static")
 def serve_ui():
     return FileResponse(str(_static_dir / "index.html"))
 
+@app.get("/dashboard", include_in_schema=False)
+def serve_dashboard():
+    return FileResponse(str(_static_dir / "dashboard.html"))
+
 # ── Auth setup ────────────────────────────────────────────────────────────────
 
 _auth = AuthManager(db_path="./data/users.db")
@@ -274,6 +278,21 @@ def reports_summary(current_user: dict = Depends(get_current_user)):
     clinical scenario, urgency, patient age group, and daily volume.
     """
     return _audit.get_summary()
+
+
+@app.get("/reports/transcript-insights", tags=["reporting"])
+def transcript_insights(current_user: dict = Depends(get_current_user)):
+    """
+    Aggregated statistics derived from 1,698 real IMAC call transcripts
+    (April 2026). Includes hourly volume, day-of-week, top query types,
+    top vaccines, and caller type distribution.
+    """
+    if not _volume:
+        raise HTTPException(status_code=503, detail=(
+            "Transcript insights not available. "
+            "Run: python -m ingestion.analyze_transcripts"
+        ))
+    return _volume
 
 
 # ── Query endpoints (auth required) ───────────────────────────────────────────
