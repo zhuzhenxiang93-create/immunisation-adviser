@@ -248,8 +248,8 @@ async function loadData() {
   const dow     = data.day_of_week      || {};
 
   // ── Stat pills ───────────────────────────────────────────────────────────
-  const topQtype = Object.entries(qtypes).sort((a,b) => b[1]-a[1])[0] || ['–', 0];
-  const topVax   = Object.entries(vaxes).sort((a,b)  => b[1]-a[1])[0] || ['–', 0];
+  const topQtype = Object.entries(qtypes).filter(([k]) => k !== 'general').sort((a,b) => b[1]-a[1])[0] || ['–', 0];
+  const topVax   = Object.entries(vaxes).filter(([k])  => k !== 'unknown').sort((a,b)  => b[1]-a[1])[0] || ['–', 0];
   document.getElementById('stat-pills').innerHTML = `
     <div class="stat-pill"><div class="num">${total.toLocaleString()}</div><div class="lbl">Calls analysed</div></div>
     <div class="stat-pill"><div class="num">${Object.keys(qtypes).length}</div><div class="lbl">Query categories</div></div>
@@ -257,8 +257,10 @@ async function loadData() {
     <div class="stat-pill"><div class="num">${topVax[1]}</div><div class="lbl">Top vaccine: ${topVax[0]}</div></div>
   `;
 
-  // ── Query types chart (top 8) ────────────────────────────────────────────
-  const qtSorted = Object.entries(qtypes).sort((a,b) => b[1]-a[1]).slice(0,8);
+  // ── Query types chart (top 8, exclude 'general' fallback) ───────────────
+  const qtSorted = Object.entries(qtypes)
+    .filter(([k]) => k !== 'general')
+    .sort((a,b) => b[1]-a[1]).slice(0,8);
   hBar(
     document.getElementById('chart-qtypes'),
     qtSorted.map(([k]) => k),
@@ -266,8 +268,10 @@ async function loadData() {
     BLUES.slice(0, qtSorted.length)
   );
 
-  // ── Vaccine types chart (top 8) ──────────────────────────────────────────
-  const vxSorted = Object.entries(vaxes).sort((a,b) => b[1]-a[1]).slice(0,8);
+  // ── Vaccine types chart (top 8, exclude 'unknown' fallback) ─────────────
+  const vxSorted = Object.entries(vaxes)
+    .filter(([k]) => k !== 'unknown')
+    .sort((a,b) => b[1]-a[1]).slice(0,8);
   hBar(
     document.getElementById('chart-vaccines'),
     vxSorted.map(([k]) => k),
