@@ -100,6 +100,31 @@ def get_current_user(
 # ── Persistent audit log (SQLite) ────────────────────────────────────────────
 _audit = AuditLogger(db_path="./data/users.db")
 
+# ── Crisis content detection ──────────────────────────────────────────────────
+import re as _re
+
+_CRISIS_PATTERNS = _re.compile(
+    r"\b(suicid|self[\s\-]?harm|kill\s+my\s*self|hurt\s+my\s*self|"
+    r"end\s+my\s+(life|it)|want\s+to\s+die|better\s+off\s+dead|"
+    r"no\s+reason\s+to\s+live|can'?t\s+go\s+on)\b",
+    _re.IGNORECASE,
+)
+
+_CRISIS_RESPONSE = (
+    "This system is designed to support immunisation queries only and cannot "
+    "help with this message.\n\n"
+    "If you or someone you know needs support, please reach out:\n\n"
+    "- **Need to talk?** Free call or text **1737** (NZ, 24/7)\n"
+    "- **Lifeline NZ:** 0800 543 354\n"
+    "- **Samaritans:** 0800 726 666\n"
+    "- **Emergency services:** 111\n\n"
+    "You are not alone."
+)
+
+
+def _is_crisis(text: str) -> bool:
+    return bool(_CRISIS_PATTERNS.search(text))
+
 # ── Transcript volume patterns (loaded once at startup) ───────────────────────
 _VOLUME_PATH = Path("./data/volume_patterns.json")
 _volume: dict = {}
@@ -313,6 +338,20 @@ def query(req: QueryRequest, current_user: dict = Depends(get_current_user)):
             ),
         )
 
+    if _is_crisis(req.query):
+        return QueryResponse(
+            answer=_CRISIS_RESPONSE,
+            citations=[],
+            confidence="not_found",
+            classification=ClassificationModel(),
+            audit=AuditModel(
+                query="[crisis content — not logged]",
+                chunks_retrieved=0,
+                timestamp=datetime.now(timezone.utc).isoformat(),
+            ),
+            formatted=_CRISIS_RESPONSE,
+        )
+
     try:
         result = run_query(req.query)
     except FileNotFoundError as e:
@@ -404,6 +443,17 @@ async def query_stream(req: QueryRequest, current_user: dict = Depends(get_curre
                 f"Query contains potential personal information ({', '.join(pii['types'])}). "
                 "Please remove patient identifiers before submitting."
             ),
+        )
+
+    # Crisis content check
+    if _is_crisis(req.query):
+        async def _crisis_stream():
+            yield f"data: {_CRISIS_RESPONSE}\n\n"
+            yield "event: done\ndata: [DONE]\n\n"
+        return StreamingResponse(
+            _crisis_stream(),
+            media_type="text/event-stream",
+            headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
         )
 
     async def event_generator() -> AsyncGenerator[str, None]:
