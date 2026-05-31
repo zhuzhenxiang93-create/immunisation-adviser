@@ -79,7 +79,8 @@ def _embed_query(query: str) -> np.ndarray:
 def _load_chunks() -> list[dict]:
     global _chunks_cache, _faiss_index, _faiss_matrix, _bm25_cache
 
-    if _chunks_cache is not None:
+    # Only return cache when ALL components are fully built
+    if _chunks_cache is not None and _bm25_cache is not None and _faiss_index is not None:
         return _chunks_cache
 
     chunks_path = Path(LOCAL_CHUNKS_FILE)
@@ -90,28 +91,34 @@ def _load_chunks() -> list[dict]:
         )
 
     with open(chunks_path, encoding="utf-8") as f:
-        _chunks_cache = json.load(f)
+        chunks = json.load(f)
 
     # ── Build FAISS index ──────────────────────────────────────────────────────
     import faiss
 
     raw = np.array(
-        [c.get("embedding", []) for c in _chunks_cache], dtype="float32"
+        [c.get("embedding", []) for c in chunks], dtype="float32"
     )                                           # shape: (n_chunks, dim)
 
     # L2-normalise every row so inner product = cosine similarity
     norms = np.linalg.norm(raw, axis=1, keepdims=True)
     norms = np.where(norms == 0, 1.0, norms)   # avoid divide-by-zero
-    _faiss_matrix = raw / norms
+    faiss_matrix = raw / norms
 
-    dim = _faiss_matrix.shape[1]
-    _faiss_index = faiss.IndexFlatIP(dim)       # exact inner-product (= cosine)
-    _faiss_index.add(_faiss_matrix)
+    dim = faiss_matrix.shape[1]
+    faiss_index = faiss.IndexFlatIP(dim)        # exact inner-product (= cosine)
+    faiss_index.add(faiss_matrix)
 
     # ── Build BM25 index ───────────────────────────────────────────────────────
     from rank_bm25 import BM25Okapi
-    corpus = [_tokenize(c["content"]) for c in _chunks_cache]
-    _bm25_cache = BM25Okapi(corpus)
+    corpus = [_tokenize(c["content"]) for c in chunks]
+    bm25 = BM25Okapi(corpus)
+
+    # Only assign globals after ALL components succeed
+    _chunks_cache = chunks
+    _faiss_matrix = faiss_matrix
+    _faiss_index  = faiss_index
+    _bm25_cache   = bm25
 
     print(
         f"[retriever] Loaded {len(_chunks_cache)} chunks | "
