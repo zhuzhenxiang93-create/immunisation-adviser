@@ -22,6 +22,7 @@ Docs:  http://127.0.0.1:8000/docs
 
 from __future__ import annotations
 
+import json
 import sys
 import asyncio
 from datetime import datetime, timezone
@@ -95,6 +96,50 @@ def get_current_user(
 # ── Persistent audit log (SQLite) ────────────────────────────────────────────
 _audit = AuditLogger(db_path="./data/users.db")
 
+# ── Transcript volume patterns (loaded once at startup) ───────────────────────
+_VOLUME_PATH = Path("./data/volume_patterns.json")
+_volume: dict = {}
+if _VOLUME_PATH.exists():
+    with open(_VOLUME_PATH, encoding="utf-8") as _f:
+        _volume = json.load(_f)
+
+
+def _build_call_context(clf: dict) -> dict:
+    """
+    Match the query classification against real IMAC call statistics.
+    Returns a dict shown in the UI to ground the query in real call data.
+    """
+    if not _volume:
+        return {}
+
+    total = _volume.get("total_classified_calls", 0)
+    qt_counts = _volume.get("top_query_types", {})
+    vx_counts  = _volume.get("top_vaccine_types", {})
+
+    # Best matching query type
+    qt_hit, qt_count = None, 0
+    for qt in clf.get("query_type", []):
+        if qt in qt_counts and qt_counts[qt] > qt_count:
+            qt_hit, qt_count = qt, qt_counts[qt]
+
+    # Best matching vaccine type
+    vx_hit, vx_count = None, 0
+    for vx in clf.get("vaccine_type", []):
+        if vx in vx_counts and vx_counts[vx] > vx_count:
+            vx_hit, vx_count = vx, vx_counts[vx]
+
+    if not qt_hit and not vx_hit:
+        return {}
+
+    return {
+        "total_calls":       total,
+        "query_type":        qt_hit,
+        "query_type_count":  qt_count,
+        "vaccine_type":      vx_hit,
+        "vaccine_type_count": vx_count,
+        "data_period":       _volume.get("data_period", "April 2026"),
+    }
+
 
 # ── Request / Response schemas ────────────────────────────────────────────────
 
@@ -142,6 +187,15 @@ class ClassificationModel(BaseModel):
     urgency:           str = "routine"
 
 
+class CallContextModel(BaseModel):
+    total_calls:        int = 0
+    query_type:         str = ""
+    query_type_count:   int = 0
+    vaccine_type:       str = ""
+    vaccine_type_count: int = 0
+    data_period:        str = ""
+
+
 class QueryResponse(BaseModel):
     answer: str
     citations: list[CitationModel]
@@ -149,6 +203,7 @@ class QueryResponse(BaseModel):
     classification: ClassificationModel
     audit: AuditModel
     formatted: str           # human-readable markdown
+    call_context: CallContextModel = CallContextModel()
 
 
 class HistoryEntry(BaseModel):
@@ -312,6 +367,7 @@ def query(req: QueryRequest, current_user: dict = Depends(get_current_user)):
             timestamp=audit_meta.get("timestamp", ""),
         ),
         formatted=result.get("formatted", ""),
+        call_context=CallContextModel(**_build_call_context(clf)),
     )
 
 

@@ -216,6 +216,19 @@
       gap: 18px;
     }
 
+    /* ── Call context banner ── */
+    .call-context {
+      background: #eaf4fd;
+      border-top: 1px solid #aed6f1;
+      padding: 8px 22px;
+      font-size: .78rem;
+      color: #1a5276;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .call-context strong { font-weight: 700; }
+
     /* ── Spinner ── */
     .spinner-wrap { text-align: center; padding: 40px; color: #adb5bd; }
 
@@ -691,6 +704,21 @@ function confidenceLabel(c) {
   return { high: 'HIGH', medium: 'MEDIUM', low: 'LOW', not_found: 'NOT FOUND' }[c] || c.toUpperCase();
 }
 
+function buildCallContext(ctx) {
+  if (!ctx || !ctx.total_calls) return '';
+  const parts = [];
+  if (ctx.query_type && ctx.query_type_count)
+    parts.push(`<strong>${ctx.query_type_count}</strong> real callers asked about <strong>${esc(ctx.query_type)}</strong>`);
+  if (ctx.vaccine_type && ctx.vaccine_type_count)
+    parts.push(`<strong>${ctx.vaccine_type_count}</strong> discussed <strong>${esc(ctx.vaccine_type)}</strong>`);
+  if (!parts.length) return '';
+  return `
+    <div class="call-context">
+      <i class="bi bi-bar-chart-fill" style="font-size:.9rem;flex-shrink:0"></i>
+      <span>Based on <strong>${ctx.total_calls.toLocaleString()}</strong> real IMAC calls (${esc(ctx.data_period)}): ${parts.join(' · ')}</span>
+    </div>`;
+}
+
 function renderResponse(data) {
   const citations = (data.citations || []).map(c => `
     <div class="citation-card">
@@ -719,6 +747,7 @@ function renderResponse(data) {
           <div class="citations-title"><i class="bi bi-journals me-1"></i>Sources</div>
           ${citations}
         </div>` : ''}
+      ${buildCallContext(data.call_context)}
       <div class="audit-footer">
         <span><i class="bi bi-database me-1"></i>${audit.chunks_retrieved || 0} chunks retrieved</span>
         ${ts ? `<span><i class="bi bi-clock me-1"></i>${ts}</span>` : ''}
