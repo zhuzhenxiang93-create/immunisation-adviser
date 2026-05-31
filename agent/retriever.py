@@ -264,6 +264,8 @@ def _retrieve_azure(query: str, top_k: int) -> list[dict[str, Any]]:
 
 def retrieve(query: str, top_k: int = RETRIEVAL_TOP_K) -> list[dict[str, Any]]:
     """Retrieve relevant chunks. Backend chosen by SEARCH_PROVIDER env var."""
+    from agent.query_normalizer import normalize
+    query = normalize(query)
     if SEARCH_PROVIDER == "azure":
         return _retrieve_azure(query, top_k)
     return _retrieve_local(query, top_k)

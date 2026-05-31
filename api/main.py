@@ -136,12 +136,12 @@ def _build_call_context(clf: dict) -> dict:
         return {}
 
     return {
-        "total_calls":       total,
-        "query_type":        qt_hit,
-        "query_type_count":  qt_count,
-        "vaccine_type":      vx_hit,
+        "total_calls":        total,
+        "query_type":         qt_hit or "",
+        "query_type_count":   qt_count,
+        "vaccine_type":       vx_hit or "",
         "vaccine_type_count": vx_count,
-        "data_period":       _volume.get("data_period", "April 2026"),
+        "data_period":        _volume.get("data_period", "April 2026"),
     }
 
 
