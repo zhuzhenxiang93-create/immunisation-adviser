@@ -1,18 +1,28 @@
 """
 run_eval.py — Two-layer evaluation of the Immunisation Guidelines Adviser.
 
-Layer 1 — Retrieval quality (automatic, section/source matching):
-  Hit Rate @k   : % of questions where correct source appears in top-k chunks
-  Recall @k     : same (binary per question)
-  MRR           : Mean Reciprocal Rank of first matching source
-  Section Hit   : % where correct section keywords appear in top-k chunks
+Metrics computed
+────────────────
+Layer 1 — Retrieval / Citation Quality (automatic):
+  Section Hit Rate @k  : % of questions where the correct section appears in
+                         top-k retrieved chunks (metadata match only, not content).
+                         With 1 GT label per question this equals Recall@k.
+                         Directly measures source citation quality.
+  MRR                  : Mean Reciprocal Rank — how early the correct section
+                         appears in the ranked list.
 
-Layer 2 — Generation quality:
-  Escalation accuracy : % of not_found questions correctly refused
-  Confidence match    : % where predicted confidence == expected confidence
-  Citation coverage   : % of non-escalated answers that have ≥1 citation
-  Confidence distribution summary
-  Human review fields (filled manually after running)
+  NOTE: Source-level hit rate is intentionally omitted — it is trivially high
+  because ~2,275 NZ Handbook chunks exist in the KB.
+  NOTE: True Recall requires labelling ALL relevant sections per question.
+  With 1 GT label, Hit Rate is an honest lower-bound proxy for Recall.
+
+Layer 2 — Generation / Accuracy (automatic + manual):
+  Escalation accuracy  : % of not_found questions correctly refused.
+  Confidence match     : % where predicted confidence == expected confidence.
+  Citation coverage    : % of answered questions with ≥1 citation.
+  Confidence distribution: breakdown of high/medium/low/not_found.
+  Human correctness    : (manual) answer clinically correct? (fill after run)
+  Human citation acc.  : (manual) citation supports answer? (fill after run)
 
 Usage:
   conda activate immunisation-adviser
@@ -27,8 +37,8 @@ import json
 import re
 import sys
 import time
-from pathlib import Path
 from collections import Counter
+from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from agent.query_handler import run_query
@@ -38,44 +48,39 @@ QUESTION_SETS = {
     "transcript":   Path(__file__).parent / "transcript_question_set.json",
 }
 
-K = 8  # top-k chunks evaluated (matches RETRIEVAL_TOP_K)
+K = 8  # matches RETRIEVAL_TOP_K
 
-# ── Source / section matching ─────────────────────────────────────────────────
+# ── Section matching ──────────────────────────────────────────────────────────
 
 _STOPWORDS = {"the", "a", "an", "of", "for", "and", "or", "in", "on", "to",
               "is", "are", "chapter", "section"}
+
 
 def _keywords(text: str) -> list[str]:
     words = re.findall(r"[a-zA-Z0-9]+", text.lower())
     return [w for w in words if w not in _STOPWORDS and len(w) > 2]
 
 
-def _source_match(chunk: dict, gt: dict) -> bool:
-    """True if chunk source_name contains the key words of gt source."""
-    if not gt or not gt.get("source"):
-        return False
-    gt_words  = set(_keywords(gt["source"]))
-    ck_words  = set(_keywords(chunk.get("source_name", "")))
-    if not gt_words:
-        return False
-    overlap = gt_words & ck_words
-    return len(overlap) >= max(1, len(gt_words) // 2)
-
-
 def _section_match(chunk: dict, gt: dict) -> bool:
-    """True if chunk metadata contains key words from gt section."""
+    """
+    True if chunk STRUCTURAL METADATA (chapter, section, breadcrumb) contains
+    ≥ half the key words from the ground-truth section label.
+
+    Excludes chunk content deliberately — the retriever must surface the
+    correct section heading, not just any chunk that mentions the topic.
+    This makes Section Hit Rate strictly harder than a topic-level check.
+    """
     if not gt or not gt.get("section"):
         return False
     gt_words = _keywords(gt["section"])
     if not gt_words:
         return False
-    chunk_text = " ".join([
-        chunk.get("chapter",   ""),
-        chunk.get("section",   ""),
-        chunk.get("breadcrumb",""),
-        chunk.get("content",   "")[:200],
+    meta = " ".join([
+        chunk.get("chapter",    ""),
+        chunk.get("section",    ""),
+        chunk.get("breadcrumb", ""),
     ]).lower()
-    matches = sum(1 for w in gt_words if w in chunk_text)
+    matches = sum(1 for w in gt_words if w in meta)
     return matches >= max(1, len(gt_words) // 2)
 
 
@@ -83,28 +88,22 @@ def _section_match(chunk: dict, gt: dict) -> bool:
 
 def _retrieval_metrics(chunks: list[dict], gt_citation: dict) -> dict:
     """
-    For one question compute:
-      source_hit_rank  : rank (1-based) of first source match, None if not found
-      section_hit_rank : rank (1-based) of first section match, None if not found
-      source_hit@k     : bool — source match in top-k
-      section_hit@k    : bool — section match in top-k
-      rr               : reciprocal rank for source (0 if not found)
-    """
-    source_rank  = None
-    section_rank = None
+    Section Hit Rate @k and MRR for one question.
 
+    With exactly 1 ground-truth section per question:
+      Section Hit Rate @k  =  1 if correct section in top-k, else 0
+      MRR                  =  1/rank of first section match, else 0
+    """
+    section_rank = None
     for rank, chunk in enumerate(chunks[:K], start=1):
-        if source_rank  is None and _source_match(chunk, gt_citation):
-            source_rank = rank
-        if section_rank is None and _section_match(chunk, gt_citation):
+        if _section_match(chunk, gt_citation):
             section_rank = rank
+            break
 
     return {
-        "source_hit_rank":  source_rank,
-        "section_hit_rank": section_rank,
-        f"source_hit@{K}":  source_rank is not None,
-        f"section_hit@{K}": section_rank is not None,
-        "rr":               1.0 / source_rank if source_rank else 0.0,
+        "section_rank":    section_rank,
+        f"hit@{K}":        section_rank is not None,
+        "rr":              1.0 / section_rank if section_rank else 0.0,
     }
 
 
@@ -112,85 +111,88 @@ def _retrieval_metrics(chunks: list[dict], gt_citation: dict) -> dict:
 
 def _aggregate(results: list[dict], k: int = K) -> dict:
     total       = len(results)
-    has_gt      = [r for r in results if r.get("ground_truth_citation", {}).get("source")]
-    not_found_q = [r for r in results if r.get("expected_confidence") == "not_found"]
-    non_nf      = [r for r in results if r.get("expected_confidence") != "not_found"]
+    has_gt      = [r for r in results
+                   if r.get("ground_truth_citation", {}).get("section")]
+    not_found_q = [r for r in results
+                   if r.get("expected_confidence") == "not_found"]
+    answered    = [r for r in results if r["confidence"] != "not_found"]
 
-    # ── Layer 1 — Retrieval ───────────────────────────────────────────────────
+    # ── Layer 1: Retrieval / Citation Quality ─────────────────────────────────
     if has_gt:
-        source_hits  = [r["retrieval"][f"source_hit@{k}"]  for r in has_gt]
-        section_hits = [r["retrieval"][f"section_hit@{k}"] for r in has_gt]
-        rrs          = [r["retrieval"]["rr"] for r in has_gt]
-        hit_rate     = sum(source_hits)  / len(has_gt)
-        section_rate = sum(section_hits) / len(has_gt)
-        mrr          = sum(rrs)          / len(has_gt)
+        hits = [r["retrieval"][f"hit@{k}"] for r in has_gt]
+        rrs  = [r["retrieval"]["rr"]        for r in has_gt]
+        section_hit_rate = sum(hits) / len(has_gt)
+        mrr              = sum(rrs)  / len(has_gt)
     else:
-        hit_rate = section_rate = mrr = 0.0
+        section_hit_rate = mrr = 0.0
 
-    # ── Layer 2 — Generation ──────────────────────────────────────────────────
-    # Escalation: not_found questions correctly refused
-    if not_found_q:
-        esc_correct  = sum(1 for r in not_found_q if r["confidence"] == "not_found")
-        esc_accuracy = esc_correct / len(not_found_q)
-    else:
-        esc_correct = esc_accuracy = 0
+    # ── Layer 2: Generation / Accuracy ───────────────────────────────────────
+    esc_correct  = sum(1 for r in not_found_q if r["confidence"] == "not_found")
+    esc_accuracy = esc_correct / len(not_found_q) if not_found_q else 0.0
 
-    # Confidence match rate (across all questions)
     conf_match = sum(
         1 for r in results
         if r.get("confidence") == r.get("expected_confidence")
     )
-    conf_match_rate = conf_match / total if total else 0
+    conf_match_rate = conf_match / total if total else 0.0
 
-    # Citation coverage (non-not_found answers with ≥1 citation)
-    answered = [r for r in results if r["confidence"] != "not_found"]
     cit_coverage = (
         sum(1 for r in answered if r.get("citations")) / len(answered)
-        if answered else 0
+        if answered else 0.0
     )
 
-    # Confidence distribution
-    conf_dist = dict(Counter(r["confidence"] for r in results))
+    # Manual review (filled in after running)
+    reviewed       = [r for r in results if r["human_correct"] is not None]
+    human_correct  = sum(1 for r in reviewed if r["human_correct"]) / len(reviewed) if reviewed else None
+    reviewed_cit   = [r for r in results if r["citation_correct"] is not None]
+    human_cit_acc  = sum(1 for r in reviewed_cit if r["citation_correct"]) / len(reviewed_cit) if reviewed_cit else None
 
     return {
         "total_questions":   total,
         "questions_with_gt": len(has_gt),
-        "layer1_retrieval": {
-            f"hit_rate_source@{k}":  round(hit_rate,   3),
-            f"hit_rate_section@{k}": round(section_rate,3),
+
+        "layer1_citation_quality": {
+            f"section_hit_rate@{k}": round(section_hit_rate, 3),
             "MRR":                   round(mrr, 3),
             "n_evaluated":           len(has_gt),
+            "note": (
+                "Section Hit Rate = lower-bound proxy for Recall@k. "
+                "1 GT label per question; multiple relevant sections possible."
+            ),
         },
-        "layer2_generation": {
+
+        "layer2_accuracy": {
             "escalation_accuracy":   round(esc_accuracy, 3),
             "escalation_correct":    esc_correct,
             "escalation_total":      len(not_found_q),
             "confidence_match_rate": round(conf_match_rate, 3),
             "citation_coverage":     round(cit_coverage, 3),
-            "confidence_distribution": conf_dist,
+            "confidence_distribution": dict(Counter(r["confidence"] for r in results)),
+            "human_answer_correctness": round(human_correct, 3) if human_correct is not None else "pending manual review",
+            "human_citation_accuracy":  round(human_cit_acc, 3)  if human_cit_acc  is not None else "pending manual review",
+            "manual_reviewed":          len(reviewed),
         },
-        "manual_review_pending": sum(1 for r in results if r["human_correct"] is None),
     }
 
 
-# ── Main evaluation loop ──────────────────────────────────────────────────────
+# ── Main loop ─────────────────────────────────────────────────────────────────
 
 def run_evaluation(
-    sets:        list[str] = ("hand_crafted", "transcript"),
-    output_path: str | None = "evaluation/results.json",
-    summary_path:str | None = "evaluation/summary.json",
-    delay:       float = 1.0,
+    sets:         list[str] = ("hand_crafted", "transcript"),
+    output_path:  str | None = "evaluation/results.json",
+    summary_path: str | None = "evaluation/summary.json",
+    delay:        float = 1.0,
 ) -> dict:
 
     questions: list[dict] = []
     for name in sets:
         path = QUESTION_SETS.get(name)
         if not path or not path.exists():
-            print(f"[warn] Question set '{name}' not found at {path}, skipping.")
+            print(f"[warn] '{name}' not found at {path}, skipping.")
             continue
         with open(path, encoding="utf-8") as f:
             qs = json.load(f)
-        print(f"Loaded {len(qs):3d} questions from {name}")
+        print(f"Loaded {len(qs):3d} questions  ← {name}")
         questions.extend(qs)
 
     print(f"\nTotal: {len(questions)} questions | K={K}\n{'='*60}\n")
@@ -201,105 +203,93 @@ def run_evaluation(
         qid   = q["id"]
         query = q["query"]
         gt    = q.get("ground_truth_citation", {})
-        expected_conf = q.get("expected_confidence", "")
+        exp   = q.get("expected_confidence", "")
 
-        print(f"[{i:02d}/{len(questions)}] {qid} — {query[:70]}...")
+        print(f"[{i:02d}/{len(questions)}] {qid}  {query[:65]}...")
 
-        state  = run_query(query)
-        output = state.get("output", {})
-        chunks = state.get("chunks", [])        # raw retrieved chunk list
-
+        state      = run_query(query)
+        output     = state.get("output", {})
+        chunks     = state.get("chunks", [])
         confidence = output.get("confidence", "not_found")
         citations  = output.get("citations", [])
         answer     = output.get("answer", "")
 
-        # Layer 1 — retrieval metrics (skip for not_found expected)
         retrieval = (
             _retrieval_metrics(chunks, gt)
-            if gt.get("source") and expected_conf != "not_found"
-            else {f"source_hit@{K}": None, f"section_hit@{K}": None,
-                  "source_hit_rank": None, "section_hit_rank": None, "rr": None}
+            if gt.get("section") and exp != "not_found"
+            else {"section_rank": None, f"hit@{K}": None, "rr": None}
         )
 
         entry = {
-            "id":                   qid,
-            "source":               q.get("source", "hand_crafted"),
-            "category":             q.get("category", ""),
-            "query":                query,
-            # Generation output
-            "confidence":           confidence,
-            "answer":               answer,
-            "citations":            citations,
-            "chunks_retrieved":     len(chunks),
-            # Ground truth
-            "expected_confidence":  expected_conf,
-            "ground_truth_answer":  q.get("ground_truth_answer", ""),
+            "id":                    qid,
+            "source":                q.get("source", "hand_crafted"),
+            "category":              q.get("category", ""),
+            "query":                 query,
+            "confidence":            confidence,
+            "answer":                answer,
+            "citations":             citations,
+            "chunks_retrieved":      len(chunks),
+            "expected_confidence":   exp,
+            "ground_truth_answer":   q.get("ground_truth_answer", ""),
             "ground_truth_citation": gt,
-            # Retrieval metrics
-            "retrieval":            retrieval,
-            # Manual review (fill in after running)
-            "human_correct":        None,   # True / False — answer clinically correct?
-            "citation_correct":     None,   # True / False — citation supports answer?
-            "notes":                "",
+            "retrieval":             retrieval,
+            # ── Fill in manually after running ──
+            "human_correct":         None,   # True/False: answer clinically correct?
+            "citation_correct":      None,   # True/False: citation supports answer?
+            "notes":                 "",
         }
         results.append(entry)
 
-        # Console feedback
-        src_hit = retrieval.get(f"source_hit@{K}")
-        sec_hit = retrieval.get(f"section_hit@{K}")
-        print(
-            f"  conf={confidence:<10} expected={expected_conf:<10} "
-            f"chunks={len(chunks)}  "
-            f"src_hit={src_hit}  sec_hit={sec_hit}"
-        )
+        hit = retrieval.get(f"hit@{K}")
+        print(f"  conf={confidence:<10}  expected={exp:<10}  "
+              f"chunks={len(chunks)}  section_hit={hit}")
         time.sleep(delay)
 
-    # ── Aggregate ─────────────────────────────────────────────────────────────
     summary = _aggregate(results, K)
 
-    # Save raw results
     if output_path:
         out = Path(output_path)
         out.parent.mkdir(parents=True, exist_ok=True)
         with open(out, "w", encoding="utf-8") as f:
             json.dump(results, f, indent=2, ensure_ascii=False)
-        print(f"\nResults saved → {out}")
+        print(f"\nResults  → {out}")
 
-    # Save summary
     if summary_path:
         sp = Path(summary_path)
         sp.parent.mkdir(parents=True, exist_ok=True)
         with open(sp, "w", encoding="utf-8") as f:
             json.dump(summary, f, indent=2, ensure_ascii=False)
-        print(f"Summary saved → {sp}")
+        print(f"Summary  → {sp}")
 
     _print_summary(summary)
     return summary
 
 
-# ── Pretty-print summary ──────────────────────────────────────────────────────
+# ── Pretty print ──────────────────────────────────────────────────────────────
 
 def _print_summary(s: dict) -> None:
-    l1 = s["layer1_retrieval"]
-    l2 = s["layer2_generation"]
-    n  = l1["n_evaluated"]
+    l1 = s["layer1_citation_quality"]
+    l2 = s["layer2_accuracy"]
+    k  = K
 
     print(f"\n{'='*60}")
     print("EVALUATION SUMMARY")
     print(f"{'='*60}")
-    print(f"Total questions : {s['total_questions']}")
-    print(f"Questions w/ GT : {s['questions_with_gt']}")
+    print(f"Total questions     : {s['total_questions']}")
+    print(f"Questions with GT   : {s['questions_with_gt']}")
     print()
-    print("── Layer 1: Retrieval (source/section matching) ──────────")
-    print(f"  Hit Rate  (source@{K}) : {l1[f'hit_rate_source@{K}']:.1%}  ({n} questions)")
-    print(f"  Hit Rate (section@{K}) : {l1[f'hit_rate_section@{K}']:.1%}")
-    print(f"  MRR                  : {l1['MRR']:.3f}")
+    print("── Layer 1: Citation Quality (Retrieval) ─────────────────")
+    print(f"  Section Hit Rate @{k}  : {l1[f'section_hit_rate@{k}']:.1%}"
+          f"  ({l1['n_evaluated']} questions)")
+    print(f"  MRR                   : {l1['MRR']:.3f}")
+    print(f"  * {l1['note']}")
     print()
-    print("── Layer 2: Generation ───────────────────────────────────")
-    print(f"  Escalation accuracy  : {l2['escalation_accuracy']:.1%}"
-          f"  ({l2['escalation_correct']}/{l2['escalation_total']} not_found correctly refused)")
-    print(f"  Confidence match     : {l2['confidence_match_rate']:.1%}")
-    print(f"  Citation coverage    : {l2['citation_coverage']:.1%}")
+    print("── Layer 2: Accuracy (Generation) ───────────────────────")
+    print(f"  Escalation accuracy   : {l2['escalation_accuracy']:.1%}"
+          f"  ({l2['escalation_correct']}/{l2['escalation_total']} "
+          f"not_found correctly refused)")
+    print(f"  Confidence match      : {l2['confidence_match_rate']:.1%}")
+    print(f"  Citation coverage     : {l2['citation_coverage']:.1%}")
     print()
     print("  Confidence distribution:")
     for conf, cnt in sorted(l2["confidence_distribution"].items(),
@@ -307,32 +297,31 @@ def _print_summary(s: dict) -> None:
         bar = "█" * cnt
         print(f"    {conf:<12} {cnt:3d}  {bar}")
     print()
-    print(f"  Manual review pending: {s['manual_review_pending']} questions")
-    print(f"  (Open evaluation/results.json and fill in human_correct / citation_correct)")
+    print("  Manual review:")
+    print(f"    Answer correctness   : {l2['human_answer_correctness']}")
+    print(f"    Citation accuracy    : {l2['human_citation_accuracy']}")
+    print(f"    Reviewed             : {l2['manual_reviewed']} questions")
+    if l2["manual_reviewed"] == 0:
+        print()
+        print("  → Open evaluation/results.json and fill in:")
+        print("    'human_correct': true/false   (answer clinically correct?)")
+        print("    'citation_correct': true/false (citation supports answer?)")
     print(f"{'='*60}\n")
 
 
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="Evaluate the Immunisation Adviser RAG pipeline."
-    )
-    parser.add_argument(
-        "--sets", default="hand_crafted,transcript",
-        help="Comma-separated question sets to use (hand_crafted, transcript)"
-    )
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--sets",    default="hand_crafted,transcript")
     parser.add_argument("--output",  default="evaluation/results.json")
     parser.add_argument("--summary", default="evaluation/summary.json")
-    parser.add_argument(
-        "--delay", type=float, default=1.0,
-        help="Seconds between queries (avoid rate limits)"
-    )
+    parser.add_argument("--delay",   type=float, default=1.0)
     args = parser.parse_args()
 
     run_evaluation(
-        sets        = [s.strip() for s in args.sets.split(",")],
-        output_path = args.output,
-        summary_path= args.summary,
-        delay       = args.delay,
+        sets         = [s.strip() for s in args.sets.split(",")],
+        output_path  = args.output,
+        summary_path = args.summary,
+        delay        = args.delay,
     )
