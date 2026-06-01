@@ -328,5 +328,125 @@
       "section": "MMR — Administration route"
     },
     "expected_confidence": "high"
+  },
+  {
+    "id": "Q031",
+    "query": "What is the funded dosing schedule for the dengue vaccine Dengvaxia in New Zealand?",
+    "category": "vaccine_schedule",
+    "ground_truth_answer": "NOT_FOUND — Dengvaxia is not part of the New Zealand national immunisation schedule and is not funded by PHARMAC. The approved NZ guidance sources do not contain a dosing schedule for this vaccine.",
+    "ground_truth_citation": {
+      "source": "N/A",
+      "section": "N/A"
+    },
+    "expected_confidence": "not_found",
+    "notes": "Tests escalation behaviour. Dengue vaccine is not on NZ schedule. System must not hallucinate a schedule."
+  },
+  {
+    "id": "Q032",
+    "query": "Is yellow fever vaccination available as a funded vaccine through the PHARMAC immunisation schedule in New Zealand?",
+    "category": "funding_eligibility",
+    "ground_truth_answer": "NOT_FOUND — Yellow fever vaccine is a self-funded travel vaccine and is not part of the PHARMAC-funded NZ immunisation schedule. The approved guidance sources do not contain yellow fever funding information.",
+    "ground_truth_citation": {
+      "source": "N/A",
+      "section": "N/A"
+    },
+    "expected_confidence": "not_found",
+    "notes": "Tests escalation. Travel vaccines outside NZ schedule are not covered by approved sources."
+  },
+  {
+    "id": "Q033",
+    "query": "What vaccination schedule is recommended for a patient who has recently completed CAR-T cell therapy?",
+    "category": "special_population",
+    "ground_truth_answer": "NOT_FOUND — The approved NZ immunisation guidance does not contain a specific vaccination schedule for patients post-CAR-T cell therapy. This is a highly specialised scenario requiring specialist advice.",
+    "ground_truth_citation": {
+      "source": "N/A",
+      "section": "N/A"
+    },
+    "expected_confidence": "not_found",
+    "notes": "CAR-T cell therapy is a newer oncology treatment. Tests system behaviour for emerging clinical scenarios not yet in the handbook."
+  },
+  {
+    "id": "Q034",
+    "query": "Can a patient currently taking tofacitinib (a JAK inhibitor) for rheumatoid arthritis receive the live zoster vaccine Zostavax?",
+    "category": "contraindication",
+    "ground_truth_answer": "NOT_FOUND — The approved NZ guidance does not explicitly address tofacitinib specifically. While general guidance on immunosuppressants and live vaccines exists, a specific statement about tofacitinib and Zostavax is not clearly present. Escalate to specialist.",
+    "ground_truth_citation": {
+      "source": "N/A",
+      "section": "N/A"
+    },
+    "expected_confidence": "not_found",
+    "notes": "Tests specificity limit. General immunosuppressant guidance exists but tofacitinib is not named. System must not extrapolate beyond what is written."
+  },
+  {
+    "id": "Q035",
+    "query": "What are the funded indications for the malaria vaccine RTS,S in New Zealand?",
+    "category": "funding_eligibility",
+    "ground_truth_answer": "NOT_FOUND — The RTS,S malaria vaccine is not part of the New Zealand immunisation schedule and is not funded by PHARMAC. This vaccine is not covered in the approved NZ guidance sources.",
+    "ground_truth_citation": {
+      "source": "N/A",
+      "section": "N/A"
+    },
+    "expected_confidence": "not_found",
+    "notes": "Malaria vaccine is not on NZ schedule. Tests that system does not hallucinate funding criteria for unavailable vaccines."
+  },
+  {
+    "id": "Q036",
+    "query": "A 10-week-old infant had a febrile seizure 20 hours after their 6-week immunisations. Is it safe to proceed with the 3-month vaccines on schedule?",
+    "category": "adverse_event_management",
+    "ground_truth_answer": "A febrile seizure following immunisation is a known rare adverse event. General guidance supports proceeding with the schedule if the seizure was febrile and self-resolving, but specialist or general practitioner review is recommended before proceeding. Handbook guidance on seizure history and vaccine precautions applies.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Precautions and contraindications — neurological conditions"
+    },
+    "expected_confidence": "low",
+    "notes": "Complex clinical scenario. Handbook has relevant sections but specific post-seizure timing guidance may be incomplete. Tests low-confidence warning behaviour."
+  },
+  {
+    "id": "Q037",
+    "query": "Is it safe to give MMR vaccine to a 2-year-old whose parent is currently receiving active chemotherapy at home?",
+    "category": "special_population",
+    "ground_truth_answer": "The handbook addresses immunocompromised household contacts but specific guidance on children living with a parent on active chemotherapy may require careful interpretation. Live vaccines like MMR in household contacts of immunocompromised individuals are generally discussed in the handbook, but specific recommendations should be reviewed with the treating oncology team.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Immunocompromised individuals — household contacts"
+    },
+    "expected_confidence": "low",
+    "notes": "Indirect immunocompromised scenario. Tests that system flags uncertainty and recommends escalation."
+  },
+  {
+    "id": "Q038",
+    "query": "Influenza vaccines were accidentally left in the freezer overnight and appear visually normal after thawing. Can they still be administered?",
+    "category": "storage_handling",
+    "ground_truth_answer": "Influenza vaccines must not be frozen. Freezing can cause irreversible damage to the antigen even if the vaccine appears visually normal after thawing. Vaccines that have been frozen must be discarded and must not be administered.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Influenza — Storage and handling / Cold chain management"
+    },
+    "expected_confidence": "high",
+    "notes": "Common real-world cold chain incident. Tests storage knowledge for the most common vaccine."
+  },
+  {
+    "id": "Q039",
+    "query": "How long can varicella vaccine remain at room temperature after removal from the freezer before it must be discarded?",
+    "category": "storage_handling",
+    "ground_truth_answer": "Once removed from the freezer, varicella vaccine must be used promptly. It should be reconstituted and used within 30 minutes of removal from the freezer. Unused reconstituted vaccine must be discarded.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Varicella — Storage and handling"
+    },
+    "expected_confidence": "high",
+    "notes": "Specific time-limit question for varicella (freeze-dried vaccine with strict reconstitution window)."
+  },
+  {
+    "id": "Q040",
+    "query": "A patient developed a firm lump at the hepatitis B injection site that has persisted for 3 months. What is the recommended management?",
+    "category": "adverse_event_management",
+    "ground_truth_answer": "A persistent nodule at the injection site may indicate a granuloma, which can occur following intramuscular injection, sometimes related to the aluminium adjuvant. The handbook advises reporting persistent injection site reactions as adverse events. Medical review is recommended. Future doses should be given at a different site.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Hepatitis B — Adverse events / Injection site reactions"
+    },
+    "expected_confidence": "medium",
+    "notes": "Tests adverse event knowledge for hepatitis B. Persistent granuloma is uncommon but clinically important."
   }
 ]
