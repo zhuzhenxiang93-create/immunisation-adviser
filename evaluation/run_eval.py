@@ -48,7 +48,7 @@ QUESTION_SETS = {
     "transcript":   Path(__file__).parent / "transcript_question_set.json",
 }
 
-K = 8  # matches RETRIEVAL_TOP_K
+K = 10  # matches RETRIEVAL_TOP_K
 
 # ── Section matching ──────────────────────────────────────────────────────────
 

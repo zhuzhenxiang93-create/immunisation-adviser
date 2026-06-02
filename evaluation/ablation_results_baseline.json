@@ -1,0 +1,1117 @@
+{
+  "metric": "section_hit@8",
+  "n_evaluated": 35,
+  "summary": {
+    "bm25_only": {
+      "section_hit_count": 27,
+      "n": 35,
+      "section_hit_rate@8": 0.771,
+      "MRR": 0.564
+    },
+    "vector_only": {
+      "section_hit_count": 31,
+      "n": 35,
+      "section_hit_rate@8": 0.886,
+      "MRR": 0.655
+    },
+    "hybrid_rrf": {
+      "section_hit_count": 28,
+      "n": 35,
+      "section_hit_rate@8": 0.8,
+      "MRR": 0.657
+    },
+    "hybrid_rrf_section_rerank": {
+      "section_hit_count": 30,
+      "n": 35,
+      "section_hit_rate@8": 0.857,
+      "MRR": 0.666
+    }
+  },
+  "results": [
+    {
+      "id": "Q001",
+      "category": "vaccine_schedule",
+      "query": "When should the MMR vaccine be given to a 12-month-old child in New Zealand?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Chapter on MMR / Childhood Schedule"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 5,
+          "hit@8": true,
+          "rr": 0.2
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q002",
+      "category": "contraindication",
+      "query": "Is the influenza vaccine safe for a patient with egg allergy?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Influenza chapter — Contraindications and precautions"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q003",
+      "category": "catch_up_schedule",
+      "query": "What is the catch-up schedule for a 3-year-old who has never been vaccinated?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Catch-up immunisation"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q004",
+      "category": "storage_handling",
+      "query": "How should varicella vaccine be stored?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Varicella — Storage and handling"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q005",
+      "category": "contraindication",
+      "query": "What are the contraindications for the BCG vaccine?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "BCG — Contraindications and precautions"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "vector_only": {
+          "section_rank": 2,
+          "hit@8": true,
+          "rr": 0.5
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q006",
+      "category": "contraindication",
+      "query": "Can a pregnant woman receive the Tdap vaccine?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Tdap — Pregnancy"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 2,
+          "hit@8": true,
+          "rr": 0.5
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q007",
+      "category": "vaccine_schedule",
+      "query": "What is the HPV vaccination schedule for a 12-year-old in New Zealand?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "HPV — Dosing schedule"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q008",
+      "category": "co_administration",
+      "query": "Can MMR and varicella vaccines be given on the same day?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "General principles — Live vaccines and intervals"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "vector_only": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "hybrid_rrf": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        }
+      }
+    },
+    {
+      "id": "Q009",
+      "category": "special_population",
+      "query": "Should premature infants receive vaccines on the same schedule as term infants?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Preterm infants — Immunisation"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q010",
+      "category": "vaccine_schedule",
+      "query": "What is the minimum interval between doses of the hepatitis B vaccine series?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Hepatitis B — Dosing intervals"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 8,
+          "hit@8": true,
+          "rr": 0.125
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q011",
+      "category": "special_population",
+      "query": "How many doses of COVID-19 vaccine should an immunocompromised patient receive?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "COVID-19 — Immunocompromised individuals"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q012",
+      "category": "side_effects",
+      "query": "What are the common side effects of the meningococcal B (Bexsero) vaccine?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Meningococcal B — Adverse events"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 7,
+          "hit@8": true,
+          "rr": 0.14285714285714285
+        },
+        "vector_only": {
+          "section_rank": 8,
+          "hit@8": true,
+          "rr": 0.125
+        },
+        "hybrid_rrf": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        }
+      }
+    },
+    {
+      "id": "Q013",
+      "category": "vaccine_schedule",
+      "query": "What is the minimum age for the first rotavirus vaccine dose?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Rotavirus — Age restrictions"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q014",
+      "category": "adverse_event_management",
+      "query": "What should be done if a patient has an anaphylactic reaction after vaccination?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Anaphylaxis management"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 5,
+          "hit@8": true,
+          "rr": 0.2
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 3,
+          "hit@8": true,
+          "rr": 0.3333333333333333
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 3,
+          "hit@8": true,
+          "rr": 0.3333333333333333
+        }
+      }
+    },
+    {
+      "id": "Q015",
+      "category": "funding_eligibility",
+      "query": "Is the pneumococcal vaccine funded for adults aged 65 and over in New Zealand?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Pneumococcal — Funded eligibility"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 3,
+          "hit@8": true,
+          "rr": 0.3333333333333333
+        },
+        "vector_only": {
+          "section_rank": 3,
+          "hit@8": true,
+          "rr": 0.3333333333333333
+        },
+        "hybrid_rrf": {
+          "section_rank": 2,
+          "hit@8": true,
+          "rr": 0.5
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 2,
+          "hit@8": true,
+          "rr": 0.5
+        }
+      }
+    },
+    {
+      "id": "Q016",
+      "category": "occupational_health",
+      "query": "Should healthcare workers be vaccinated against varicella if they have no history of chickenpox?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Varicella — Healthcare workers"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q017",
+      "category": "special_population",
+      "query": "Can a breastfeeding mother receive the influenza vaccine?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Influenza — Breastfeeding"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q018",
+      "category": "vaccine_schedule",
+      "query": "What is the recommended schedule for the Shingrix (recombinant zoster) vaccine?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Herpes zoster (shingles) — Shingrix schedule"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "vector_only": {
+          "section_rank": 2,
+          "hit@8": true,
+          "rr": 0.5
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q019",
+      "category": "contraindication",
+      "query": "Can vaccines be given to a child who has a mild cold without fever?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "General principles — Vaccination with minor illness"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "vector_only": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "hybrid_rrf": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        }
+      }
+    },
+    {
+      "id": "Q020",
+      "category": "administration_technique",
+      "query": "What is the preferred injection site for vaccines in infants under 12 months?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Vaccine administration — Injection site selection"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q021",
+      "category": "catch_up_schedule",
+      "query": "What is the catch-up schedule for a 7-month-old infant who missed the Hib vaccine?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Hib — Catch-up schedule"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q022",
+      "category": "special_population",
+      "query": "Are live attenuated vaccines safe to give to HIV-positive children?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Immunocompromised — HIV-positive individuals"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 3,
+          "hit@8": true,
+          "rr": 0.3333333333333333
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q023",
+      "category": "travel_vaccine",
+      "query": "What vaccines are recommended for travel to Southeast Asia?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Travel immunisation"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q024",
+      "category": "post_vaccination_care",
+      "query": "What is the recommended paracetamol dose after vaccination for a 3-month-old infant?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Post-vaccination care — Fever management"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "vector_only": {
+          "section_rank": 7,
+          "hit@8": true,
+          "rr": 0.14285714285714285
+        },
+        "hybrid_rrf": {
+          "section_rank": 8,
+          "hit@8": true,
+          "rr": 0.125
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 8,
+          "hit@8": true,
+          "rr": 0.125
+        }
+      }
+    },
+    {
+      "id": "Q025",
+      "category": "contraindication",
+      "query": "Can an immunocompromised patient receive the oral polio vaccine?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Polio — Immunocompromised patients"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q026",
+      "category": "special_population",
+      "query": "What is the recommended RSV prophylaxis for a premature infant born at 28 weeks gestation?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "RSV prophylaxis — Preterm infants"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 4,
+          "hit@8": true,
+          "rr": 0.25
+        },
+        "vector_only": {
+          "section_rank": 2,
+          "hit@8": true,
+          "rr": 0.5
+        },
+        "hybrid_rrf": {
+          "section_rank": 2,
+          "hit@8": true,
+          "rr": 0.5
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 2,
+          "hit@8": true,
+          "rr": 0.5
+        }
+      }
+    },
+    {
+      "id": "Q027",
+      "category": "co_administration",
+      "query": "What is the minimum interval required between two doses of different live vaccines?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "General principles — Live vaccine intervals"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "vector_only": {
+          "section_rank": 5,
+          "hit@8": true,
+          "rr": 0.2
+        },
+        "hybrid_rrf": {
+          "section_rank": 6,
+          "hit@8": true,
+          "rr": 0.16666666666666666
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 6,
+          "hit@8": true,
+          "rr": 0.16666666666666666
+        }
+      }
+    },
+    {
+      "id": "Q028",
+      "category": "documentation",
+      "query": "What documentation must be completed after administering a vaccine in New Zealand?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Vaccine administration — Documentation requirements"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 2,
+          "hit@8": true,
+          "rr": 0.5
+        },
+        "vector_only": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 6,
+          "hit@8": true,
+          "rr": 0.16666666666666666
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 6,
+          "hit@8": true,
+          "rr": 0.16666666666666666
+        }
+      }
+    },
+    {
+      "id": "Q029",
+      "category": "special_population",
+      "query": "Is the hepatitis A vaccine recommended for patients with chronic liver disease?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Hepatitis A — High-risk groups"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 6,
+          "hit@8": true,
+          "rr": 0.16666666666666666
+        },
+        "vector_only": {
+          "section_rank": 7,
+          "hit@8": true,
+          "rr": 0.14285714285714285
+        },
+        "hybrid_rrf": {
+          "section_rank": 5,
+          "hit@8": true,
+          "rr": 0.2
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 5,
+          "hit@8": true,
+          "rr": 0.2
+        }
+      }
+    },
+    {
+      "id": "Q030",
+      "category": "administration_error",
+      "query": "A nurse accidentally gave a subcutaneous injection instead of intramuscular for MMR. Is the dose valid?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "MMR — Administration route"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q036",
+      "category": "adverse_event_management",
+      "query": "A 10-week-old infant had a febrile seizure 20 hours after their 6-week immunisations. Is it safe to proceed with the 3-month vaccines on schedule?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Precautions and contraindications — neurological conditions"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "vector_only": {
+          "section_rank": 8,
+          "hit@8": true,
+          "rr": 0.125
+        },
+        "hybrid_rrf": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        }
+      }
+    },
+    {
+      "id": "Q037",
+      "category": "special_population",
+      "query": "Is it safe to give MMR vaccine to a 2-year-old whose parent is currently receiving active chemotherapy at home?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Immunocompromised individuals — household contacts"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "vector_only": {
+          "section_rank": 7,
+          "hit@8": true,
+          "rr": 0.14285714285714285
+        },
+        "hybrid_rrf": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 6,
+          "hit@8": true,
+          "rr": 0.16666666666666666
+        }
+      }
+    },
+    {
+      "id": "Q038",
+      "category": "storage_handling",
+      "query": "Influenza vaccines were accidentally left in the freezer overnight and appear visually normal after thawing. Can they still be administered?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Influenza — Storage and handling / Cold chain management"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "vector_only": {
+          "section_rank": 5,
+          "hit@8": true,
+          "rr": 0.2
+        },
+        "hybrid_rrf": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 6,
+          "hit@8": true,
+          "rr": 0.16666666666666666
+        }
+      }
+    },
+    {
+      "id": "Q039",
+      "category": "storage_handling",
+      "query": "How long can varicella vaccine remain at room temperature after removal from the freezer before it must be discarded?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Varicella — Storage and handling"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "vector_only": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": 1,
+          "hit@8": true,
+          "rr": 1.0
+        }
+      }
+    },
+    {
+      "id": "Q040",
+      "category": "adverse_event_management",
+      "query": "A patient developed a firm lump at the hepatitis B injection site that has persisted for 3 months. What is the recommended management?",
+      "ground_truth_citation": {
+        "source": "NZ Immunisation Handbook",
+        "section": "Hepatitis B — Adverse events / Injection site reactions"
+      },
+      "methods": {
+        "bm25_only": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "vector_only": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "hybrid_rrf": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        },
+        "hybrid_rrf_section_rerank": {
+          "section_rank": null,
+          "hit@8": false,
+          "rr": 0.0
+        }
+      }
+    }
+  ]
+}

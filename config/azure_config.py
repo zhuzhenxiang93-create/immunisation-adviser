@@ -48,7 +48,7 @@ AZURE_SEARCH_INDEX_NAME = os.getenv("AZURE_SEARCH_INDEX_NAME", "immunisation-gui
 LOCAL_CHUNKS_FILE = os.getenv("LOCAL_CHUNKS_FILE", "data/chunks_with_embeddings.json")
 
 # ── Retrieval settings ────────────────────────────────────────────────────────
-RETRIEVAL_TOP_K = 8
+RETRIEVAL_TOP_K = 10
 RETRIEVAL_SIMILARITY_THRESHOLD = 0.75
 
 

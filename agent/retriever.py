@@ -132,14 +132,16 @@ def _load_chunks() -> list[dict]:
 def _rrf_fusion(
     bm25_ranking: list[int],
     faiss_ranking: list[int],
-    k: int = 60,
+    k: int = 20,
+    faiss_weight: float = 0.7,
+    bm25_weight: float = 0.3,
 ) -> dict[int, float]:
-    """Reciprocal Rank Fusion. Returns {chunk_idx: rrf_score}, higher = better."""
+    """Weighted Reciprocal Rank Fusion. FAISS weighted higher as it outperforms BM25 on this domain."""
     scores: dict[int, float] = {}
     for rank, idx in enumerate(bm25_ranking):
-        scores[idx] = scores.get(idx, 0.0) + 1.0 / (k + rank + 1)
+        scores[idx] = scores.get(idx, 0.0) + bm25_weight / (k + rank + 1)
     for rank, idx in enumerate(faiss_ranking):
-        scores[idx] = scores.get(idx, 0.0) + 1.0 / (k + rank + 1)
+        scores[idx] = scores.get(idx, 0.0) + faiss_weight / (k + rank + 1)
     return scores
 
 
@@ -176,7 +178,9 @@ def _retrieve_local(query: str, top_k: int) -> list[dict[str, Any]]:
     # ── RRF fusion ────────────────────────────────────────────────────────────
     rrf_scores = _rrf_fusion(bm25_ranking, faiss_ranking)
     top_indices = sorted(
-        rrf_scores, key=lambda i: rrf_scores[i], reverse=True
+        rrf_scores,
+        key=lambda i: rrf_scores[i],
+        reverse=True,
     )[:top_k]
 
     # ── Build result list ─────────────────────────────────────────────────────
