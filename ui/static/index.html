@@ -194,14 +194,16 @@
       font-size: .83rem;
       background: #fafafa;
     }
-    .citation-card .c-source { font-weight: 700; color: var(--imac-blue); }
+    .citation-card .c-source { font-weight: 2000; color: var(--imac-blue); }
     .citation-card .c-section { color: #555; margin: 2px 0; }
     .citation-card .c-excerpt {
-      color: #555;
+      color: #333;
       border-left: 3px solid #aed6f1;
       padding-left: 10px;
       margin-top: 6px;
+      margin-bottom: 4px;
       font-style: italic;
+      font-size: .95rem;
     }
     .citation-card .c-url { font-size: .76rem; color: #adb5bd; }
 
@@ -673,6 +675,7 @@ async function submitQuery() {
   } catch (e) {
     showError('Cannot reach the API server. Is it running on port 8000?');
   } finally {
+    clearProgressTimer();
     btn.disabled = false;
     btn.innerHTML = '<i class="bi bi-send-fill me-1"></i>Ask';
   }
@@ -729,8 +732,8 @@ function renderResponse(data) {
     <div class="citation-card">
       <div class="c-source"><i class="bi bi-book me-1"></i>${esc(c.source)}</div>
       <div class="c-section"><i class="bi bi-bookmark me-1 text-muted"></i>${esc(c.section)}</div>
-      ${c.url ? `<div class="c-url"><a href="${esc(c.url)}" target="_blank"><i class="bi bi-link-45deg"></i>${esc(c.url)}</a></div>` : ''}
       ${c.excerpt ? `<div class="c-excerpt">${esc(c.excerpt)}</div>` : ''}
+      ${c.url ? `<div class="c-url"><a href="${esc(c.url)}" target="_blank"><i class="bi bi-link-45deg"></i>${esc(c.url)}</a></div>` : ''}
     </div>`).join('');
 
   const audit = data.audit || {};
@@ -798,12 +801,50 @@ function rerunQuery(q) {
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
+let _progressTimer = null;
+
 function showSpinner() {
-  document.getElementById('response-area').innerHTML = `
-    <div class="spinner-wrap">
-      <div class="spinner-border text-primary" style="width:2.5rem;height:2.5rem"></div>
-      <div class="mt-3">Searching knowledge base…</div>
+  const steps = [
+    { delay: 0,    icon: 'bi-search',        text: 'Searching guidance…' },
+    { delay: 1500, icon: 'bi-file-earmark-text', text: 'Analysing relevant sections…' },
+    { delay: 3500, icon: 'bi-pencil-square',  text: 'Generating cited answer…' },
+    { delay: 6000, icon: 'bi-hourglass-split', text: 'Almost there…' },
+  ];
+
+  const area = document.getElementById('response-area');
+  area.innerHTML = `
+    <div class="spinner-wrap" id="progress-wrap">
+      <div class="spinner-border text-primary mb-3" style="width:2.5rem;height:2.5rem"></div>
+      <div id="progress-text" style="font-size:.95rem;color:#555">
+        <i class="bi bi-search me-2"></i>Searching guidance…
+      </div>
+      <div id="progress-bar-wrap" style="width:220px;margin:12px auto 0">
+        <div style="height:3px;background:#e9ecef;border-radius:2px">
+          <div id="progress-bar" style="height:3px;background:var(--imac-blue);border-radius:2px;width:0;transition:width 0.6s ease"></div>
+        </div>
+      </div>
     </div>`;
+
+  if (_progressTimer) clearInterval(_progressTimer);
+
+  const pct = [15, 45, 75, 90];
+  steps.forEach((step, i) => {
+    const t = setTimeout(() => {
+      const el = document.getElementById('progress-text');
+      const bar = document.getElementById('progress-bar');
+      if (el) el.innerHTML = `<i class="bi ${step.icon} me-2"></i>${step.text}`;
+      if (bar) bar.style.width = pct[i] + '%';
+    }, step.delay);
+    if (!_progressTimer) _progressTimer = [];
+    _progressTimer.push(t);
+  });
+}
+
+function clearProgressTimer() {
+  if (Array.isArray(_progressTimer)) _progressTimer.forEach(clearTimeout);
+  _progressTimer = null;
+  const bar = document.getElementById('progress-bar');
+  if (bar) bar.style.width = '100%';
 }
 
 function showError(msg) {

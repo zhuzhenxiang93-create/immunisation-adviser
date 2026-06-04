@@ -85,6 +85,4 @@ def get_embedding_model() -> str:
     """Return the model name for embeddings."""
     if LLM_PROVIDER == "azure":
         return AZURE_OPENAI_DEPLOYMENT_EMBEDDING
-    elif LLM_PROVIDER == "qwen":
-        return QWEN_MODEL_EMBEDDING
     return OPENAI_MODEL_EMBEDDING

@@ -1,0 +1,25 @@
+{
+  "total_questions": 90,
+  "questions_with_gt": 55,
+  "layer1_citation_quality": {
+    "recall@10": 0.909,
+    "MRR": 0.68,
+    "n_evaluated": 55,
+    "note": "Content-based Recall@10: hit if any top-10 chunk contains ≥40% of ground-truth answer keywords. Consistent with run_retrieval_ablation.py (55 answerable questions)."
+  },
+  "layer2_accuracy": {
+    "escalation_accuracy": 0.8,
+    "escalation_correct": 4,
+    "escalation_total": 5,
+    "confidence_match_rate": 0.578,
+    "citation_coverage": 1.0,
+    "confidence_distribution": {
+      "high": 51,
+      "not_found": 24,
+      "medium": 15
+    },
+    "human_answer_correctness": "pending manual review",
+    "human_citation_accuracy": "pending manual review",
+    "manual_reviewed": 0
+  }
+}

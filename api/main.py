@@ -166,7 +166,7 @@ class AuthResponse(BaseModel):
 
 class QueryRequest(BaseModel):
     query: str = Field(..., min_length=3, max_length=1000)
-    top_k: int = Field(default=8, ge=1, le=20)
+    top_k: int = Field(default=10, ge=1, le=20)
 
 
 class CitationModel(BaseModel):
@@ -429,7 +429,7 @@ async def query_stream(req: QueryRequest, current_user: dict = Depends(get_curre
                 ],
                 stream=True,
                 temperature=0,
-                max_tokens=1500,
+                max_tokens=600,
             )
 
             # Accumulate full response so we can redact PII before streaming

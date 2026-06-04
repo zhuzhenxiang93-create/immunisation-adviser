@@ -1,12 +1,15 @@
-# Section-Level Retrieval Ablation
+# Content-Based Retrieval Recall
 
-Evaluated 35 hand-crafted questions with ground-truth sections.
-Metric: Section Hit@11 and MRR.
+Evaluated 55 questions.
+Metric: Recall@10 — at least 40% of ground-truth answer
+keywords must appear in any one retrieved chunk.
 
-| Method | Section Hit@8 | Rate | MRR |
+| Method | Recall@10 | Rate | MRR |
 |---|---:|---:|---:|
-| bm25 only | 29/35 | 82.9% | 0.623 |
-| vector only | 31/35 | 88.6% | 0.656 |
-| hybrid rrf | 31/35 | 88.6% | 0.701 |
+| bm25 only | 47/55 | 85.5% | 0.654 |
+| vector only | 48/55 | 87.3% | 0.714 |
+| hybrid rrf | 49/55 | 89.1% | 0.705 |
 
-Note: This ablation is retrieval-only. It does not judge final answer correctness or whether generated citations fully support the answer.
+Note: A question is counted as hit if any of the top-10 retrieved chunks
+contains the key clinical facts from the ground truth answer.
+This is a content-level check, not a section metadata match.

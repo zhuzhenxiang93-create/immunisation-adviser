@@ -1,0 +1,2798 @@
+[
+  {
+    "id": "Q001",
+    "source": "hand_crafted",
+    "category": "vaccine_schedule",
+    "query": "When should the MMR vaccine be given to a 12-month-old child in New Zealand?",
+    "confidence": "high",
+    "answer": "The first dose of the MMR vaccine is scheduled and recommended at age 12 months. If given earlier, from age 11 months, it is still considered MMR1, and a second dose should be given at age 15 months. For optimal early protection, the second dose can be administered from age 12 months, at least four weeks after the first dose.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "12.5. Recommended immunisation schedule > 12.5.1. Usual childhood schedule > MMR vaccination when aged under 12 months",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/12-measles",
+        "excerpt": "The first dose of MMR is scheduled and recommended at age 12 months... ideally given at age 15 months."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "The MMR vaccine is given at 12 months and again at 15 months (combined MMRV) in the NZ immunisation schedule.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Chapter on MMR / Childhood Schedule"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q002",
+    "source": "hand_crafted",
+    "category": "contraindication",
+    "query": "Is the influenza vaccine safe for a patient with egg allergy?",
+    "confidence": "high",
+    "answer": "Yes, the influenza vaccine can be safely administered to individuals with a history of egg allergy, including anaphylaxis. Recent studies indicate that influenza vaccines containing less than 1 µg of ovalbumin do not trigger anaphylaxis in sensitive individuals.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "11.6. Contraindications and precautions > 11.6.3. Egg allergy",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/11-influenza",
+        "excerpt": "Influenza vaccine can be safely administered to people with a history of egg allergy, including anaphylaxis, at general practices, pharmacies or at the workplace."
+      },
+      {
+        "source": "IMAC Vaccines & Diseases (immune.org.nz)",
+        "section": "Influenza vaccine > Other formulations and brands > Other considerations",
+        "url": "https://immune.org.nz/vaccine/influenza-vaccine",
+        "excerpt": "Influvac Tetra, Fluad and Fluzone are egg-based vaccines, but can be administered to people with a history of egg allergy or egg anaphylaxis."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Most influenza vaccines contain trace egg protein; guidelines specify precautions for patients with severe egg allergy (anaphylaxis). Consult the relevant handbook section.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Influenza chapter — Contraindications and precautions"
+    },
+    "retrieval": {
+      "section_rank": 6,
+      "hit@10": true,
+      "rr": 0.16666666666666666
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q003",
+    "source": "hand_crafted",
+    "category": "catch_up_schedule",
+    "query": "What is the catch-up schedule for a 3-year-old who has never been vaccinated?",
+    "confidence": "high",
+    "answer": "For a 3-year-old who has never been vaccinated, the catch-up schedule should be developed by first determining the antigens required for their current age and then administering the necessary vaccines according to the New Zealand Schedule. Most vaccines can be given at the same visit, and the catch-up schedule can be shortened to four-weekly intervals to ensure the required number of doses are administered. It is important not to repeat any prior doses, regardless of how long ago they were given, and to assume that the child has not received any vaccines if their immunisation status is uncertain. MMR should be prioritized at the first visit if applicable.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "2.1.6. Catch-up programmes for unimmunised or partially immunised children",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/2-processes-for-safe-immunisation",
+        "excerpt": "When children have missed vaccine doses, it is important to bring them up to date as quickly as possible. Where more than one vaccine is overdue, it is preferable to give as many as possible at the first visit. For children aged 12 months and older, MMR is the priority."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "A2.2.1. Principles of catch-up for infants and children aged under 10 years",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/appendix-2-planning-immunisation-catch-ups",
+        "excerpt": "If the immunisation status of a child is uncertain or unknown, plan the catch-up schedule assuming the vaccines have not been given."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "A2.2.1. Principles of catch-up for infants and children aged under 10 years",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/appendix-2-planning-immunisation-catch-ups",
+        "excerpt": "There is considerable flexibility when planning catch-up schedules. To offer the best protection in the shortest time possible, most vaccines can be given at the same visit, and the catch-up schedule shortened to four-weekly intervals to ensure the required number of doses are administered."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Catch-up schedules are defined in the NZ Immunisation Handbook. For a completely unvaccinated 3-year-old, multiple vaccines may be required across several visits.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Catch-up immunisation"
+    },
+    "retrieval": {
+      "section_rank": 2,
+      "hit@10": true,
+      "rr": 0.5
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q004",
+    "source": "hand_crafted",
+    "category": "storage_handling",
+    "query": "How should varicella vaccine be stored?",
+    "confidence": "high",
+    "answer": "Varicella vaccine (Varilrix) should be stored in the refrigerator at +2°C to +8°C. The diluent may be stored at room temperature (up to 25°C). Once reconstituted, the vaccine should be used immediately if possible and discarded if not used within 90 minutes at room temperature. It should not be frozen.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "24.4.3. Transport, storage and handling",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/24-varicella-chickenpox",
+        "excerpt": "The vaccine should be stored in the refrigerator at +2°C to +8°C, although the diluent may be stored at room temperature (to a maximum of 25°C). Reconstituted vaccine should be used immediately, if possible, and discarded if reconstituted vaccine is not used within 90 minutes (1½ hours) at room temperature."
+      }
+    ],
+    "chunks_retrieved": 8,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Varicella vaccine must be stored frozen at -15°C to -50°C and protected from light. Once thawed, it must not be refrozen.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Varicella — Storage and handling"
+    },
+    "retrieval": {
+      "section_rank": 2,
+      "hit@10": true,
+      "rr": 0.5
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q005",
+    "source": "hand_crafted",
+    "category": "contraindication",
+    "query": "What are the contraindications for the BCG vaccine?",
+    "confidence": "high",
+    "answer": "The BCG vaccine should not be given to individuals who are known to be hypersensitive to any component of the vaccine, receiving immunosuppressive treatment (including corticosteroids), suffering from malignant conditions (e.g., lymphoma, leukaemia), or in whom immunocompromise is known or suspected (e.g., primary immune deficiencies). It should also be avoided in individuals infected with HIV, including neonates where the mother's HIV status is unknown. Additionally, BCG vaccination should be delayed for infants born before 34 weeks' gestation until they reach 34 weeks' post-conceptual age.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "23.6. Contraindications and precautions > 23.6.1. Contraindications",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/23-tuberculosis",
+        "excerpt": "BCG vaccine should not be given to individuals: known to be hypersensitive to any component of the vaccine; receiving corticosteroids or other immunosuppressive treatment; suffering from malignant conditions such as lymphoma, leukaemia, Hodgkin’s disease or other tumours of the reticulo-endothelial system; in whom immunocompromise is known or suspected; known to be infected with HIV."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "23.6. Contraindications and precautions > 23.6.2. Precautions",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/23-tuberculosis",
+        "excerpt": "Infants born before 34 weeks’ gestation should have their BCG vaccination delayed until 34 weeks’ post-conceptual age."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "BCG is contraindicated in immunocompromised individuals, HIV-positive patients (unless on stable ART with adequate CD4 count per guidelines), and those with generalised septic skin conditions.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "BCG — Contraindications and precautions"
+    },
+    "retrieval": {
+      "section_rank": 3,
+      "hit@10": true,
+      "rr": 0.3333333333333333
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q006",
+    "source": "hand_crafted",
+    "category": "contraindication",
+    "query": "Can a pregnant woman receive the Tdap vaccine?",
+    "confidence": "high",
+    "answer": "Yes, pregnant women should receive a dose of Tdap in every pregnancy to provide pertussis protection to the fetus. It is recommended to be given from 16 weeks' gestation, preferably in the second trimester, and is funded when given any time in the second or third trimester.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "6.5.4. Pregnancy and breastfeeding",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/6-diphtheria",
+        "excerpt": "Pregnant women should receive a dose of Tdap in every pregnancy so that antibodies can pass to the fetus to provide pertussis protection from birth (funded when given any time in second or third trimester). It is recommended to be given from 16 weeks’ gestation of every pregnancy, preferably in the second trimester."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "22.5.4. Pregnancy and breastfeeding",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/22-tetanus",
+        "excerpt": "Pregnant women should receive a dose of Tdap in every pregnancy so that antibodies can pass to the fetus to provide pertussis protection from birth (funded when given any time in second or third trimester). It is recommended to be given from 16 weeks’ gestation of every pregnancy, preferably in the second trimester."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "16.5.2. Pregnancy and breastfeeding",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/16-pertussis-whooping-cough",
+        "excerpt": "Pregnant women should receive a dose of Tdap in every pregnancy so that antibodies can pass to the fetus to provide protection from birth (funded when given any time in second or third trimester). It is recommended to be given from 16 weeks’ gestation of every pregnancy, preferably in the second trimester."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Tdap is recommended during each pregnancy (ideally 16–32 weeks) to protect the newborn via maternal antibody transfer.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Tdap — Pregnancy"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q007",
+    "source": "hand_crafted",
+    "category": "vaccine_schedule",
+    "query": "What is the HPV vaccination schedule for a 12-year-old in New Zealand?",
+    "confidence": "high",
+    "answer": "For a 12-year-old in New Zealand, the HPV vaccination schedule consists of a two-dose series. The first dose is administered, and the second dose is given 6 to 12 months later. This spacing can be reduced to 5 months if necessary, such as when administered through a School Based Immunisation Programme. If the individual has confirmed HIV infection or is a transplant or chemotherapy patient, three doses are required instead of two.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "10.5. Recommended immunisation schedule > 10.5.1. Recommended and funded",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/10-human-papillomavirus",
+        "excerpt": "A two-dose schedule of HPV at 0 and 6–12 months is recommended for individuals who receive the first dose before their 15th birthday."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "HPV vaccine (Gardasil 9) is funded for eligible students at age 12–13 via the school-based programme. For immunocompetent recipients aged 9–14 receiving their first dose before age 15, a 2-dose schedule is used. Those aged 15 and over, or immunocompromised individuals, receive a 3-dose schedule.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "HPV — Dosing schedule"
+    },
+    "retrieval": {
+      "section_rank": 4,
+      "hit@10": true,
+      "rr": 0.25
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q008",
+    "source": "hand_crafted",
+    "category": "co_administration",
+    "query": "Can MMR and varicella vaccines be given on the same day?",
+    "confidence": "high",
+    "answer": "Yes, MMR can be given concurrently with other vaccines, including varicella, as long as separate syringes are used and the injections are given at different sites.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "12. Measles > 12.4. Vaccines > 12.4.4. Dosage and administration > Co-administration with other vaccines",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/12-measles",
+        "excerpt": "MMR can be given concurrently with other vaccines, as long as separate syringes are used, and the injections are given at different sites."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "21. Rubella > 21.4. Vaccines > 21.4.4. Dosage and administration > Co-administration with other vaccines",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/21-rubella",
+        "excerpt": "MMR can be given concurrently with other vaccines, as long as separate syringes are used and the injections are given at different sites."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Yes. MMR and varicella can be given simultaneously as separate injections at different sites, or as the combined MMRV vaccine. If not given on the same day, a minimum 4-week interval must separate two live vaccines.",
+    "ground_truth_citation": {
+      "source": "Immunisation Advisory Centre (IMAC)",
+      "section": "Quick answers to frequent MMR questions > Can we give the 15-months varicella, Hib and MMR2"
+    },
+    "retrieval": {
+      "section_rank": 5,
+      "hit@10": true,
+      "rr": 0.2
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q009",
+    "source": "hand_crafted",
+    "category": "special_population",
+    "query": "Should premature infants receive vaccines on the same schedule as term infants?",
+    "confidence": "high",
+    "answer": "Yes, vaccination as per the Schedule (i.e., at the usual chronological age, with the usual vaccine dosage and interval) is recommended for preterm and/or low birthweight infants.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "4.2. Infants with special immunisation considerations from birth > 4.2.2. Preterm and/or low birthweight infants",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/4-immunisation-of-special-groups",
+        "excerpt": "Vaccination as per the Schedule (ie, at the usual chronological age, with the usual vaccine dosage and interval) is recommended for preterm and/or low birthweight infants."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "3. Vaccination questions and addressing concerns > 3.1. Some commonly asked questions > 3.1.2. Babies and children > What if a baby had a difficult birth or was premature?",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/3-vaccination-questions-and-addressing-concerns",
+        "excerpt": "Preterm and/or low birthweight infants should receive vaccination as per the Schedule (ie, at the usual chronological age, with the usual vaccine dosage and interval), including rotavirus vaccination."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Yes. Premature infants should be immunised according to their chronological age (date of birth), not their corrected gestational age, using the standard NZ schedule. Doses should not be reduced.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Preterm infants — Immunisation"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q010",
+    "source": "hand_crafted",
+    "category": "vaccine_schedule",
+    "query": "What is the minimum interval between doses of the hepatitis B vaccine series?",
+    "confidence": "high",
+    "answer": "The minimum interval between doses of the hepatitis B vaccine series is four weeks. If a course of immunisation is interrupted for any reason, it may be resumed without repeating prior doses regardless of how long ago the doses were given.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "9. Hepatitis B > 9.5. Recommended immunisation schedule > 9.5.1. Usual childhood schedule",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/9-hepatitis-b",
+        "excerpt": "If a course of immunisation is interrupted for any reason, it may be resumed without repeating prior doses."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "8. Processes for safe immunisation > 2.1.5. Spacing of doses > Principles for spacing of doses of the same vaccine",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/2-processes-for-safe-immunisation",
+        "excerpt": "The general rule is for a minimum of four weeks between doses of a primary series."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "For the standard 3-dose series, the minimum interval is 4 weeks between doses 1 and 2, and 8 weeks between doses 2 and 3, with at least 16 weeks between doses 1 and 3.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Hepatitis B — Dosing intervals"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q011",
+    "source": "hand_crafted",
+    "category": "special_population",
+    "query": "How many doses of COVID-19 vaccine should an immunocompromised patient receive?",
+    "confidence": "high",
+    "answer": "Immunocompromised individuals are recommended to receive three doses of mRNA-CV (3 Âµg) for the primary course, with the first and second doses given three weeks apart, and the third dose at least eight weeks after the second dose. Additionally, they are eligible for an extra dose of the most current variant-matched mRNA-CV at least six months after a previous dose, which can be reduced to three months on a case-by-case basis if there is a significant clinical need.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "4.3.3. Secondary (acquired) immunodeficiency > Vaccines for individuals with acquired immunodeficiency",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/4-immunisation-of-special-groups",
+        "excerpt": "Individuals with secondary (acquired) immunodeficiency are recommended to receive three doses of mRNA-CV (3 Âµg). First and second doses are given three weeks apart and dose three is given at least eight weeks after the second dose."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "5.5.3. Additional doses for ages 5 years and older after primary course",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/5-coronavirus-disease-covid-19",
+        "excerpt": "Regardless of any previous doses received after completion of the primary course, an additional dose of the most current variant-matched mRNA-CV (3Âµg, 10 Âµg or 30 Âµg, as age appropriate) is recommended for all individuals with secondary (acquired) immunodeficiency, to be given at least six months after a previous dose."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "medium",
+    "ground_truth_answer": "Immunocompromised individuals may require additional primary doses and booster doses of COVID-19 vaccine as per current Ministry of Health guidance. The specific schedule depends on the degree of immunosuppression and the vaccine product used.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "COVID-19 — Immunocompromised individuals"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q012",
+    "source": "hand_crafted",
+    "category": "side_effects",
+    "query": "What are the common side effects of the meningococcal B (Bexsero) vaccine?",
+    "confidence": "high",
+    "answer": "Common side effects of the meningococcal B (Bexsero) vaccine include fever, discomfort or pain around the injection site, irritability, unusual crying, decreased appetite in infants and children, and headache, muscle or joint aches, malaise, or nausea in adolescents and adults. Very rarely, a severe allergic reaction (anaphylaxis) may occur.",
+    "citations": [
+      {
+        "source": "IMAC Vaccines & Diseases (immune.org.nz)",
+        "section": "Vaccine Safety",
+        "url": "https://immune.org.nz/vaccine/bexsero",
+        "excerpt": "Bexsero has an excellent safety record. The most common vaccine responses include fever and discomfort or pain around the injection site. Infants and children may also experience irritability, have unusual crying or a decreased appetite, whilst adolescents and adults may experience headache, muscle or joint aches, malaise or nausea."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Common side effects of Bexsero include injection site pain, redness and swelling, fever, irritability, sleepiness, and loss of appetite. Fever is especially common in infants; prophylactic paracetamol may be recommended.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Meningococcal B — Adverse events"
+    },
+    "retrieval": {
+      "section_rank": 4,
+      "hit@10": true,
+      "rr": 0.25
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q013",
+    "source": "hand_crafted",
+    "category": "vaccine_schedule",
+    "query": "What is the minimum age for the first rotavirus vaccine dose?",
+    "confidence": "high",
+    "answer": "The minimum age for the first rotavirus vaccine dose (RV1, Rotarix) is 6 weeks. The first dose should be given before age 15 weeks, specifically at the latest 14 weeks and 6 days.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "20.5. Recommended immunisation schedule",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/20-rotavirus",
+        "excerpt": "The first dose of rotavirus vaccine (RV1, Rotarix) should be given before age 15 weeks (ie, the latest age is 14 weeks and 6 days)."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "20.5. Recommended immunisation schedule",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/20-rotavirus",
+        "excerpt": "Usual scheduled age: 6â14 weeks"
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "The first dose of rotavirus vaccine must be given at 6 weeks of age or older but no later than 14 weeks and 6 days. The series must be completed by 24 weeks of age (Rotarix) or 32 weeks (RotaTeq).",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Rotavirus — Age restrictions"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q014",
+    "source": "hand_crafted",
+    "category": "adverse_event_management",
+    "query": "What should be done if a patient has an anaphylactic reaction after vaccination?",
+    "confidence": "high",
+    "answer": "In the event of an anaphylactic reaction after vaccination, the mainstay of treatment is an intramuscular injection of 1:1,000 adrenaline. It should be administered immediately, and the individual must be laid down (elevating the head and chest if they have breathing difficulties). Call for professional assistance and never leave the individual alone. If there is a cardiac or respiratory arrest, commence age-appropriate CPR and life support measures. All anaphylaxis reactions should be reported to the New Zealand pharmacovigilance system.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "2.3.3. Anaphylaxis and emergency management > Emergency management",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/2-processes-for-safe-immunisation",
+        "excerpt": "An IM injection of 1:1,000 adrenaline is the mainstay of the treatment of anaphylaxis... CALL FOR HELP – send for professional assistance (ambulance, doctor). Never leave the individual alone."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "2.3.3. Anaphylaxis and emergency management > Emergency management",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/2-processes-for-safe-immunisation",
+        "excerpt": "If cardiac arrest – commence age-appropriate CPR and life support measures."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "2.3.3. Anaphylaxis and emergency management > Emergency management",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/2-processes-for-safe-immunisation",
+        "excerpt": "All anaphylaxis reactions should be reported to the New Zealand pharmacovigilance system."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Administer 0.01 mg/kg intramuscular adrenaline (epinephrine) into the outer mid-thigh immediately. Call 111. Lay the patient flat with legs raised unless breathing is compromised. Repeat adrenaline every 5 minutes if needed. Observe for biphasic reaction.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Anaphylaxis management"
+    },
+    "retrieval": {
+      "section_rank": 8,
+      "hit@10": true,
+      "rr": 0.125
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q015",
+    "source": "hand_crafted",
+    "category": "funding_eligibility",
+    "query": "Is the pneumococcal vaccine funded for adults aged 65 and over in New Zealand?",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Yes. Adults aged 65 and over are eligible for a funded pneumococcal vaccine under the NZ National Immunisation Schedule. The specific product and schedule may vary based on prior vaccination history.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Pneumococcal — Funded eligibility"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q016",
+    "source": "hand_crafted",
+    "category": "occupational_health",
+    "query": "Should healthcare workers be vaccinated against varicella if they have no history of chickenpox?",
+    "confidence": "high",
+    "answer": "Yes, healthcare workers should be immunised with the varicella vaccine (VV) if they are susceptible to varicella and have no history of chickenpox. This vaccination is particularly important for those working in obstetric, paediatric, and neonatal units, as well as those caring for immunocompromised patients.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "24.5.3. Recommended but not funded",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/24-varicella-chickenpox",
+        "excerpt": "All health care workers should be immunised with VV if they are susceptible to varicella (not funded), particularly those within obstetric, paediatric and neonatal units, and those caring for immunocompromised children and adults."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Yes. Healthcare workers without reliable evidence of immunity (prior disease or vaccination) should receive 2 doses of varicella vaccine at least 4 weeks apart to protect themselves and vulnerable patients.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Varicella — Healthcare workers"
+    },
+    "retrieval": {
+      "section_rank": 3,
+      "hit@10": true,
+      "rr": 0.3333333333333333
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q017",
+    "source": "hand_crafted",
+    "category": "special_population",
+    "query": "Can a breastfeeding mother receive the influenza vaccine?",
+    "confidence": "high",
+    "answer": "Yes, breastfeeding mothers can receive the influenza vaccine. It is safe to administer the influenza vaccine while lactating, and there is no evidence that it causes harm to the infant.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "11.5. Recommended immunisation schedule > 11.5.1. Pregnancy and breastfeeding",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/11-influenza",
+        "excerpt": "Influenza vaccine is safe to administer during any stage of pregnancy or while lactating."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "4. Immunisation of special groups > 4.1. Pregnancy and lactation > 4.1.2. During pregnancy > Influenza vaccine",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/4-immunisation-of-special-groups",
+        "excerpt": "There is no evidence that influenza vaccine prepared from a virus subunit causes harm to the fetus or neonate."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Yes. Inactivated influenza vaccine is safe and recommended for breastfeeding women. Vaccination protects the mother and may provide indirect protection to the infant through reduced maternal illness.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Influenza — Breastfeeding"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q018",
+    "source": "hand_crafted",
+    "category": "vaccine_schedule",
+    "query": "What is the recommended schedule for the Shingrix (recombinant zoster) vaccine?",
+    "confidence": "high",
+    "answer": "Two doses of adjuvanted recombinant zoster vaccine (rZV; Shingrix) are recommended and funded for all adults at the age of 65 years. The preferred spacing between doses is 2 – 6 months apart, but if the spacing is wider than this, the first dose does not need to be repeated.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "25.5.1. Recommended and funded",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/25-zoster-herpes-zostershingles",
+        "excerpt": "Two doses of adjuvanted recombinant zoster vaccine (rZV; Shingrix) are recommended and funded for all adults at the age of 65 years."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Shingrix is given as 2 doses intramuscularly, with the second dose 2–6 months after the first. For immunocompromised patients, the interval may be shortened to 1–2 months between doses.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Herpes zoster (shingles) — Shingrix schedule"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q019",
+    "source": "hand_crafted",
+    "category": "contraindication",
+    "query": "Can vaccines be given to a child who has a mild cold without fever?",
+    "confidence": "high",
+    "answer": "Yes, vaccines can be administered to a child who is mildly unwell, including those with a mild cold and without fever (temperature ≤38°C).",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "2. Processes for safe immunisation",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/2-processes-for-safe-immunisation",
+        "excerpt": "Mildly unwell, with a temperature ≤38°C"
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Yes. A mild illness without fever is not a contraindication to vaccination. Children with minor upper respiratory tract infections may be vaccinated on schedule.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "3.1. Some commonly asked questions > 3.1.3. Allergies and illnesses"
+    },
+    "retrieval": {
+      "section_rank": 8,
+      "hit@10": true,
+      "rr": 0.125
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q020",
+    "source": "hand_crafted",
+    "category": "administration_technique",
+    "query": "What is the preferred injection site for vaccines in infants under 12 months?",
+    "confidence": "high",
+    "answer": "The preferred injection site for vaccines in infants under 12 months is the vastus lateralis muscle on the anterolateral thigh, as it is large, thick, and well developed in infants.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "2.2. Vaccine administration > 2.2.3. Route of administration > Intramuscular injection sites",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/2-processes-for-safe-immunisation",
+        "excerpt": "The recommended sites for intramuscular (IM) vaccines... are: the vastus lateralis muscle on the anterolateral thigh for infants aged under 12 months."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "The anterolateral thigh (vastus lateralis muscle) is the preferred intramuscular injection site for infants under 12 months of age due to the larger muscle mass compared to the deltoid.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Vaccine administration — Injection site selection"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q021",
+    "source": "hand_crafted",
+    "category": "catch_up_schedule",
+    "query": "What is the catch-up schedule for a 7-month-old infant who missed the Hib vaccine?",
+    "confidence": "medium",
+    "answer": "For a 7-month-old infant who missed the Hib vaccine, the catch-up schedule includes administering the DTaP-IPV-HepB/Hib vaccine. The first dose should be given, followed by a second dose 4 weeks later, and a third dose 4 weeks after that. After completing the primary series, continue with the usual immunisation schedule, replacing DTaP-IPV with DTaP-IPV-HepB/Hib at age 4 years.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "Appendix 2: Planning immunisation catch-ups > A2.2.3. National Immunisation Schedule catch-up guides for infants, children and adolescents aged under 18 years > Table A2.3: Age at presentation: 3–6 months",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/appendix-2-planning-immunisation-catch-ups",
+        "excerpt": "DTaP-IPV-HepB/Hib\n\n4 weeks later\n\nDTaP-IPV-HepB/Hib\n\n4 weeks later\n\nDTaP-IPV-HepB/Hib"
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "For infants aged 7–11 months who have not yet received Hib vaccine, 2 primary doses are given 4 weeks apart, followed by a booster dose at 12–15 months (at least 8 weeks after the second dose).",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Hib — Catch-up schedule"
+    },
+    "retrieval": {
+      "section_rank": 2,
+      "hit@10": true,
+      "rr": 0.5
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q022",
+    "source": "hand_crafted",
+    "category": "special_population",
+    "query": "Are live attenuated vaccines safe to give to HIV-positive children?",
+    "confidence": "medium",
+    "answer": "Live attenuated vaccines, such as MMR, are recommended for HIV-positive children if their CD4+ lymphocyte percentage is 15 percent or greater. However, administration of live attenuated vaccines is contraindicated for individuals with CD4+ counts below the recommended levels due to the risk of vaccine-related complications. Specifically, MMR is associated with vaccine-related pneumonitis in those with low CD4+ counts.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "4. Immunisation of special groups > 4.3.12. HIV infection",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/4-immunisation-of-special-groups",
+        "excerpt": "MMR is recommended for all HIV-positive children, whether they are symptomatic or asymptomatic, if their CD4+ lymphocyte percentage is 15 percent or greater. Administration of MMR with CD4+ counts below these recommended levels has been associated with vaccine-related pneumonitis."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "4. Immunisation of special groups > 4.3.12. HIV infection",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/4-immunisation-of-special-groups",
+        "excerpt": "Administration of BCG vaccination is contraindicated for all HIV-positive individuals regardless of their CD4+ percentage/count."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Live vaccines (MMR, varicella) may be given to HIV-positive children who are not severely immunocompromised (CD4 count above threshold as per guidelines). BCG should generally be avoided. Clinical judgement and specialist consultation are required.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Immunocompromised — HIV-positive individuals"
+    },
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": false,
+      "rr": 0.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q023",
+    "source": "hand_crafted",
+    "category": "travel_vaccine",
+    "query": "What vaccines are recommended for travel to Southeast Asia?",
+    "confidence": "medium",
+    "answer": "For travel to Southeast Asia, the following vaccines are recommended: Hepatitis A vaccination should be given as soon as travel is considered, especially since there is a risk of foodborne hepatitis A even in low prevalence countries (NZ Immunisation Handbook, Chapter 8, Section 8.5.1, https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/8-hepatitis-a). Additionally, vaccination against measles (MMR) is recommended for all children aged 12 months and older and adults if they have not been adequately vaccinated (NZ Immunisation Handbook, Chapter 12, Section 12.5.5, https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/12-measles). Influenza vaccination is also recommended for those planning to travel internationally (IMAC Vaccines & Diseases, https://immune.org.nz/vaccine/influenza-vaccine). Other vaccines may be considered based on specific travel circumstances and areas visited, such as polio, diphtheria, and meningococcal vaccines, depending on the endemicity of these diseases in the specific regions of Southeast Asia being visited.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook",
+        "section": "8.5.1",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/8-hepatitis-a",
+        "excerpt": "The first dose of HepA should be given as soon as travel is considered."
+      },
+      {
+        "source": "NZ Immunisation Handbook",
+        "section": "12.5.5",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/12-measles",
+        "excerpt": "Vaccination with MMR is recommended for all children aged 12 months and older and adults travelling overseas if they have not previously been adequately vaccinated."
+      },
+      {
+        "source": "IMAC Vaccines & Diseases",
+        "section": "Travel",
+        "url": "https://immune.org.nz/vaccine/influenza-vaccine",
+        "excerpt": "Influenza vaccination is recommended for those planning to travel internationally."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "medium",
+    "ground_truth_answer": "For travel to Southeast Asia, ensure routine NZ schedule vaccines are up to date. Additional vaccines to consider include hepatitis A, hepatitis B, typhoid, and Japanese encephalitis depending on itinerary and activities. Malaria prophylaxis should also be discussed.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Travel immunisation"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q024",
+    "source": "hand_crafted",
+    "category": "post_vaccination_care",
+    "query": "What is the recommended paracetamol dose after vaccination for a 3-month-old infant?",
+    "confidence": "high",
+    "answer": "For a 3-month-old infant receiving the Bexsero vaccine, a prophylactic weight-based dose of paracetamol is recommended at 15 mg/kg. This can be administered at the time of vaccination or up to 30 minutes before, followed by two additional doses spaced 4 to 6 hours apart. A maximum of 4 doses can be given in a 24-hour period.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "A9.3.2. Paracetamol liquid formulation",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/appendix-9",
+        "excerpt": "A prophylactic weight-based dose (15mg/kg) of paracetamol is recommended to reduce risk of fever. This is administered at the time of, or up to 30 minutes before, or immediately after Bexsero vaccination, followed by two further doses spaced 4 to 6 hours apart."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "13.5.1. Usual childhood schedule",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/13-meningococcal-disease",
+        "excerpt": "As an antipyretic, prophylactic paracetamol is recommended to be given up to 30 minutes prior to or immediately after MenB vaccination and give up to two further doses four to six hours apart for children aged under 2 years."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "medium",
+    "ground_truth_answer": "The recommended dose of paracetamol for infants is 15 mg/kg per dose, given every 4–6 hours as needed, not exceeding 4 doses in 24 hours. For a typical 3-month-old (approximately 5–6 kg), this is approximately 75–90 mg per dose. Always check current product labelling.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Post-vaccination care — Fever management"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q025",
+    "source": "hand_crafted",
+    "category": "contraindication",
+    "query": "Can an immunocompromised patient receive the oral polio vaccine?",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 9,
+    "expected_confidence": "high",
+    "ground_truth_answer": "No. Oral polio vaccine (OPV) is a live vaccine and is absolutely contraindicated in immunocompromised individuals and their household contacts. Inactivated polio vaccine (IPV) should be used instead.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Polio — Immunocompromised patients"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q026",
+    "source": "hand_crafted",
+    "category": "special_population",
+    "query": "What is the recommended RSV prophylaxis for a premature infant born at 28 weeks gestation?",
+    "confidence": "high",
+    "answer": "For a premature infant born at 28 weeks gestation, palivizumab (Synagis) is recommended for passive immunisation against RSV. It is funded for infants aged under 12 months who were born before 32 weeks gestation during the RSV season, which typically runs from April to November.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "19.5.2. Funded groups for palivizumab",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/19-respiratory-syncytial-virus",
+        "excerpt": "Funding is available through special authority, for monthly injections during the RSV season (usually April to November) for those: Aged under 12 months, born preterm less than 32 weeks’ gestation."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "4.2.2. Preterm and/or low birthweight infants > Respiratory syncytial virus passive immunisation",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/4-immunisation-of-special-groups",
+        "excerpt": "It is funded for infants aged under 12 months who were born before 32 weeks gestation."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "medium",
+    "ground_truth_answer": "Premature infants born at or before 29 weeks gestation who are under 12 months at the start of the RSV season may be eligible for nirsevimab (Beyfortus) or palivizumab (Synagis) prophylaxis under funded criteria. Eligibility depends on gestational age, age at RSV season, and presence of chronic lung disease.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "RSV prophylaxis — Preterm infants"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q027",
+    "source": "hand_crafted",
+    "category": "co_administration",
+    "query": "What is the minimum interval required between two doses of different live vaccines?",
+    "confidence": "high",
+    "answer": "The minimum interval required between two doses of different live vaccines administered at different visits is four weeks. However, if they are given at the same visit, there are no known contraindications to administering them together.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "2.1.5. Spacing of doses",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/2-processes-for-safe-immunisation",
+        "excerpt": "A minimum interval of four weeks is recommended when live vaccines are given at different visits."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "3.1.1. Vaccine scheduling",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/3-vaccination-questions-and-addressing-concerns",
+        "excerpt": "If two or more parenterally or intranasally administered live vaccines are not given at the same visit, then a minimum interval of four weeks is recommended."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "If two different live vaccines are not given on the same day, a minimum interval of 4 weeks (28 days) must be observed between them. This is to prevent immunological interference between the vaccines.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "General principles — Live vaccine intervals"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q028",
+    "source": "hand_crafted",
+    "category": "documentation",
+    "query": "What documentation must be completed after administering a vaccine in New Zealand?",
+    "confidence": "high",
+    "answer": "After administering a vaccine in New Zealand, the vaccinator must complete several documentation requirements, including: 1) relevant sections in the Well Child Tamariki Ora My Health Book, 2) the child's immunisation certificate (if applicable), 3) the Health New Zealand payment claim form (if applicable), and 4) a manual vaccination recording form for entry into the Aotearoa Immunisation Register (AIR) as soon as practical. Additionally, accurate clinical records must be maintained, including confirmation of informed consent, observation for adverse events, and any actions taken if an adverse event occurs.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "2.3.4. Documentation and insurance",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/2-processes-for-safe-immunisation",
+        "excerpt": "The vaccinator should also complete the relevant sections in the Well Child Tamariki Ora My Health Book and, where applicable, the child’s immunisation certificate, the Health New Zealand payment claim form, and a manual vaccination recording form."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "2.3.4. Documentation and insurance",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/2-processes-for-safe-immunisation",
+        "excerpt": "Accurate documentation, including information on the Aotearoa Immunisation Register (AIR), is essential."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "After vaccination, the provider must record: patient name and date of birth, vaccine name and brand, dose, batch number, expiry date, injection site, date and time of administration, and the vaccinator's name and signature. This must be entered in the patient's clinical record and the National Immunisation Register (NIR).",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "2.3. Post-vaccination > 2.3.4. Documentation and insurance"
+    },
+    "retrieval": {
+      "section_rank": 6,
+      "hit@10": true,
+      "rr": 0.16666666666666666
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q029",
+    "source": "hand_crafted",
+    "category": "special_population",
+    "query": "Is the hepatitis A vaccine recommended for patients with chronic liver disease?",
+    "confidence": "high",
+    "answer": "Yes, the hepatitis A vaccine is recommended and funded for children with chronic liver disease and for adults undergoing transplants. However, adults with chronic liver disease are recommended to receive the vaccine but it is not funded.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "8. Hepatitis A > 8.5. Recommended immunisation schedule > 8.5.1. Recommendations > Individuals with chronic liver disease",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/8-hepatitis-a",
+        "excerpt": "HepA is recommended and funded for children with chronic liver disease and for children and adults undergoing transplants."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "8. Hepatitis A > 8.5. Recommended immunisation schedule > Table 8.1: Hepatitis A vaccine recommendations",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/8-hepatitis-a",
+        "excerpt": "Recommended but not funded: Adults with chronic liver disease."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Yes. Patients with chronic liver disease are at increased risk of severe hepatitis A infection and should receive the hepatitis A vaccine series. In New Zealand, funding eligibility criteria apply.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Hepatitis A — High-risk groups"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q030",
+    "source": "hand_crafted",
+    "category": "administration_error",
+    "query": "A nurse accidentally gave a subcutaneous injection instead of intramuscular for MMR. Is the dose valid?",
+    "confidence": "not_found",
+    "answer": "An error occurred: Generation failed: Error code: 400 - {'error': {'message': \"The response was filtered due to the prompt triggering Azure OpenAI's content management policy. Please modify your prompt and retry. To learn more about our content filtering policies please read our documentation: https://go.microsoft.com/fwlink/?linkid=2198766\", 'type': None, 'param': 'prompt', 'code': 'content_filter', 'status': 400, 'innererror': {'code': 'ResponsibleAIPolicyViolation', 'content_filter_result': {'hate': {'filtered': False, 'severity': 'safe'}, 'jailbreak': {'detected': False, 'filtered': False}, 'self_harm': {'filtered': True, 'severity': 'medium'}, 'sexual': {'filtered': False, 'severity': 'safe'}, 'violence': {'filtered': False, 'severity': 'safe'}}}}}\n\nPlease try again or contact technical support.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "MMR vaccine is licensed for subcutaneous administration, so a subcutaneous injection is the correct route and the dose is valid. No repeat dose is required. This is distinct from vaccines like hepatitis B, where incorrect route may compromise immunogenicity.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "MMR — Administration route"
+    },
+    "retrieval": {
+      "section_rank": 2,
+      "hit@10": true,
+      "rr": 0.5
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q031",
+    "source": "hand_crafted",
+    "category": "vaccine_schedule",
+    "query": "What is the funded dosing schedule for the dengue vaccine Dengvaxia in New Zealand?",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "not_found",
+    "ground_truth_answer": "NOT_FOUND — Dengvaxia is not part of the New Zealand national immunisation schedule and is not funded by PHARMAC. The approved NZ guidance sources do not contain a dosing schedule for this vaccine.",
+    "ground_truth_citation": {
+      "source": "N/A",
+      "section": "N/A"
+    },
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q032",
+    "source": "hand_crafted",
+    "category": "funding_eligibility",
+    "query": "Is yellow fever vaccination available as a funded vaccine through the PHARMAC immunisation schedule in New Zealand?",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "not_found",
+    "ground_truth_answer": "NOT_FOUND — Yellow fever vaccine is a self-funded travel vaccine and is not part of the PHARMAC-funded NZ immunisation schedule. The approved guidance sources do not contain yellow fever funding information.",
+    "ground_truth_citation": {
+      "source": "N/A",
+      "section": "N/A"
+    },
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q033",
+    "source": "hand_crafted",
+    "category": "special_population",
+    "query": "What vaccination schedule is recommended for a patient who has recently completed CAR-T cell therapy?",
+    "confidence": "high",
+    "answer": "Individuals who have undergone CAR-T cell therapy are considered potentially immunocompromised and are recommended to receive two doses of recombinant zoster vaccine (rZV, Shingrix) given two to six months apart. Additionally, for COVID-19 vaccination, they can be revaccinated with a two or three-dose primary course of mRNA-CV, plus additional doses as age appropriate, starting at least six months after the last dose of their previous vaccination course. It is advisable to discuss the optimal timing for vaccinations with a specialist.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "4.3.8. Oncology > Vaccination after cancer chemotherapy",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/4-immunisation-of-special-groups",
+        "excerpt": "Individuals from age 18 years, including those aged 66 years and over, who are potentially immunocompromised post-chemotherapy or other cancer treatments are recommended two doses of recombinant zoster vaccine (rZV, Shingrix), given two to six months apart."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "5.5. Recommended immunisation schedule > 5.5.9. Revaccination",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/5-coronavirus-disease-covid-19",
+        "excerpt": "Individuals from age 6 months who have undergone haematopoietic stem cell transplantation since their first course can be revaccinated with a two or three-dose primary course of mRNA-CV (as age appropriate)."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "10. Timing of vaccinations",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/5-coronavirus-disease-covid-19",
+        "excerpt": "It is recommended to discuss the optimal timing for vaccination with a specialist before the vaccine appointment for those who are severely immunocompromised."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "not_found",
+    "ground_truth_answer": "NOT_FOUND — The approved NZ immunisation guidance does not contain a specific vaccination schedule for patients post-CAR-T cell therapy. This is a highly specialised scenario requiring specialist advice.",
+    "ground_truth_citation": {
+      "source": "N/A",
+      "section": "N/A"
+    },
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q034",
+    "source": "hand_crafted",
+    "category": "contraindication",
+    "query": "Can a patient currently taking tofacitinib (a JAK inhibitor) for rheumatoid arthritis receive the live zoster vaccine Zostavax?",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "not_found",
+    "ground_truth_answer": "NOT_FOUND — The approved NZ guidance does not explicitly address tofacitinib specifically. While general guidance on immunosuppressants and live vaccines exists, a specific statement about tofacitinib and Zostavax is not clearly present. Escalate to specialist.",
+    "ground_truth_citation": {
+      "source": "N/A",
+      "section": "N/A"
+    },
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q035",
+    "source": "hand_crafted",
+    "category": "funding_eligibility",
+    "query": "What are the funded indications for the malaria vaccine RTS,S in New Zealand?",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "not_found",
+    "ground_truth_answer": "NOT_FOUND — The RTS,S malaria vaccine is not part of the New Zealand immunisation schedule and is not funded by PHARMAC. This vaccine is not covered in the approved NZ guidance sources.",
+    "ground_truth_citation": {
+      "source": "N/A",
+      "section": "N/A"
+    },
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q036",
+    "source": "hand_crafted",
+    "category": "adverse_event_management",
+    "query": "A 10-week-old infant had a febrile seizure 20 hours after their 6-week immunisations. Is it safe to proceed with the 3-month vaccines on schedule?",
+    "confidence": "medium",
+    "answer": "The guidance indicates that a febrile reaction may occur after any vaccine and can result in a febrile seizure in susceptible children. However, these seizures are almost always benign with no associated sequelae. Therefore, vaccination is still recommended, but individual cases should be discussed with a specialist, especially for children who have had seizures. It is advisable to consult with the infant's healthcare provider before proceeding with the 3-month vaccines.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "3.1.3. Allergies and illnesses > What if a child has had seizures?",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/3-vaccination-questions-and-addressing-concerns",
+        "excerpt": "A febrile reaction may occur after any vaccine and result in a febrile seizure in a susceptible child. Vaccine-related febrile seizures are rare, although the risk is higher following administration of certain vaccines."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "low",
+    "ground_truth_answer": "A febrile seizure following immunisation is a known rare adverse event. General guidance supports proceeding with the schedule if the seizure was febrile and self-resolving, but specialist or general practitioner review is recommended before proceeding. Handbook guidance on seizure history and vaccine precautions applies.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Precautions and contraindications — neurological conditions"
+    },
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": false,
+      "rr": 0.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q037",
+    "source": "hand_crafted",
+    "category": "special_population",
+    "query": "Is it safe to give MMR vaccine to a 2-year-old whose parent is currently receiving active chemotherapy at home?",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "low",
+    "ground_truth_answer": "The handbook addresses immunocompromised household contacts but specific guidance on children living with a parent on active chemotherapy may require careful interpretation. Live vaccines like MMR in household contacts of immunocompromised individuals are generally discussed in the handbook, but specific recommendations should be reviewed with the treating oncology team.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Immunocompromised individuals — household contacts"
+    },
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": false,
+      "rr": 0.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q038",
+    "source": "hand_crafted",
+    "category": "storage_handling",
+    "query": "Influenza vaccines were accidentally left in the freezer overnight and appear visually normal after thawing. Can they still be administered?",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Influenza vaccines must not be frozen. Freezing can cause irreversible damage to the antigen even if the vaccine appears visually normal after thawing. Vaccines that have been frozen must be discarded and must not be administered.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Influenza — Storage and handling / Cold chain management"
+    },
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": false,
+      "rr": 0.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q039",
+    "source": "hand_crafted",
+    "category": "storage_handling",
+    "query": "How long can varicella vaccine remain at room temperature after removal from the freezer before it must be discarded?",
+    "confidence": "high",
+    "answer": "Reconstituted varicella vaccine should be used immediately, if possible, and discarded if not used within 90 minutes (1½ hours) at room temperature.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "24.4.3. Transport, storage and handling",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/24-varicella-chickenpox",
+        "excerpt": "Reconstituted vaccine should be used immediately, if possible, and discarded if reconstituted vaccine is not used within 90 minutes (1½ hours) at room temperature."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Once removed from the freezer, varicella vaccine must be used promptly. It should be reconstituted and used within 30 minutes of removal from the freezer. Unused reconstituted vaccine must be discarded.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Varicella — Storage and handling"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q040",
+    "source": "hand_crafted",
+    "category": "adverse_event_management",
+    "query": "A patient developed a firm lump at the hepatitis B injection site that has persisted for 3 months. What is the recommended management?",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "medium",
+    "ground_truth_answer": "A persistent nodule at the injection site may indicate a granuloma, which can occur following intramuscular injection, sometimes related to the aluminium adjuvant. The handbook advises reporting persistent injection site reactions as adverse events. Medical review is recommended. Future doses should be given at a different site.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook",
+      "section": "Hepatitis B — Adverse events / Injection site reactions"
+    },
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": false,
+      "rr": 0.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q041",
+    "source": "hand_crafted",
+    "category": "vaccine_schedule",
+    "query": "Should pregnant women receive a pertussis (whooping cough) vaccine in New Zealand, and if so, when?",
+    "confidence": "high",
+    "answer": "Yes, pregnant women in New Zealand should receive a dose of the Tdap vaccine in every pregnancy. It is recommended to be administered from 16 weeks of gestation, preferably during the second trimester, to provide protection to both the mother and her infant from pertussis.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "16. Pertussis (whooping cough) > 16.5. Recommended immunisation schedule > 16.5.2. Pregnancy and breastfeeding",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/16-pertussis-whooping-cough",
+        "excerpt": "Pregnant women should receive a dose of Tdap in every pregnancy so that antibodies can pass to the fetus to provide protection from birth (funded when given any time in second or third trimester). It is recommended to be given from 16 weeks’ gestation of every pregnancy, preferably in the second trimester to protect both the mother and her infant from pertussis."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Yes. Pregnant women should receive a dose of Tdap in every pregnancy to pass antibodies to the fetus. It is recommended from 16 weeks gestation, preferably in the second trimester, and is funded.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "16.5. Recommended immunisation schedule > 16.5.2. Pregnancy and breastfeeding"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q042",
+    "source": "hand_crafted",
+    "category": "contraindication",
+    "query": "What is the only contraindication to pertussis-containing vaccines?",
+    "confidence": "high",
+    "answer": "The only contraindication to pertussis-containing vaccines is an immediate severe anaphylactic reaction to the vaccine, or any component of the vaccine, following a previous dose.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "16.6.1. Contraindications",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/16-pertussis-whooping-cough",
+        "excerpt": "The only contraindication is an immediate severe anaphylactic reaction to the vaccine, or any component of the vaccine, following a previous dose."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "The only contraindication is a previous severe anaphylactic reaction to the vaccine or any of its components.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "16.6. Contraindications and precautions > 16.6.1. Contraindications"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q043",
+    "source": "hand_crafted",
+    "category": "vaccine_schedule",
+    "query": "When is the rotavirus vaccine given in New Zealand and by what route?",
+    "confidence": "high",
+    "answer": "The rotavirus vaccine, Rotarix®, is given orally at 6 weeks and 3 months of age in New Zealand.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "20. Rotavirus > 20.6. Contraindications and precautions",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/20-rotavirus",
+        "excerpt": "Rotarix Â® is an oral vaccine given at 6 weeks and 3 months of age."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "Appendix 1: The history of immunisation in New Zealand > A1.3. History of the Schedule: background information > A1.3.13. Rotavirus vaccines",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/appendix-1-the-history-of-immunisation-in-new-zealand",
+        "excerpt": "In 2017, the two-dose monovalent vaccine (RV1, Rotarix) replaced RV5 on the Schedule, for infants at ages 6 weeks and 3 months."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Two oral doses of RV1 (Rotarix) are given at ages 6 weeks and 3 months. The vaccine is administered orally, not by injection.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "20.5. Recommended immunisation schedule > 20.5.1. Routine schedule"
+    },
+    "retrieval": {
+      "section_rank": 2,
+      "hit@10": true,
+      "rr": 0.5
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q044",
+    "source": "hand_crafted",
+    "category": "administration_technique",
+    "query": "If a baby vomits immediately after receiving the rotavirus vaccine, should the dose be repeated?",
+    "confidence": "high",
+    "answer": "If the first dose of rotavirus vaccine is vomited immediately after administration, a single repeat dose can be given. However, if the dose is regurgitated or vomited after administration, a repeat dose should not be given. The second dose should be administered as per the schedule.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "20.4.4. Dosage and administration > If the dose is regurgitated or vomited",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/20-rotavirus",
+        "excerpt": "If the dose is regurgitated or vomited during or after administration, a repeat dose should not be given. The second dose should be administered as per the schedule. Receptor binding of vaccine is instantaneous, making repeat dosing unnecessary. If the first dose is immediately spat out then a single repeat dose could be given."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "No. If the dose of rotavirus vaccine is regurgitated or vomited during or after administration, a repeat dose should not be given at that visit. The remaining scheduled dose should be given at the next visit.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "20.4. Vaccines > 20.4.4. Dosage and administration > If the dose is regurgitated or vomited"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q045",
+    "source": "hand_crafted",
+    "category": "vaccine_schedule",
+    "query": "What is the maximum age for administering the first dose of rotavirus vaccine?",
+    "confidence": "high",
+    "answer": "The maximum age for administering the first dose of rotavirus vaccine (RV1) is 14 weeks and 6 days. If the first dose is not given before the infant turns 15 weeks old, they cannot receive any doses of the rotavirus vaccine.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "20.5. Recommended immunisation schedule > 20.5.1. Routine schedule",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/20-rotavirus",
+        "excerpt": "The upper age limit for receipt of the first dose of RV1 is immediately prior to turning 15 weeks old (14 weeks and 6 days)."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "The first dose of RV1 (Rotarix) must be given before age 15 weeks (14 weeks and 6 days). The second dose must be administered at or before 24 weeks of age.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "20.5. Recommended immunisation schedule > 20.5.2. Catch-up schedules"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q046",
+    "source": "hand_crafted",
+    "category": "special_population",
+    "query": "Which children are eligible for extended pneumococcal immunisation beyond the routine schedule in New Zealand?",
+    "confidence": "high",
+    "answer": "Children eligible for extended pneumococcal immunisation beyond the routine schedule include those with certain high-risk medical conditions. The specific conditions and eligibility criteria are detailed in the relevant tables of the immunisation handbook, which outline the funding restrictions and dosing requirements for PCV13 and 23PPV for high-risk groups.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "17.5.2. Extended pneumococcal immunisation for high-risk groups",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/17-pneumococcal-disease",
+        "excerpt": "As part of the extended immunisation programme for high-risk groups, PCV13 and 23PPV are funded for eligible individuals, as shown in Table 17.3 , Table 17.4 and Table 17.5."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "High-risk children including those with HIV infection, pre- or post-splenectomy, immunocompromising conditions, cochlear implants, or chronic conditions are eligible for extended PCV13 and 23PPV immunisation beyond the routine schedule.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "17.5. Recommended immunisation schedule > 17.5.2. Extended pneumococcal immunisation for high-risk groups"
+    },
+    "retrieval": {
+      "section_rank": 2,
+      "hit@10": true,
+      "rr": 0.5
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q047",
+    "source": "hand_crafted",
+    "category": "funding_eligibility",
+    "query": "Is pneumococcal vaccine funded for healthy adults aged 65 and over with no other risk factors in New Zealand?",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "No. For healthy adults aged 65 and over with no other risk factors, PCV13 followed by 23PPV at least 8 weeks later is recommended but not funded.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "17.5. Recommended immunisation schedule > 17.5.4. Recommended but not funded > Adults aged 65 years and older with no other risk factors"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q048",
+    "source": "hand_crafted",
+    "category": "funding_eligibility",
+    "query": "When is the Shingrix (recombinant zoster) vaccine funded in New Zealand?",
+    "confidence": "high",
+    "answer": "The Shingrix vaccine is funded for two doses at age 65 years. From 1 July 2024, it will also be funded for individuals aged 18 years and older who are immunocompromised or at increased risk of zoster and its complications.",
+    "citations": [
+      {
+        "source": "IMAC Vaccines & Diseases",
+        "section": "Shingrix",
+        "url": "https://immune.org.nz/vaccine/shingrix",
+        "excerpt": "Two doses are funded at age 65 years and from 1 July 2024 funding is increased to include some immunocompromised from 18 years of age."
+      },
+      {
+        "source": "NZ Immunisation Handbook",
+        "section": "25.5.2. Recommended not funded",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/25-zoster-herpes-zostershingles",
+        "excerpt": "rZV is approved for use in New Zealand for all individuals aged 50 years or older, including those aged 66 years and over, not eligible to funded vaccine."
+      },
+      {
+        "source": "IMAC Vaccines & Diseases",
+        "section": "Funded Shingrix eligibility",
+        "url": "https://immune.org.nz/vaccine/shingrix",
+        "excerpt": "From 1 July 2024, two doses are also funded for people 18 years of age or older with any of the following: pre- and post- haematopoietic stem cell transplant or cellular therapy..."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Two doses of Shingrix (rZV) are funded for all adults at age 65 years and for those aged 18 years and over who are immunocompromised.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "25.5. Recommended immunisation schedule > 25.5.1. Recommended and funded"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q049",
+    "source": "hand_crafted",
+    "category": "contraindication",
+    "query": "Can a patient who has previously had shingles receive the Shingrix vaccine?",
+    "confidence": "high",
+    "answer": "Yes, Shingrix may be offered to individuals who have previously had shingles. It is recommended to wait at least 12 months after the zoster episode has resolved before administering Shingrix. For immunocompromised individuals at high risk of zoster recurrence, this waiting period may be shortened to at least three months. Those with a history of ophthalmic shingles should also wait 12 months after the disease has completely settled before vaccination.",
+    "citations": [
+      {
+        "source": "IMAC Vaccines & Diseases",
+        "section": "Shingrix > Other formulations and brands > Shingrix after zoster episode",
+        "url": "https://immune.org.nz/vaccine/shingrix",
+        "excerpt": "Shingrix may be offered to individuals who previously had Zostavax (live zoster vaccine) and/or have a history of zoster episodes. Allow 12 months after an episode of zoster has resolved before giving Shingrix."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "25. Zoster (herpes zoster/shingles) > 25.5.3. Individuals with a history of zoster (shingles)",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/25-zoster-herpes-zostershingles",
+        "excerpt": "Recombinant ZV is recommended to be given from 12 months after zoster has resolved from which time the rate of recurrence is increased."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Yes. Individuals with a history of zoster episodes can receive rZV (Shingrix). Previous shingles is not a contraindication.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "25.5. Recommended immunisation schedule > 25.5.3. Individuals with a history of zoster (shingles)"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q050",
+    "source": "hand_crafted",
+    "category": "funding_eligibility",
+    "query": "Is hepatitis A vaccine funded for patients with chronic liver disease in New Zealand?",
+    "confidence": "high",
+    "answer": "Yes, the hepatitis A vaccine is funded for children with chronic liver disease from 12 months of age. Additionally, adults with chronic liver disease who are likely to require a liver transplant are also eligible for funded hepatitis A vaccination.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "8. Hepatitis A > 8.5. Recommended immunisation schedule",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/8-hepatitis-a",
+        "excerpt": "Children with chronic liver disease a"
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "4. Immunisation of special groups > 4.5. Chronic liver disease > Vaccination of individuals with chronic liver disease",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/4-immunisation-of-special-groups",
+        "excerpt": "Adults who are likely to require a liver transplant are eligible for additional funded vaccines, including hepatitis A vaccine."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Yes. HepA is recommended and funded for children with chronic liver disease and for children and adults undergoing liver transplant.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "8.5. Recommended immunisation schedule > 8.5.1. Recommendations > Individuals with chronic liver disease"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q051",
+    "source": "hand_crafted",
+    "category": "travel_vaccine",
+    "query": "When should hepatitis A vaccine be given to a patient planning international travel?",
+    "confidence": "high",
+    "answer": "The first dose of the hepatitis A vaccine should be given as soon as travel is considered. It is recommended for all travellers, even those going to low prevalence countries, due to the risk of foodborne hepatitis A. The vaccine is licensed from age 1 year, but may also be considered for infants younger than 1 year if they are at significant risk of infection.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "8.5.1. Recommendations > Travellers",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/8-hepatitis-a",
+        "excerpt": "The first dose of HepA should be given as soon as travel is considered."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "The first dose of HepA should be given as soon as travel is considered. It is recommended for travellers to high and intermediate hepatitis A endemicity areas.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "8.5. Recommended immunisation schedule > 8.5.1. Recommendations > Travellers"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q052",
+    "source": "hand_crafted",
+    "category": "special_population",
+    "query": "Which infants are eligible for funded palivizumab (RSV prophylaxis) in New Zealand?",
+    "confidence": "high",
+    "answer": "Infants eligible for funded palivizumab (RSV prophylaxis) in New Zealand include: 1) Infants aged under 12 months who were born before 32 weeks gestation. 2) Infants aged under 24 months with severe lung, airway, neurological or neuromuscular disease requiring ongoing ventilatory/respiratory support, haemodynamically significant congenital heart disease, severe combined immune deficiency, or inborn errors of immunity that increase susceptibility to life-threatening viral respiratory infections, as confirmed by an immunologist.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "19.5.2. Funded groups for palivizumab",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/19-respiratory-syncytial-virus",
+        "excerpt": "Funding is available through special authority, for monthly injections during the RSV season (usually April to November) for those: - Aged under 12 months, born preterm less than 32 weeks’ gestation - Aged under 24 months: severe lung, airway, neurological or neuromuscular disease that requires ongoing ventilatory/respiratory support in the community with haemodynamically significant congenital heart disease with severe combined immune deficiency, as confirmed by an immunologist."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Palivizumab is funded for infants at high risk of severe RSV lower respiratory tract infection prior to and during the RSV season. Funding is available through specialist services.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "19.5. Recommended immunisation schedule > 19.5.2. Funded groups for palivizumab"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q053",
+    "source": "hand_crafted",
+    "category": "vaccine_schedule",
+    "query": "How many doses of Hib vaccine are given in the New Zealand routine childhood schedule?",
+    "confidence": "high",
+    "answer": "In the New Zealand routine childhood schedule, the Hib vaccine is administered as part of the DTaP-IPV-HepB/Hib vaccine at ages 6 weeks, 3 months, and 5 months, followed by a booster dose of Hib-PRP vaccine at age 15 months.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "7.5. Recommended immunisation schedule",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/7-haemophilus-inuenzae-type-b-hib-disease",
+        "excerpt": "DTaP-IPV-HepB/Hib vaccine is recommended at 6 weeks, 3 months and 5 months of age followed by a booster dose of Hib-PRP vaccine at age 15 months."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Three doses of DTaP-IPV-HepB/Hib (Infanrix-hexa) are given as the primary series at 6 weeks, 3 months, and 5 months. A booster dose is given at 15 months.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "7.5. Recommended immunisation schedule > 7.5.1. Usual childhood schedule"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q054",
+    "source": "hand_crafted",
+    "category": "funding_eligibility",
+    "query": "Who is eligible to receive the funded mpox vaccine in New Zealand?",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "The mpox vaccine (MPV) is recommended and funded for individuals aged 18 years or over who are at high risk for mpox infection.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "14.5. Recommended immunisation schedule > 14.5.1. Recommended groups"
+    },
+    "retrieval": {
+      "section_rank": 2,
+      "hit@10": true,
+      "rr": 0.5
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q055",
+    "source": "hand_crafted",
+    "category": "contraindication",
+    "query": "What are the contraindications to the mpox vaccine (Jynneos)?",
+    "confidence": "high",
+    "answer": "Jynneos should not be given to anyone with a history of anaphylaxis to a previous dose of Jynneos or any component of the vaccine. It is contraindicated in individuals with known hypersensitivity to any of the vaccine’s excipients or trace residues (such as chicken or egg protein, gentamicin, ciprofloxacin, or benzonase). Additionally, Jynneos should not be administered to anyone with myocarditis or pericarditis following a previous dose of Jynneos. Vaccination should be postponed in individuals who are acutely unwell with a fever over 38°C.",
+    "citations": [
+      {
+        "source": "IMAC Vaccines & Diseases (immune.org.nz)",
+        "section": "Other formulations and brands > Vaccine Safety",
+        "url": "https://immune.org.nz/vaccine/jynneos",
+        "excerpt": "Jynneos should not be given to anyone with a history of anaphylaxis to a previous dose of Jynneos or any component of the vaccine. Jynneos is contraindicated in subjects with known hypersensitivity to any of the vaccine’s excipients or trace residues (chicken or egg protein, gentamicin, ciprofloxacin, or benzonase)."
+      },
+      {
+        "source": "IMAC Vaccines & Diseases (immune.org.nz)",
+        "section": "Other formulations and brands > Vaccine Safety",
+        "url": "https://immune.org.nz/vaccine/jynneos",
+        "excerpt": "Jynneos should not be given to anyone with myocarditis or pericarditis following a previous dose of Jynneos and anyone with previous myocarditis or pericarditis should have a risk-benefit discussion."
+      },
+      {
+        "source": "IMAC Vaccines & Diseases (immune.org.nz)",
+        "section": "Other formulations and brands > Vaccine Safety",
+        "url": "https://immune.org.nz/vaccine/jynneos",
+        "excerpt": "Postpone vaccination in individuals who are acutely unwell with a fever over 38°C."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "MPV (Jynneos) is contraindicated for anyone with a severe systemic allergic reaction (anaphylaxis) to a previous dose or any component of the vaccine.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "14.6. Contraindications and precautions > 14.6.1. Contraindications"
+    },
+    "retrieval": {
+      "section_rank": 3,
+      "hit@10": true,
+      "rr": 0.3333333333333333
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q056",
+    "source": "hand_crafted",
+    "category": "side_effects",
+    "query": "What are the common side effects of DTaP-containing vaccines in children?",
+    "confidence": "high",
+    "answer": "Common side effects of DTaP-containing vaccines in children include local reactions such as pain, redness, swelling, and induration at the injection site. Less common systemic reactions may include fretfulness, anorexia, vomiting, crying, and slight to moderate fever. These reactions typically occur within several hours of immunisation and resolve spontaneously within 48 hours without sequelae.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "16.7. Potential responses and AEFIs > 16.7.1. DTaP-containing vaccines",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/16-pertussis-whooping-cough",
+        "excerpt": "Local reactions commonly include pain, redness, swelling and induration at the injection site. Less common reactions include fretfulness, anorexia, vomiting, crying and slight to moderate fever."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "DTaP-containing vaccines are generally well tolerated in children. Common reactions include local reactions at the injection site (redness, swelling, pain), fever, and irritability.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "16.7. Potential responses and AEFIs > 16.7.1. DTaP-containing vaccines"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q057",
+    "source": "hand_crafted",
+    "category": "contraindication",
+    "query": "What are the contraindications to rotavirus vaccine in New Zealand?",
+    "confidence": "high",
+    "answer": "The contraindications to rotavirus vaccine in New Zealand include: 1) infants suffering from severe acute gastroenteritis (diarrhoea or vomiting), where vaccination should be postponed until symptoms have resolved; 2) infants with chronic gastrointestinal diseases that may predispose them to intussusception; and 3) infants born to mothers who received immunosuppressive therapies during pregnancy, where the decision to vaccinate should be made on a case-by-case basis. Additionally, if an infant turns 15 weeks of age before the first rotavirus vaccine dose can be administered, they will not be able to receive any doses of the vaccine.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "20.6. Contraindications and precautions > 20.6.2. Precautions",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/20-rotavirus",
+        "excerpt": "The decision to administer rotavirus vaccine to infants born to mothers who received immunosuppressive agents (biologic agents) during pregnancy should be determined case by case."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "20.9. Variations from the vaccine data sheet",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/20-rotavirus",
+        "excerpt": "The RV1 data sheet recommends postponing the administration of the vaccine in infants suffering from diarrhoea or vomiting."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Rotavirus vaccine should not be given to infants with a history of severe anaphylactic reaction to a previous dose, intussusception, or severe combined immunodeficiency (SCID).",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "20.6. Contraindications and precautions > 20.6.1. Contraindications"
+    },
+    "retrieval": {
+      "section_rank": 9,
+      "hit@10": true,
+      "rr": 0.1111111111111111
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q058",
+    "source": "hand_crafted",
+    "category": "side_effects",
+    "query": "What are the adverse reactions to hepatitis A vaccine?",
+    "confidence": "high",
+    "answer": "Adverse reactions to the hepatitis A vaccine include soreness, redness, and swelling at the injection site; fever; malaise; headache; nausea; and loss of appetite. These responses are usually mild and brief. Similar responses are observed with combination vaccines such as HepA–HepB and HepA–typhoid.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "8.7.1. Potential responses",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/8-hepatitis-a",
+        "excerpt": "Soreness, redness and swelling at the injection site; fever; malaise; headache; nausea; and loss of appetite have been reported for monovalent HepA, but these responses are usually mild and brief."
+      }
+    ],
+    "chunks_retrieved": 8,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Common reactions to hepatitis A vaccine include soreness, redness and swelling at the injection site, fever, malaise, headache, nausea, and loss of appetite.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "8.7. Potential responses and AEFIs > 8.7.1. Potential responses"
+    },
+    "retrieval": {
+      "section_rank": 2,
+      "hit@10": true,
+      "rr": 0.5
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q059",
+    "source": "hand_crafted",
+    "category": "co_administration",
+    "query": "Can pneumococcal vaccines be given at the same time as other routine childhood vaccinations?",
+    "confidence": "high",
+    "answer": "PCV13 or 23PPV may be administered at the same time as other routine childhood vaccinations, in a separate syringe at a separate injection site. However, PCV13 has been associated with an increased risk of fever over 39°C and febrile convulsions when co-administered with inactivated influenza vaccine in children aged 6 months to under 5 years. Separation of the vaccines by two days can be offered but is not essential.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "17.4. Vaccines > Co-administration with other vaccines",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/17-pneumococcal-disease",
+        "excerpt": "PCV13 or 23PPV may be administered at the same time as other routine childhood vaccinations, in a separate syringe at a separate injection site."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "Yes. PCV13 or 23PPV may be administered at the same time as other routine childhood vaccinations, in a separate syringe at a different injection site.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "17.4. Vaccines > Co-administration with other vaccines"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "Q060",
+    "source": "hand_crafted",
+    "category": "contraindication",
+    "query": "What are the contraindications to RSV vaccines including palivizumab?",
+    "confidence": "high",
+    "answer": "There are no specific contraindications to RSVpreF (Arexvy) or palivizumab, except for anaphylaxis to a previous dose or any component of the vaccine.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "19.6. Contraindications and precautions > 19.6.1. Contraindications",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/19-respiratory-syncytial-virus",
+        "excerpt": "There are no specific contraindications to RSVpreF (Arexvy) or palivizumab, except for anaphylaxis to a previous dose or any component of the vaccine."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "There are no specific contraindications to RSVpreF (Arexvy) or palivizumab, except for anaphylaxis to a previous dose or any component of the vaccine.",
+    "ground_truth_citation": {
+      "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+      "section": "19.6. Contraindications and precautions > 19.6.1. Contraindications"
+    },
+    "retrieval": {
+      "section_rank": 1,
+      "hit@10": true,
+      "rr": 1.0
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R001",
+    "source": "real_imac_call_transcript",
+    "category": "dosage",
+    "query": "Hi, [caller]. It's [caller] from the doctors in [caller] again. , I just wanted to confirm, I've got a 4 year old who's come in for her 4-year-old immunizations, and it's just not showing up on my list, but, in regards to her 3rd meningococcal B dose. So she's had her first dose at 14 months, and then she's had another dose at 18 months. So then she should be due for her third booster dose, right?",
+    "confidence": "high",
+    "answer": "Yes, the child is due for her third booster dose of the meningococcal B vaccine. According to the schedule, for children who received their first dose at 12 to 23 months, they should receive two doses separated by 8 weeks, followed by a booster dose given 12 to 24 months after the second dose. Since the child received her second dose at 18 months, the booster dose is due now.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "13.5. Recommended immunisation schedule",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/13-meningococcal-disease",
+        "excerpt": "Give a booster dose 12–24 months after dose two."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "Appendix 2: Planning immunisation catch-ups > A2.2.3. National Immunisation Schedule catch-up guides for infants, children and adolescents aged under 18 years",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/appendix-2-planning-immunisation-catch-ups",
+        "excerpt": "Children aged 12 months to under 24 months at time of first dose, give two doses eight weeks apart followed by a booster dose given 12–23 months after dose two."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R002",
+    "source": "real_imac_call_transcript",
+    "category": "dosage",
+    "query": "I'm, I'm very lucky to have you again. I just had another question, [caller], something unrelated, just about a hepatitis B vaccine. I've just got a patient coming in for his catch-up vaccines. He's 14 years old. he had the hepatitis B on the 16th of March this year, and he's coming in for the second dose, which is, today.",
+    "confidence": "high",
+    "answer": "For a 14-year-old who received the first dose of the hepatitis B vaccine on March 16, the second dose should be administered today, as it falls within the recommended schedule. The alternative two-dose catch-up schedule for adolescents aged 10–15 years allows for the second dose to be given six months after the first dose.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "9.5.3. Catch-ups for children and adolescents",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/9-hepatitis-b",
+        "excerpt": "For adolescents aged 10–15 years, an alternative two-dose hepatitis B catch-up schedule may be considered using the monovalent HepB with the second dose given six months after the first."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R003",
+    "source": "real_imac_call_transcript",
+    "category": "vaccine_schedule",
+    "query": "Hi [caller], [caller] here, nurse at [caller]. no, sorry, I'm at Red Beach today. I'm at Red Beach today. Got to think where I am. , just a quick question. At Red at [caller], we've got a list on the wall from IMA. I can't find it online. It's got all the vaccines that we can give. They're part of the schedule, and Hep A is on it. If they are not having it for like catch-ups or something, they're having it because someone in the family's travelling and they want Hep A and B and because one of th",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R004",
+    "source": "real_imac_call_transcript",
+    "category": "co_administration",
+    "query": "I've just got a patient that's going to have the fluid, flu vaccine. they're having the B12 injection, that should be fine at the same time. . .",
+    "confidence": "high",
+    "answer": "Influenza vaccine can be coadministered with other vaccines, including B12 injections, given at separate injection sites. It is recommended to use separate syringes for each vaccine.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "11.4. Vaccines > 11.4.4. Dosage and administration > Co-administration with other vaccines",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/11-influenza",
+        "excerpt": "Influenza vaccine can be coadministered with other vaccines... given at separate injection sites."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R005",
+    "source": "real_imac_call_transcript",
+    "category": "funding_eligibility",
+    "query": "Hi, I have a question about, using funded boost strips for tetanus-prone wounds for non-New Zealand residents. so should we be using funded or non-funded stock? And can we claim from Ministry of Health or can we not claim?",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R006",
+    "source": "real_imac_call_transcript",
+    "category": "dosage",
+    "query": "She's had, a couple of doses of the COVID vaccination in the past and would be due for a booster dose. but she was advised, she was diagnosed with, lichen planus, no, planus, which is like, mouth ulcers. She was advised by one of the clinical pharmacists that this was likely a reaction to the COVID-19 vaccination.",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R007",
+    "source": "real_imac_call_transcript",
+    "category": "dosage",
+    "query": "Just had a quick little question, might be being a little pedantic. Just a couple have come in for a COVID booster and it's just slightly under 6 months since the previous one. So it's October 2, 22nd of October. so they're just a few days early. Is that to just go ahead or how pedantic do we want to be about the 6 month gap between doses?",
+    "confidence": "medium",
+    "answer": "Clinical discretion can be applied when considering vaccination given less than six months after a previous dose. A shorter spacing of a minimum of three months may be appropriate for those individuals considered to be at very high risk of severe disease from COVID-19 infection. However, the preferred spacing is at least six months between additional doses. Therefore, it may be acceptable to proceed with the booster if the individuals are at high risk, but caution is advised for those not in this category.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "5.5.3. Additional doses for ages 5 years and older after primary course",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/5-coronavirus-disease-covid-19",
+        "excerpt": "Clinical discretion can be applied, case by case, when considering vaccination given less than six months after a previous dose."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "5.5.3. Additional doses for ages 5 years and older after primary course",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/5-coronavirus-disease-covid-19",
+        "excerpt": "Spacing of either at least six months or 12 months is preferred, depending on risk for severe COVID-19."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R008",
+    "source": "real_imac_call_transcript",
+    "category": "administration_technique",
+    "query": ", hi [caller], it's [caller], one of the nurses at Maryland's Medical centre. We've got an 83 year old come in for her flu vaccination, and she's currently got shingles. She's had it for 10 days. She doesn't have a fever, but she, we're just wondering if they might be infected. Would you advise going ahead and giving the flu injection or just hanging off, hanging back for a while?",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R009",
+    "source": "real_imac_call_transcript",
+    "category": "catch_up_schedule",
+    "query": "Hi, I've got a, 5 year old coming in. he's due for his 4 year old DTap IPV. I'm just wondering, he's had no MM, no BEC zeros. So I'm thinking, what are the guidelines now for catch up BC zeros?",
+    "confidence": "medium",
+    "answer": "For a 5-year-old who has not received any doses of MMR (measles, mumps, rubella), the guidelines state that the first dose of MMR should be administered at 12 months of age, and the second dose at 15 months or at least four weeks after the first dose. Since this child is now 5 years old and has not received any MMR doses, they should receive the first dose of MMR now and continue with the usual childhood schedule. Additionally, for the DTaP-IPV catch-up, the child should receive the DTaP-IPV-HepB/Hib vaccine, ensuring that it is given at least 6 months after any previous doses of DTaP-IPV-HepB/Hib. If the child has not received any doses of Hib-PRP, they do not require it as it is covered by the combination vaccine. Therefore, the child should receive the DTaP-IPV-HepB/Hib and the first dose of MMR at this visit.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "A2.2.1. Principles of catch-up for infants and children aged under 10 years",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/appendix-2-planning-immunisation-catch-ups",
+        "excerpt": "Children commencing immunisation at age 12 months or older require 1 dose of MMR, then continue the usual childhood schedule with a second dose of MMR given at age 15 months, or at least 4 weeks after the first MMR dose."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "A2.2.3. National Immunisation Schedule catch-up guides for infants, children and adolescents aged under 18 years",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/appendix-2-planning-immunisation-catch-ups",
+        "excerpt": "If a child turns 10 years old before completing their catch-up programme, they should continue on the ‘10 years to under 18 years’ catch-up schedule."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R010",
+    "source": "real_imac_call_transcript",
+    "category": "funding_eligibility",
+    "query": "I just had a quick question about the flu vaccines and hopefully just helping me find a resource. I, I'm new to, I've, I've been away from vaccinating for a while, so I'm a bit new to it again. so just with like being an authorised vaccinator, when it comes to like the funded flu vaccines and the non-funded flu vaccines, we're authorised to deliver those, right?",
+    "confidence": "medium",
+    "answer": "Yes, as an authorised vaccinator, you are permitted to deliver both funded and non-funded influenza vaccines. However, it is important to stay updated on which vaccines are available and their funding status, as well as to ensure compliance with any specific regulations or guidelines that may apply to your practice.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "Introduction > The National Immunisation Schedule",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/introduction",
+        "excerpt": "vaccinators are advised to regularly check the Pharmaceutical Schedule (external link) and any online updates for changes to funding decisions, and the Handbook for the latest immunisation information."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "11. Influenza > 11.4. Vaccines > 11.4.1. Available vaccines > Funded vaccines",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/11-influenza",
+        "excerpt": "Influvac Tetra is the funded influenza vaccine for 2026, for 6 months of age and over."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R011",
+    "source": "real_imac_call_transcript",
+    "category": "efficacy",
+    "query": "Hi, [caller]. This is [caller], calling from Newton Medical centre. we have a working patient. She's 23 years old, already has 3 COVID vaccines. But she, people around her had COVID recently. She wants extra protection. Can she have the latest one?",
+    "confidence": "medium",
+    "answer": "Individuals aged 16 years or over who have completed their primary course of COVID-19 vaccination are eligible for a single additional dose of mRNA-CV (30µg) if not contraindicated. However, this additional dose is not generally required due to the likelihood of repeated exposure to SARS-CoV-2 since the completion of the primary course. Therefore, while she can request the latest vaccine, it is not routinely recommended for healthy individuals under 30 years of age.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "5.5.3. Additional doses for ages 5 years and older after primary course",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/5-coronavirus-disease-covid-19",
+        "excerpt": "Anyone aged 16 years or over who has not yet received an additional dose since completion of the primary course is eligible for a single dose of mRNA-CV (30µg), if not contraindicated. Although, with the likelihood of repeated exposure to SARS-CoV-2 since completion of the primary course, this is not generally required."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "5.5.3. Additional doses for ages 5 years and older after primary course",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/5-coronavirus-disease-covid-19",
+        "excerpt": "Healthy individuals are not routinely recommended an additional dose, but it is available on request."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R012",
+    "source": "real_imac_call_transcript",
+    "category": "administration_technique",
+    "query": "And Pharix hexa given somewhere in the community, I'm not too sure, and then they referred to AD to get the, tetanus immunoglobin injection.",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R013",
+    "source": "real_imac_call_transcript",
+    "category": "dosage",
+    "query": "Look, I've got a lady that's going to [caller] 1 week before her baby is 12 months old. So, what I need to know, if she has MMR the week before, is that dose zero, or can that, you know, is 1 week ?",
+    "confidence": "medium",
+    "answer": "MMR1 can be administered up to one month before the child is 12 months old, but it requires a prescription as it is outside of licensure. It will be considered an exception error, and the dose does not need to be repeated. Otherwise, it can be given 4 days before the child turns 12 months old.",
+    "citations": [
+      {
+        "source": "Immunisation Advisory Centre (IMAC)",
+        "section": "Overview > Can we give the 12-months MMR1 vaccines earlier than 12 months of age?",
+        "url": "https://immune.org.nz/factsheets/quick-answers-to-frequent-mmr-questions",
+        "excerpt": "There are no clinical concerns with MMR1 administration up to one month before age 12 months, but it requires a prescription as it is outside of licensure."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R014",
+    "source": "real_imac_call_transcript",
+    "category": "catch_up_schedule",
+    "query": "Hi, I just had an inquiry. I just wanted to double-check. I've got a, 11 year old patient who is in for a catch-up plan, which is, which includes MMR and HPV vaccines.",
+    "confidence": "medium",
+    "answer": "For an 11-year-old patient in a catch-up plan, MMR is recommended and should be prioritized. The HPV vaccine can also be administered, with three doses being available for previously unvaccinated individuals aged 15 years to 26 years. However, since the patient is 11 years old, they are eligible for the HPV vaccine as well. It is advisable to administer as many antigens as possible at each visit to ensure timely protection.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "A2.2.2. Principles of catch-up for children and adolescents aged 10 to under 18 years",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/appendix-2-planning-immunisation-catch-ups",
+        "excerpt": "MMR should be recommended at the first visit."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "A2.3. Immunisation catch-up for eligible adults aged 18 years and older",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/appendix-2-planning-immunisation-catch-ups",
+        "excerpt": "Previously unvaccinated males and females aged 15 years to 26 years inclusive may receive three doses of HPV vaccine."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "A2.2.2. Principles of catch-up for children and adolescents aged 10 to under 18 years",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/appendix-2-planning-immunisation-catch-ups",
+        "excerpt": "If an individual infrequently attends general practice and failure to return for future immunisation is a concern, it is prudent to administer as many antigens as possible at every visit."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R015",
+    "source": "real_imac_call_transcript",
+    "category": "storage_handling",
+    "query": "Currently going through all of my consent forms for the year 7 and 8 co-delivery here in [caller], the DTP and Gardasil. So I've rung the mum with this consent form. All she put on about the medical history, and that's why I rang. Her daughter only has one kidney that's sitting in her pelvis, and they were nervous about immunisation, and the kidney is not only working at 75%, so they can't give her ibuprofen, obviously, .",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R016",
+    "source": "real_imac_call_transcript",
+    "category": "funding_eligibility",
+    "query": ", hi, [caller]. It's [caller], I'm one of the nurses at the Hastings Health centre. I'm very sorry to trouble you when you're very busy. [caller], this is a funded Shingrix question. We've got, the rheumatology department is recommending several of our patients have the funded, Shingrix vaccines, which is fine, but I'm just inquiring, do I need a prescription from the GP for those, since, no, big question mark.",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R017",
+    "source": "real_imac_call_transcript",
+    "category": "funding_eligibility",
+    "query": "Hi, my name is [caller]. I'm one of the nurses at Fielding Healthcare. Well, I just have a patient with me who has Guillain-Barre syndrome and was under the impression that provided that counted as immunodeficiency for funded vaccines. Can you confirm if that is true, if I can, if he meets funding criteria for Shingrix?",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R018",
+    "source": "real_imac_call_transcript",
+    "category": "funding_eligibility",
+    "query": "[caller] from Hokawru Medical. Just a very quick question. the meningitis vaccines for pre-hostal students. I've had a read up. It doesn't say it has to be [caller] hostels. This girl is going, to [caller], and she's gonna be in hostels over there. Nowhere does it say it has to be [caller], so can we fund her or not?",
+    "confidence": "medium",
+    "answer": "The guidance specifies that individuals who will be living in communal accommodation, such as boarding school hostels, tertiary education halls of residence, military barracks, Youth Justice residences, or prisons, are eligible for meningococcal vaccination. This includes those who turn 13 years of age while living in such settings. Therefore, if the student is going to be in hostels, even if they are not specifically in New Zealand, they may still be eligible for funding under the criteria for communal living situations. However, please confirm with the relevant handbook section for specific funding eligibility.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "13. Meningococcal disease > 13.5. Recommended immunisation schedule",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/13-meningococcal-disease",
+        "excerpt": "MenACWY and MenB are recommended and funded from age 13–25 years inclusively for individuals who will be living in communal accommodation within the next three months, or who are in their first year of living in communal accommodation."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R019",
+    "source": "real_imac_call_transcript",
+    "category": "vaccine_schedule",
+    "query": "Actually, I have got, patient, so he will be joining defence Force, and then he has been required to get some of the immunisation schedule prior to his enlistment. So he already had the polio, he already had MMR, he already had his COVID vaccination done. another requirement is 3 hep B injection and then 3 tetanus, which includes diphtheria and pertussis and whooping cough.",
+    "confidence": "medium",
+    "answer": "For a patient joining the Defence Force, the following immunisations are required: a primary course of 3 doses of Hepatitis B vaccine and a primary course of 3 doses of Tdap vaccine (which includes tetanus, diphtheria, and pertussis) at a minimum of 4-weekly intervals. Additionally, Tdap is recommended at least every 10 years. Since the patient has already received polio and MMR vaccinations, those are not required again. The COVID-19 vaccination is also noted as a requirement.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "Appendix 2: Planning immunisation catch-ups > A2.3. Immunisation catch-up for eligible adults aged 18 years and older",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/appendix-2-planning-immunisation-catch-ups",
+        "excerpt": "A primary course of 3 doses of Tdap vaccines (at a minimum of 4-weekly intervals) is recommended and funded for unimmunised or partially immunised adults."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "Introduction > Table 2: Extended immunisation programme for special groups",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/introduction",
+        "excerpt": "A primary course of 3 polio (IPV) doses (at a minimum of 4-weekly intervals) is recommended and funded for unimmunised or partially immunised adults."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R020",
+    "source": "real_imac_call_transcript",
+    "category": "administration_technique",
+    "query": "Hi, [caller]. My name is [caller]. I'm calling from Staff Care Occupational Health in [caller]. I'm just calling around, we have two customers, that were booked in for a hepatitis A booster. what is your recommendation around, so they're not, they were given, administered the hepatitis A vaccine in [caller].",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R021",
+    "source": "real_imac_call_transcript",
+    "category": "vaccine_schedule",
+    "query": "So I've got two questions, and they're both related to the same patient, but, the first question is, one of our patients is 24-year-old, young man born in [caller] and had all of his childhood vaccinations, so what the schedule was for when he was born in 2001, which included hepatitis B.",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R022",
+    "source": "real_imac_call_transcript",
+    "category": "catch_up_schedule",
+    "query": "I have a 4 year old here who has had all of their vaccines although late. Apart from the big 0 which I can offer a catch-up, but he hasn't had the hub, the 15-month hib.",
+    "confidence": "high",
+    "answer": "For a 4-year-old who has missed the 15-month Hib vaccine, the catch-up schedule allows for the administration of the DTaP-IPV-HepB/Hib vaccine. Since the child is already 4 years old, they do not require a separate Hib-PRP vaccine as this is covered by the combination vaccine. The DTaP-IPV-HepB/Hib should be administered at least 6 months after the third dose of the primary series, if applicable.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "Appendix 2: Planning immunisation catch-ups > A2.2.1. Principles of catch-up for infants and children aged under 10 years",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/appendix-2-planning-immunisation-catch-ups",
+        "excerpt": "Children who receive catch up DTaP-IPV-HepB/Hib between ages 12 months to under 5 years do not require a single antigen Hib vaccine (Hib-PRP) as this is covered by the combination vaccine."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "Appendix 2: Planning immunisation catch-ups > A2.2.3. National Immunisation Schedule catch-up guides for infants, children and adolescents aged under 18 years > Table A2.8: Age at presentation: 5 years to under 10 years",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/appendix-2-planning-immunisation-catch-ups",
+        "excerpt": "Healthy children aged 5 years and older do not need Hib-PRP. However, DTaP-IPV-HepB/Hib should be offered to reduce the number of injections at each visit."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R023",
+    "source": "real_imac_call_transcript",
+    "category": "efficacy",
+    "query": "[caller], hi, it's I'm [caller]. I've worked for 2 F Show Health. I just want to know, do you know how long does the, Shinrix, vaccine last, like work for?",
+    "confidence": "high",
+    "answer": "The Shingrix vaccine (recombinant zoster vaccine) has shown efficacy against zoster that is sustained overall at 84 percent for at least seven years and 70 percent at up to ten years post-vaccination, including in individuals aged 70 years and over and those with pre-existing medical conditions.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "25.4.2. Efficacy and effectiveness",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/25-zoster-herpes-zostershingles",
+        "excerpt": "long term follow-up of trial participants found rZV efficacy against zoster plateaued after four to six years and was sustained overall at 84 percent for at least seven years and 70 percent at up to ten years post-vaccination."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R024",
+    "source": "real_imac_call_transcript",
+    "category": "efficacy",
+    "query": "I'm just, I've got a, [caller] here with me who's 74 years old and she's got COPD and we were just really, she had an RSV vaccination in June 2024. And we were just looking at the information on it and it looks like it's 80% effective for two years. So should she this June be looking at getting another one?",
+    "confidence": "medium",
+    "answer": "The RSVpreF vaccine (Arexvy) provides around 80% efficacy against severe RSV-LRTD and 67% against all RSV-LRTI over two seasons. However, further data is required to assess the optimal timing of revaccination. It appears that one dose induces an adequate immune response to provide protection for longer than one year, but the specific recommendation for revaccination timing is not clearly defined in the guidance.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "19.4. Vaccines > 19.4.2. Efficacy and effectiveness > Efficacy of adjuvanted RSVpreF vaccine, Arexvy",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/19-respiratory-syncytial-virus",
+        "excerpt": "the efficacy of one dose over two seasons (adjusted for seasonality) was maintained around 80 percent (53â92 percent) against severe RSV-LRTD and 67 percent (48â80) against all RSV-LRTI. Further data is required to assess the optimal timing of revaccination."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "19.4. Vaccines > 19.4.2. Efficacy and effectiveness > Immunogenicity of adjuvanted RSVpreF vaccine, Arexvy",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/19-respiratory-syncytial-virus",
+        "excerpt": "Although clinical trials evaluated a two-dose primary course, it appears that one dose induces an adequate immune response to provide protection for longer than one year."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R025",
+    "source": "real_imac_call_transcript",
+    "category": "administration_technique",
+    "query": "It's like buses. I've got two in a row. I've got a, a 12 year old coming in for, meningococcal, injections because he's going to boarding school, but he's 1212 months, sorry, 12 years, 3 months old, and I see the rules say from 13 years. Is there a problem?",
+    "confidence": "high",
+    "answer": "The guidance states that individuals who turn 13 years of age while living in boarding school hostels are eligible for the meningococcal vaccine. Since the 12-year-old is 12 years and 3 months old, they can still receive the vaccine as they will be 13 years old shortly and are entering a boarding school hostel. Therefore, there is no problem in administering the vaccine now.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "13.5. Recommended immunisation schedule",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/13-meningococcal-disease",
+        "excerpt": "This includes those who turn 13 years of age while living in boarding school hostels."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R026",
+    "source": "real_imac_call_transcript",
+    "category": "catch_up_schedule",
+    "query": "I'm not a health professional, but my GP has advised me to contact IMA regarding shingles vaccine funding after I missed my eligibility due to having shingles. At 65. Is there any pathway or advice for the situation?",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R027",
+    "source": "real_imac_call_transcript",
+    "category": "co_administration",
+    "query": "Hi, [caller]. This is [caller] from Eastmere Doctors. Hi, I'm just calling because I just had a 6-week this morning, 6-week, vaccine. the mum only wanted to have the rotavirus done, which we have done for her. but the GP was asking for the patient to have a DPT vaccine only because the mum didn't want to do the other ones. And I did explain, we've, we've only got the combination.",
+    "confidence": "not_found",
+    "answer": "I could not find a clear answer in the approved guidance. Please consult the relevant handbook section directly or escalate to a senior advisor.",
+    "citations": [],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R028",
+    "source": "real_imac_call_transcript",
+    "category": "efficacy",
+    "query": "And he's just come back from holiday in [caller] having a chat to one of his friends who's just had some nasty bouts of shingles, and he's, it's scared the whatsits out of him now because he's 5 years down the line after his, Zostavax, and it's documented that it does only give you 5 years protection. he's prepared to pay for Shingrix privately, to give himself the protection, and from what I can understand, that should be fine. I just wanted to double check it with yourselves.",
+    "confidence": "medium",
+    "answer": "Shingrix may be offered to individuals who previously had Zostavax and/or have a history of zoster episodes. It is recommended to wait 12 months after an episode of zoster has resolved before administering Shingrix. However, for those who are immunocompromised with the highest risk of zoster recurrence, this waiting period may be shortened to at least three months. Therefore, if the individual is 5 years post-Zostavax and has no other contraindications, receiving Shingrix privately should be acceptable.",
+    "citations": [
+      {
+        "source": "IMAC Vaccines & Diseases (immune.org.nz)",
+        "section": "Other formulations and brands > Shingrix after zoster episode",
+        "url": "https://immune.org.nz/vaccine/shingrix",
+        "excerpt": "Shingrix may be offered to individuals who previously had Zostavax (live zoster vaccine) and/or have a history of zoster episodes. Allow 12 months after an episode of zoster has resolved before giving Shingrix."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R029",
+    "source": "real_imac_call_transcript",
+    "category": "vaccine_schedule",
+    "query": "Hi, [caller]. It's [caller], one of the nurses from Stratford Coastal Medical. I've just got a query, on a PCV for a patient. they've had 3 doses, which is like on schedule. It's just on the schedule, is due for a PCV 13 as a catch-up, but I think they've already had PCV enough doses, but I'm just double-checking.",
+    "confidence": "medium",
+    "answer": "For children who have already received three doses of PCV, the guidance states that if they are under 5 years and have not received any PCV13, they should receive two doses of PCV13 at least 8 weeks apart. If they have completed a primary course with PCV10, they can complete with PCV13. However, if they are high-risk and have already received doses of PCV10 or PCV7, they may be eligible for additional doses of PCV13. It's important to assess their vaccination history to determine the appropriate catch-up schedule.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "17. Pneumococcal disease > 17.5. Recommended immunisation schedule > 17.5.2. Extended pneumococcal immunisation for high-risk groups",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/17-pneumococcal-disease",
+        "excerpt": "Two doses of PCV13 are funded for high-risk children aged from 12 months and under 18 years irrespective of previous doses of any non-PCV13 vaccine (PCV10 or PCV7); or, Up to an additional four doses of PCV13 are funded for vaccination or re-vaccination of high-risk children aged under 5 years."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "Appendix 2: Planning immunisation catch-ups > A2.2.1. Principles of catch-up for infants and children aged under 10 years",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/appendix-2-planning-immunisation-catch-ups",
+        "excerpt": "Infants who commenced vaccination with PCV10 can complete the course with PCV13."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  },
+  {
+    "id": "R030",
+    "source": "real_imac_call_transcript",
+    "category": "general",
+    "query": "Hi. [caller], I, I have a 6 year old and a 9-year-old coming for the flu vaccine for the first time. do they need a 2nd 14 weeks later or, or?",
+    "confidence": "high",
+    "answer": "For both the 6-year-old and the 9-year-old receiving the influenza vaccine for the first time, they will require two doses of the vaccine, administered four weeks apart. The second dose is unfunded. After the initial two doses, they will receive one funded dose annually in subsequent years.",
+    "citations": [
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "11.4.4. Dosage and administration > Individuals aged 6 months and older",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/11-influenza",
+        "excerpt": "Children aged under 9 years who have not previously received influenza vaccine require two doses of vaccine four weeks apart to produce a satisfactory immune response."
+      },
+      {
+        "source": "NZ Immunisation Handbook (Te Whatu Ora)",
+        "section": "4. Immunisation of special groups > 4.3.3. Secondary (acquired) immunodeficiency > Vaccines for individuals with acquired immunodeficiency",
+        "url": "https://www.tewhatuora.govt.nz/for-health-professionals/clinical-guidance/immunisation-handbook/4-immunisation-of-special-groups",
+        "excerpt": "A second dose is funded for children aged 6 months to under 9 years when influenza vaccine is being used for the first time."
+      }
+    ],
+    "chunks_retrieved": 10,
+    "expected_confidence": "high",
+    "ground_truth_answer": "",
+    "ground_truth_citation": {},
+    "retrieval": {
+      "section_rank": null,
+      "hit@10": null,
+      "rr": null
+    },
+    "human_correct": null,
+    "citation_correct": null,
+    "notes": ""
+  }
+]

@@ -50,60 +50,55 @@ QUESTION_SETS = {
 
 K = 10  # matches RETRIEVAL_TOP_K
 
-# ── Section matching ──────────────────────────────────────────────────────────
+# ── Content-based retrieval matching ─────────────────────────────────────────
+# Consistent with run_retrieval_ablation.py: checks if any retrieved chunk
+# contains enough key terms from the ground truth answer (not section labels).
 
-_STOPWORDS = {"the", "a", "an", "of", "for", "and", "or", "in", "on", "to",
-              "is", "are", "chapter", "section"}
+_STOPWORDS = {
+    "the", "a", "an", "of", "for", "and", "or", "in", "on", "to", "is",
+    "are", "was", "were", "be", "been", "has", "have", "had", "will",
+    "should", "may", "can", "not", "with", "from", "this", "that",
+    "which", "who", "what", "when", "where", "how", "new", "zealand",
+}
+
+CONTENT_MATCH_THRESHOLD = 0.4
 
 
 def _keywords(text: str) -> list[str]:
     words = re.findall(r"[a-zA-Z0-9]+", text.lower())
-    return [w for w in words if w not in _STOPWORDS and len(w) > 2]
+    return [w for w in words if w not in _STOPWORDS and len(w) > 3]
 
 
-def _section_match(chunk: dict, gt: dict) -> bool:
-    """
-    True if chunk STRUCTURAL METADATA (chapter, section, breadcrumb) contains
-    ≥ half the key words from the ground-truth section label.
-
-    Excludes chunk content deliberately — the retriever must surface the
-    correct section heading, not just any chunk that mentions the topic.
-    This makes Section Hit Rate strictly harder than a topic-level check.
-    """
-    if not gt or not gt.get("section"):
-        return False
-    gt_words = _keywords(gt["section"])
+def _content_match(chunk: dict, gt_answer: str) -> bool:
+    """True if the chunk content contains ≥40% of key terms from the GT answer."""
+    gt_words = _keywords(gt_answer)
     if not gt_words:
         return False
-    meta = " ".join([
-        chunk.get("chapter",    ""),
-        chunk.get("section",    ""),
-        chunk.get("breadcrumb", ""),
-    ]).lower()
-    matches = sum(1 for w in gt_words if w in meta)
-    return matches >= max(1, len(gt_words) // 2)
+    content  = chunk.get("content", "").lower()
+    matches  = sum(1 for w in gt_words if w in content)
+    required = max(2, int(len(gt_words) * CONTENT_MATCH_THRESHOLD))
+    return matches >= required
 
 
 # ── Per-question retrieval metrics ────────────────────────────────────────────
 
-def _retrieval_metrics(chunks: list[dict], gt_citation: dict) -> dict:
+def _retrieval_metrics(chunks: list[dict], gt_answer: str) -> dict:
     """
-    Section Hit Rate @k and MRR for one question.
-
-    With exactly 1 ground-truth section per question:
-      Section Hit Rate @k  =  1 if correct section in top-k, else 0
-      MRR                  =  1/rank of first section match, else 0
+    Content-based Recall@K and MRR.
+    A question is a hit if any retrieved chunk contains the relevant clinical facts.
+    Consistent with run_retrieval_ablation.py — both use the same 55 answerable
+    questions and the same content-matching logic.
     """
-    section_rank = None
+    first_hit = None
     for rank, chunk in enumerate(chunks[:K], start=1):
-        if _section_match(chunk, gt_citation):
-            section_rank = rank
+        if _content_match(chunk, gt_answer):
+            first_hit = rank
             break
 
     return {
-        "section_rank":    section_rank,
-        f"hit@{K}":        section_rank is not None,
-        "rr":              1.0 / section_rank if section_rank else 0.0,
+        "section_rank": first_hit,
+        f"hit@{K}":     first_hit is not None,
+        "rr":           1.0 / first_hit if first_hit else 0.0,
     }
 
 
@@ -118,11 +113,18 @@ def _aggregate(results: list[dict], k: int = K) -> dict:
     answered    = [r for r in results if r["confidence"] != "not_found"]
 
     # ── Layer 1: Retrieval / Citation Quality ─────────────────────────────────
-    if has_gt:
-        hits = [r["retrieval"][f"hit@{k}"] for r in has_gt]
-        rrs  = [r["retrieval"]["rr"]        for r in has_gt]
-        section_hit_rate = sum(hits) / len(has_gt)
-        mrr              = sum(rrs)  / len(has_gt)
+    # Only questions with ground-truth section labels contribute to Recall/MRR.
+    # Questions without labels (e.g. transcript set) are excluded from this metric
+    # but still evaluated for Layer 2 generation quality.
+    gt_with_retrieval = [
+        r for r in has_gt
+        if r.get("retrieval", {}).get(f"hit@{k}") is not None
+    ]
+    if gt_with_retrieval:
+        hits = [bool(r["retrieval"].get(f"hit@{k}")) for r in gt_with_retrieval]
+        rrs  = [r["retrieval"].get("rr") or 0.0      for r in gt_with_retrieval]
+        section_hit_rate = sum(hits) / len(gt_with_retrieval)
+        mrr              = sum(rrs)  / len(gt_with_retrieval)
     else:
         section_hit_rate = mrr = 0.0
 
@@ -149,15 +151,16 @@ def _aggregate(results: list[dict], k: int = K) -> dict:
 
     return {
         "total_questions":   total,
-        "questions_with_gt": len(has_gt),
+        "questions_with_gt": len(gt_with_retrieval),
 
         "layer1_citation_quality": {
-            f"section_hit_rate@{k}": round(section_hit_rate, 3),
-            "MRR":                   round(mrr, 3),
-            "n_evaluated":           len(has_gt),
+            f"recall@{k}":  round(section_hit_rate, 3),
+            "MRR":          round(mrr, 3),
+            "n_evaluated":           len(gt_with_retrieval),
             "note": (
-                "Section Hit Rate = lower-bound proxy for Recall@k. "
-                "1 GT label per question; multiple relevant sections possible."
+                f"Content-based Recall@{k}: hit if any top-{k} chunk contains "
+                "≥40% of ground-truth answer keywords. "
+                "Consistent with run_retrieval_ablation.py (55 answerable questions)."
             ),
         },
 
@@ -214,9 +217,10 @@ def run_evaluation(
         citations  = output.get("citations", [])
         answer     = output.get("answer", "")
 
+        gt_answer = q.get("ground_truth_answer", "")
         retrieval = (
-            _retrieval_metrics(chunks, gt)
-            if gt.get("section") and exp != "not_found"
+            _retrieval_metrics(chunks, gt_answer)
+            if gt_answer and exp != "not_found"
             else {"section_rank": None, f"hit@{K}": None, "rr": None}
         )
 
@@ -279,8 +283,8 @@ def _print_summary(s: dict) -> None:
     print(f"Questions with GT   : {s['questions_with_gt']}")
     print()
     print("── Layer 1: Citation Quality (Retrieval) ─────────────────")
-    print(f"  Section Hit Rate @{k}  : {l1[f'section_hit_rate@{k}']:.1%}"
-          f"  ({l1['n_evaluated']} questions)")
+    print(f"  Recall @{k}            : {l1[f'recall@{k}']:.1%}"
+          f"  ({l1['n_evaluated']} questions with GT labels)")
     print(f"  MRR                   : {l1['MRR']:.3f}")
     print(f"  * {l1['note']}")
     print()

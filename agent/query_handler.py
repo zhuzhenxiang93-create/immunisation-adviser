@@ -16,6 +16,7 @@ Usage:
 from __future__ import annotations
 
 import sys
+import time
 from pathlib import Path
 from typing import TypedDict
 
@@ -51,33 +52,35 @@ class AgentState(TypedDict):
 
 def classify_node(state: AgentState) -> dict:
     """Classify the query across six dimensions (rule-based, zero latency)."""
+    t0 = time.perf_counter()
     classification = classify_query(state["query"])
-    print(f"[classify] {classification}")
+    print(f"[classify] {classification} ({(time.perf_counter()-t0)*1000:.0f}ms)")
     return {"classification": classification}
 
 
 def retrieve_node(state: AgentState) -> dict:
     """Retrieve relevant chunks from local/Azure search (hybrid search)."""
+    t0 = time.perf_counter()
     try:
         chunks = retrieve(state["query"], top_k=RETRIEVAL_TOP_K)
-        print(f"[retrieve] {len(chunks)} chunks retrieved")
+        print(f"[retrieve] {len(chunks)} chunks retrieved ({(time.perf_counter()-t0)*1000:.0f}ms)")
         return {"chunks": chunks, "error": ""}
     except Exception as e:
-        print(f"[retrieve] ERROR: {e}")
+        print(f"[retrieve] ERROR: {e} ({(time.perf_counter()-t0)*1000:.0f}ms)")
         return {"chunks": [], "error": f"Retrieval failed: {e}"}
 
 
 def generate_node(state: AgentState) -> dict:
     """Generate answer + citations from LLM given retrieved chunks."""
     if state.get("error"):
-        # Propagate retrieval error — skip generation
         return {"generation": {"answer": "", "citations": [], "confidence": "not_found"}}
+    t0 = time.perf_counter()
     try:
         generation = generate(state["query"], state["chunks"])
-        print(f"[generate] confidence={generation.get('confidence')}")
+        print(f"[generate] confidence={generation.get('confidence')} ({(time.perf_counter()-t0)*1000:.0f}ms)")
         return {"generation": generation, "error": ""}
     except Exception as e:
-        print(f"[generate] ERROR: {e}")
+        print(f"[generate] ERROR: {e} ({(time.perf_counter()-t0)*1000:.0f}ms)")
         return {
             "generation": {"answer": "", "citations": [], "confidence": "not_found"},
             "error": f"Generation failed: {e}",
@@ -151,6 +154,7 @@ def run_query(query: str) -> dict:
         AgentState dict with keys:
             query, chunks, generation, output, formatted, error
     """
+    t_start = time.perf_counter()
     graph = _get_graph()
     initial_state: AgentState = {
         "query": query,
@@ -161,7 +165,9 @@ def run_query(query: str) -> dict:
         "formatted": "",
         "error": "",
     }
-    return graph.invoke(initial_state)
+    result = graph.invoke(initial_state)
+    print(f"[total] {(time.perf_counter()-t_start)*1000:.0f}ms")
+    return result
 
 
 # ---------------------------------------------------------------------------
